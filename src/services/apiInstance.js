@@ -7,7 +7,6 @@ const apiInstace = axios.create({
 
 apiInstace.interceptors.request.use((config) => {
   const token = localStorage.getItem(TOKEN_NAME);
-
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
