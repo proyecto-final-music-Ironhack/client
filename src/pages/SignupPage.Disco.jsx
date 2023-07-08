@@ -1,16 +1,32 @@
 import { Link } from "react-router-dom";
 import discoService from "../services/disco.service";
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  Flex,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Center,
+  Spinner,
+} from "@chakra-ui/react";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
 import { useEffect, useState } from "react";
 
 export default function SignupPageDisco() {
   const [discos, setDiscos] = useState([]);
-  const [searchName, setSearchName] = useState("");
+  const [filteredDiscos, setfilteredDiscos] = useState([]);
 
   const getDiscos = async () => {
     try {
       const res = await discoService.getAllDiscos();
       setDiscos(res.data);
+      setfilteredDiscos(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -20,23 +36,37 @@ export default function SignupPageDisco() {
     getDiscos();
   }, []);
 
-
-  const showfilteredDiscos = (search) => {
-    const copy = {...discos}
+  const filterBySearch = (event) => {
+    const copy = { ...discos };
+    const query = event.target.value;
     const filteredDiscos = copy.filter((disco) => {
-      return disco.name.toLowerCase().includes(search.toLowerCase());
+      return disco.name.toLowerCase().includes(query.toLowerCase());
     });
-    setDiscos(filteredDiscos)
-  }
+    setfilteredDiscos(filteredDiscos);
+  };
 
   return (
     <>
-      <form>
-        <FormControl>
-          <Input placeholder="Search for your disco" />
+      <Flex pt="48" justify="center" align="center" w="full">
+        <FormControl w="60">
+          <FormLabel>Search for your club</FormLabel>
+          <AutoComplete>
+            <AutoCompleteInput backgroundColor='white' />
+            <AutoCompleteList >
+              {filteredDiscos.map((disco) => (
+                <AutoCompleteItem
+                  key={disco._id}
+                  value={disco.name}
+                >
+                  {disco.name}
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteList>
+          </AutoComplete>
+          {/* <FormHelperText>Can't find your local? Contact with us.</FormHelperText> */}
         </FormControl>
-        <Button type="submit">Search disco</Button>
-      </form>
+      </Flex>
+
       <Link to="/">VOLVER</Link>
     </>
   );
