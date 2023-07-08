@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import { Navigate } from "react-router-dom";
 
 export default function PrivateRoute({ children, redirectTo = "/login" }) {
   const { user, loading } = useContext(AuthContext);

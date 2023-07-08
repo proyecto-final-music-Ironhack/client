@@ -1,9 +1,9 @@
-import SignupForm from "../components/SignupForm.User";
+import SignupFormUser from "../components/SignupForm.User";
 
 export default function SignupPageUser() {
   return (
     <>
-      <SignupForm />
+      <SignupFormUser />
     </>
   );
 }
