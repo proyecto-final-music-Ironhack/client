@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 
-const SignupFormUser = () => {
+const SignupFormDj = () => {
   const [signupData, setSignupData] = useState({
     username: "",
     name: "",
@@ -22,9 +22,8 @@ const SignupFormUser = () => {
     e.preventDefault();
 
     authService
-      .signupUser(signupData)
+      .signupDj(signupData)
       .then(({ data }) => {
-        console.log(data);
         setSignupData({ username: "", name: "", email: "", password: "" });
 
         navigate("/login");
@@ -77,7 +76,7 @@ const SignupFormUser = () => {
 
       <div>
         <Button colorScheme="teal" variant="solid" type="submit">
-          Create user
+          Create Dj
         </Button>
         <Link to="/login">Login</Link>
       </div>
@@ -85,4 +84,4 @@ const SignupFormUser = () => {
   );
 };
 
-export default SignupFormUser;
+export default SignupFormDj;

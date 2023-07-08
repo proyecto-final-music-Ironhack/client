@@ -5,8 +5,11 @@ class AuthService {
     this.api = apiInstance;
   }
 
-  signup(data) {
-    return this.api.post("/auth/signup", data);
+  signupUser(data) {
+    return this.api.post("/auth/signup/user", data);
+  }
+  signupDj(data) {
+    return this.api.post("/auth/signup/dj", data);
   }
 
   login(data) {

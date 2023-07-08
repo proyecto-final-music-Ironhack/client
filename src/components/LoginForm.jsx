@@ -48,7 +48,7 @@ const LoginForm = () => {
       </FormControl>
 
       <FormControl>
-        <FormLabel>Contraseña</FormLabel>
+        <FormLabel>Password</FormLabel>
         <Input
           type="password"
           value={password}
