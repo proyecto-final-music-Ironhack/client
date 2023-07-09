@@ -8,6 +8,7 @@ import SignupPageDj from "./pages/auth/SignupPage.Dj";
 import SignupPageDisco from "./pages/auth/SignupPage.Disco";
 import SearchDiscoPage from "./pages/auth/SearchDiscoPage";
 import ErrorPage from "./pages/ErrorPage";
+import EventsListPage from "./pages/privates.routes/EventsListPage";
 
 function App() {
   return (
@@ -20,12 +21,13 @@ function App() {
           </PrivateRoute>
         }
       />
+      <Route path="/events" element={<EventsListPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/signup/user" element={<SignupPageUser />} />
       <Route path="/signup/dj" element={<SignupPageDj />} />
       <Route path="/signup/disco" element={<SignupPageDisco />} />
-      <Route path="/search/disco" element={<SearchDiscoPage/>} />
+      <Route path="/search/disco" element={<SearchDiscoPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
