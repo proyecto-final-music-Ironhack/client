@@ -20,7 +20,6 @@ const SignupFormDj = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     authService
       .signupDj(signupData)
       .then(({ data }) => {
@@ -37,41 +36,21 @@ const SignupFormDj = () => {
     <form onSubmit={handleSubmit}>
       <FormControl>
         <FormLabel>Username</FormLabel>
-        <Input
-          type="text"
-          value={username}
-          onChange={handleInputChange}
-          name="username"
-        />
+        <Input type="text" value={username} onChange={handleInputChange} name="username" />
       </FormControl>
       <FormControl>
         <FormLabel>Name</FormLabel>
-        <Input
-          type="text"
-          value={name}
-          onChange={handleInputChange}
-          name="name"
-        />
+        <Input type="text" value={name} onChange={handleInputChange} name="name" />
       </FormControl>
 
       <FormControl>
         <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          value={password}
-          onChange={handleInputChange}
-          name="password"
-        />
+        <Input type="password" value={password} onChange={handleInputChange} name="password" />
       </FormControl>
 
       <FormControl>
         <FormLabel>Email</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={handleInputChange}
-          name="email"
-        />
+        <Input type="email" value={email} onChange={handleInputChange} name="email" />
       </FormControl>
 
       <div>

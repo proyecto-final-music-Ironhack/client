@@ -1,26 +1,13 @@
 import { Link } from "react-router-dom";
-import discoService from "../services/disco.service";
-import {
-  Button,
-  FormControl,
-  Flex,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Center,
-  Spinner,
-} from "@chakra-ui/react";
-import {
-  AutoComplete,
-  AutoCompleteInput,
-  AutoCompleteItem,
-  AutoCompleteList,
-} from "@choc-ui/chakra-autocomplete";
+import discoService from "../../services/disco.service";
+import { Button, FormControl, Flex, FormHelperText, FormLabel, Input, Center, Spinner, Text } from "@chakra-ui/react";
+import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from "@choc-ui/chakra-autocomplete";
 import { useEffect, useState } from "react";
 
-export default function SignupPageDisco() {
+export default function SearchDiscoPage() {
   const [discos, setDiscos] = useState([]);
   const [filteredDiscos, setfilteredDiscos] = useState([]);
+  const [showButton, setShowButton] = useState(false);
 
   const getDiscos = async () => {
     try {
@@ -36,13 +23,8 @@ export default function SignupPageDisco() {
     getDiscos();
   }, []);
 
-  const filterBySearch = (event) => {
-    const copy = { ...discos };
-    const query = event.target.value;
-    const filteredDiscos = copy.filter((disco) => {
-      return disco.name.toLowerCase().includes(query.toLowerCase());
-    });
-    setfilteredDiscos(filteredDiscos);
+  const inputOnChange = () => {
+    setShowButton(true);
   };
 
   return (
@@ -51,14 +33,11 @@ export default function SignupPageDisco() {
         <FormControl w="60">
           <FormLabel>Search for your club</FormLabel>
           <AutoComplete>
-            <AutoCompleteInput backgroundColor='white' />
-            <AutoCompleteList >
+            <AutoCompleteInput />
+            <AutoCompleteList>
               {filteredDiscos.map((disco) => (
-                <AutoCompleteItem
-                  key={disco._id}
-                  value={disco.name}
-                >
-                  {disco.name}
+                <AutoCompleteItem key={disco._id} value={disco.name} onClick={() => inputOnChange()}>
+                  {disco.name} ({disco.province})
                 </AutoCompleteItem>
               ))}
             </AutoCompleteList>
@@ -66,8 +45,8 @@ export default function SignupPageDisco() {
           {/* <FormHelperText>Can't find your local? Contact with us.</FormHelperText> */}
         </FormControl>
       </Flex>
-
-      <Link to="/">VOLVER</Link>
+      <Text>Can't find your club? Contact with us.</Text>
+      {showButton && <Link to="/signup/disco">Continuar</Link>}
     </>
   );
 }
