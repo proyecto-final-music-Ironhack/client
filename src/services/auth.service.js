@@ -12,6 +12,10 @@ class AuthService {
     return this.api.post("/auth/signup/dj", data);
   }
 
+  signupDisco(data) {
+    return this.api.post("/auth/signup/disco", data);
+  }
+
   login(data) {
     return this.api.post(`/auth/login`, data);
   }

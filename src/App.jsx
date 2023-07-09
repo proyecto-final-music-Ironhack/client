@@ -1,11 +1,12 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import SignupPageUser from "./pages/SignupPage.User";
-import SignupPageDj from "./pages/SignupPage.Dj";
-import SignupPageDisco from "./pages/SignupPage.Disco";
+import LoginPage from "./pages/auth/LoginPage";
+import SignupPage from "./pages/auth/SignupPage";
+import SignupPageUser from "./pages/auth/SignupPage.User";
+import SignupPageDj from "./pages/auth/SignupPage.Dj";
+import SignupPageDisco from "./pages/auth/SignupPage.Disco";
+import SearchDiscoPage from "./pages/auth/SearchDiscoPage";
 import ErrorPage from "./pages/ErrorPage";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Route path="/signup/user" element={<SignupPageUser />} />
       <Route path="/signup/dj" element={<SignupPageDj />} />
       <Route path="/signup/disco" element={<SignupPageDisco />} />
+      <Route path="/search/disco" element={<SearchDiscoPage/>} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
