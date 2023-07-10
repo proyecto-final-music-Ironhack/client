@@ -11,7 +11,6 @@ export default function SearchEvent() {
     try {
       const res = await eventService.getAllEvent();
       setEvent(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -22,8 +21,19 @@ export default function SearchEvent() {
   }, []);
 
   useEffect(() => {
+    const today = new Date();
+    const sevenDaysLater = new Date();
+    sevenDaysLater.setDate(today.getDate() + 8);
+
     setFilterEvent(
-      event.filter((e) => e.name.toLowerCase().includes(search.toLowerCase()))
+      event.filter((e) => {
+        const eventDate = new Date(e.date);
+        return (
+          e.name.toLowerCase().includes(search.toLowerCase()) &&
+          eventDate >= today &&
+          eventDate <= sevenDaysLater
+        );
+      })
     );
   }, [search, event]);
 
