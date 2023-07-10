@@ -25,10 +25,9 @@ const LoginForm = () => {
     authService
       .login(loginData)
       .then(({ data }) => {
-        console.log(data);
         storeToken(data.authToken);
         authenticate();
-        navigate("/");
+        navigate("/events");
       })
       .catch((err) => console.log(err));
   };
