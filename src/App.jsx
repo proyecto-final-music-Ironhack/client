@@ -10,6 +10,7 @@ import SearchDiscoPage from "./pages/auth/SearchDiscoPage";
 import ErrorPage from "./pages/ErrorPage";
 import EventsListPage from "./pages/privates.routes/EventsListPage";
 import DiscoDetailPage from "./pages/privates.routes/DiscoDetailPage";
+import EventCreatePage from "./pages/privates.routes/EventCreatePage";
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
         element={
           <PrivateRoute>
             <EventsListPage />
-            <DiscoDetailPage />
           </PrivateRoute>
         }
       />
+      <Route path="/events/create" element={<EventCreatePage />} />
+      <Route path="/disco/:id" element={<DiscoDetailPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/signup/user" element={<SignupPageUser />} />

@@ -1,8 +1,15 @@
+import Mapbox, { Marker, Popup } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import eventService from "../services/event.service";
 import { useEffect, useState } from "react";
 import { useGeolocated } from "react-geolocated";
-import Mapbox, { Marker, Popup } from "react-map-gl";
-import eventService from "../services/event.service";
-import "mapbox-gl/dist/mapbox-gl.css";
+import myMarkerCurrentEvent from "../../public/Property 1=Live.svg";
+import myMarkerOtherEvent from "../../public/Property 1=Default.svg";
+import myImgUser from "../../public/Profile Picture.svg";
+
+const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
+const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;
+const myMarkerUser = <img src={myImgUser} alt="Marker" />;
 
 export default function Map({ children }) {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -25,7 +32,7 @@ export default function Map({ children }) {
       setViewport({
         latitude: coords?.latitude,
         longitude: coords?.longitude,
-        zoom: 9,
+        zoom: 10,
       });
     }
   }, [isGeolocationAvailable, isGeolocationEnabled, coords]);
@@ -42,6 +49,18 @@ export default function Map({ children }) {
     fetchEvents();
   }, []);
 
+  const isEventNow = (eventDate) => {
+    const now = new Date();
+    const event = new Date(eventDate);
+    const OneHourEvent = new Date(now.getTime() + 60);
+    return (
+      now.getDate() === event.getDate() &&
+      now.getMonth() === event.getMonth() &&
+      now.getFullYear() === event.getFullYear() &&
+      now.getHours() === OneHourEvent.getHours()
+    );
+  };
+
   return (
     <Mapbox
       {...viewport}
@@ -51,11 +70,9 @@ export default function Map({ children }) {
       style={{ width: "100%", height: "250px" }}
     >
       {isGeolocationAvailable && isGeolocationEnabled && coords && (
-        <Marker
-          latitude={viewport.latitude}
-          longitude={viewport.longitude}
-          color="red"
-        />
+        <Marker latitude={viewport.latitude} longitude={viewport.longitude}>
+          {myMarkerUser}
+        </Marker>
       )}
       {events
         .filter((event) => event.disco)
@@ -65,8 +82,8 @@ export default function Map({ children }) {
               key={event._id}
               latitude={event.disco?.latitude}
               longitude={event.disco?.longitude}
-              color="green"
             >
+              {isEventNow(event.date) ? myMarkerCurrent : myMarkerOther}
               {/* <Popup
                 latitude={event.disco?.latitude}
                 longitude={event.disco?.longitude}
