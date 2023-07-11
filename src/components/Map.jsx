@@ -1,7 +1,15 @@
+import Mapbox, { Marker, Popup } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import eventService from "../services/event.service";
 import { useEffect, useState } from "react";
 import { useGeolocated } from "react-geolocated";
-import Mapbox, { Marker, Popup } from "react-map-gl";
-import eventService from "../services/event.service";
+import myMarkerCurrentEvent from "../../public/Property 1=Live.svg";
+import myMarkerOtherEvent from "../../public/Property 1=Default.svg";
+import myImgUser from "../../public/Profile Picture.svg";
+
+const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
+const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;
+const myMarkerUser = <img src={myImgUser} alt="Marker" />;
 
 export default function Map({ children }) {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -19,13 +27,12 @@ export default function Map({ children }) {
     zoom: 14,
   });
 
-  // Obtén las coordenadas del usuario al montar el componente
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationEnabled && coords) {
       setViewport({
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        zoom: 14,
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+        zoom: 10,
       });
     }
   }, [isGeolocationAvailable, isGeolocationEnabled, coords]);
@@ -42,34 +49,53 @@ export default function Map({ children }) {
     fetchEvents();
   }, []);
 
+  const isEventNow = (eventDate) => {
+    const now = new Date();
+    const event = new Date(eventDate);
+    const OneHourEvent = new Date(now.getTime() + 60);
+    return (
+      now.getDate() === event.getDate() &&
+      now.getMonth() === event.getMonth() &&
+      now.getFullYear() === event.getFullYear() &&
+      now.getHours() === OneHourEvent.getHours()
+    );
+  };
+
   return (
     <Mapbox
       {...viewport}
-      width="100%"
-      height="100%"
       mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
       mapStyle="mapbox://styles/mapbox/dark-v11"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
+      style={{ width: "100%", height: "250px" }}
     >
       {isGeolocationAvailable && isGeolocationEnabled && coords && (
-        <Marker latitude={coords.latitude} longitude={coords.longitude} />
-      )}
-
-      {/* {events.map((event) => (
-        <Marker
-          key={event._id}
-          latitude={event.latitude}
-          longitude={event.longitude}
-        >
-          <Popup latitude={event.latitude} longitude={event.longitude}>
-            <div>
-              <h3>{event.name}</h3>
-              <p>{new Date(event.date).toLocaleDateString()}</p>
-            </div>
-          </Popup>
+        <Marker latitude={viewport.latitude} longitude={viewport.longitude}>
+          {myMarkerUser}
         </Marker>
-      ))} */}
-
+      )}
+      {events
+        .filter((event) => event.disco)
+        .map((event) => {
+          return (
+            <Marker
+              key={event._id}
+              latitude={event.disco?.latitude}
+              longitude={event.disco?.longitude}
+            >
+              {isEventNow(event.date) ? myMarkerCurrent : myMarkerOther}
+              {/* <Popup
+                latitude={event.disco?.latitude}
+                longitude={event.disco?.longitude}
+              >
+                <div>
+                  <h3>{event.disco.name}</h3>
+                  <p>{new Date(event.date).toLocaleDateString()}</p>
+                </div>
+              </Popup> */}
+            </Marker>
+          );
+        })}{" "}
       {children}
     </Mapbox>
   );

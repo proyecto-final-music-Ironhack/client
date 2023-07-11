@@ -12,6 +12,9 @@ class EventService {
   getOneEvent(id) {
     return this.api.get(`/event/${id}`);
   }
+  createEvent(eventData) {
+    return this.api.post("/events/create", eventData);
+  }
 }
 
 const eventService = new EventService();
