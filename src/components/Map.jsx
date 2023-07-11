@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGeolocated } from "react-geolocated";
 import Mapbox, { Marker, Popup } from "react-map-gl";
 import eventService from "../services/event.service";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function Map({ children }) {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -19,13 +20,12 @@ export default function Map({ children }) {
     zoom: 14,
   });
 
-  // Obtén las coordenadas del usuario al montar el componente
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationEnabled && coords) {
       setViewport({
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        zoom: 14,
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+        zoom: 9,
       });
     }
   }, [isGeolocationAvailable, isGeolocationEnabled, coords]);
@@ -45,31 +45,40 @@ export default function Map({ children }) {
   return (
     <Mapbox
       {...viewport}
-      width="100%"
-      height="100%"
       mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
       mapStyle="mapbox://styles/mapbox/dark-v11"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
+      style={{ width: "100%", height: "250px" }}
     >
       {isGeolocationAvailable && isGeolocationEnabled && coords && (
-        <Marker latitude={coords.latitude} longitude={coords.longitude} />
-      )}
-
-      {/* {events.map((event) => (
         <Marker
-          key={event._id}
-          latitude={event.latitude}
-          longitude={event.longitude}
-        >
-          <Popup latitude={event.latitude} longitude={event.longitude}>
-            <div>
-              <h3>{event.name}</h3>
-              <p>{new Date(event.date).toLocaleDateString()}</p>
-            </div>
-          </Popup>
-        </Marker>
-      ))} */}
-
+          latitude={viewport.latitude}
+          longitude={viewport.longitude}
+          color="red"
+        />
+      )}
+      {events
+        .filter((event) => event.disco)
+        .map((event) => {
+          return (
+            <Marker
+              key={event._id}
+              latitude={event.disco?.latitude}
+              longitude={event.disco?.longitude}
+              color="green"
+            >
+              {/* <Popup
+                latitude={event.disco?.latitude}
+                longitude={event.disco?.longitude}
+              >
+                <div>
+                  <h3>{event.disco.name}</h3>
+                  <p>{new Date(event.date).toLocaleDateString()}</p>
+                </div>
+              </Popup> */}
+            </Marker>
+          );
+        })}{" "}
       {children}
     </Mapbox>
   );

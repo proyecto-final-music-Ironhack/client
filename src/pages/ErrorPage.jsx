@@ -5,7 +5,7 @@ export default function ErrorPage() {
   return (
     <div>
       <p>¿Cómo has llegado aquí?</p>
-      <Link to="/">Volver a Home</Link>
+      <Link to="/events">Volver a Home</Link>
     </div>
   );
 }
