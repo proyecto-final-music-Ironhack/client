@@ -9,18 +9,12 @@ import SignupPageDisco from "./pages/auth/SignupPage.Disco";
 import SearchDiscoPage from "./pages/auth/SearchDiscoPage";
 import ErrorPage from "./pages/ErrorPage";
 import EventsListPage from "./pages/privates.routes/EventsListPage";
+import EventProfilePage from "./pages/privates.routes/event/EventProfilePage";
 
 function App() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            {/* {aquí irán las rutas que solo pueden verse si existe token} */}
-          </PrivateRoute>
-        }
-      />
+      <Route path="/" element={<PrivateRoute>{/* {aquí irán las rutas que solo pueden verse si existe token} */}</PrivateRoute>} />
       <Route path="/events" element={<EventsListPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
@@ -28,6 +22,7 @@ function App() {
       <Route path="/signup/dj" element={<SignupPageDj />} />
       <Route path="/signup/disco" element={<SignupPageDisco />} />
       <Route path="/search/disco" element={<SearchDiscoPage />} />
+      <Route path="/event/profile" element={<EventProfilePage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

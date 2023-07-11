@@ -4,14 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 
-function EmailPassStep() {
+function EmailPassStep({ discoName }) {
   const { previousStep } = useWizard();
   const [signupData, setSignupData] = useState({
-    idFromAPI: "",
+    name: "",
     email: "",
     password: "",
   });
-
+  console.log(discoName);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -22,21 +22,21 @@ function EmailPassStep() {
   const handleSubmit = (e) => {
     e.preventDefault();
     authService
-      .signupDisco(signupData)
+      .signupDisco({ ...signupData, name: discoName })
       .then(({ data }) => {
-        setSignupData({ idFromAPI: "", email: "", password: "" });
+        setSignupData({ email: "", password: "" });
         navigate("/login");
       })
       .catch((err) => console.log(err));
   };
 
-  const { idFromAPI, email, password } = signupData;
+  const { email, password } = signupData;
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <FormControl>
-          <Input hidden type="text" value={idFromAPI} onChange={handleInputChange} name="idFromAPI" />
+          <Input type="text" value={discoName} onChange={handleInputChange} name="discoName" />
         </FormControl>
 
         <FormControl>
