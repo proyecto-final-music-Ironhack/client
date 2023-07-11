@@ -10,7 +10,7 @@ class EventService {
   }
 
   getOneEvent(id) {
-    return this.api.get(`/event/${id}`);
+    return this.api.get(`/events/${id}`);
   }
   createEvent(eventData) {
     return this.api.post("/events/create", eventData);

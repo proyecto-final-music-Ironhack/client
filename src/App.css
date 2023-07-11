@@ -1,9 +1,11 @@
-#root {
+/* #root {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  max-width: 100%;
 }
 
 .disco-form-footer {
 color: red;
-}
+} */

@@ -12,30 +12,34 @@ import EventsListPage from "./pages/privates.routes/EventsListPage";
 import EventProfilePage from "./pages/privates.routes/event/EventProfilePage";
 import DiscoDetailPage from "./pages/privates.routes/DiscoDetailPage";
 import EventCreatePage from "./pages/privates.routes/EventCreatePage";
+import Nav from "./components/Nav";
 
 function App() {
   return (
-    <Routes>
-      <Route
-        path="/events"
-        element={
-          <PrivateRoute>
-            <EventsListPage />
-          </PrivateRoute>
-        }
-      />
-      <Route path="/events/create" element={<EventCreatePage />} />
-      <Route path="/disco/:id" element={<DiscoDetailPage />} />
+    <>
+    <Nav />
+      <Routes>
+        <Route
+          path="/events"
+          element={
+            <PrivateRoute>
+              <EventsListPage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/events/create" element={<EventCreatePage />} />
+        <Route path="/disco/:id" element={<DiscoDetailPage />} />
 
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/signup/user" element={<SignupPageUser />} />
-      <Route path="/signup/dj" element={<SignupPageDj />} />
-      <Route path="/signup/disco" element={<SignupPageDisco />} />
-      <Route path="/search/disco" element={<SearchDiscoPage />} />
-      <Route path="/event/profile" element={<EventProfilePage />} />
-      <Route path="*" element={<ErrorPage />} />
-    </Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/signup/user" element={<SignupPageUser />} />
+        <Route path="/signup/dj" element={<SignupPageDj />} />
+        <Route path="/signup/disco" element={<SignupPageDisco />} />
+        <Route path="/search/disco" element={<SearchDiscoPage />} />
+        <Route path="/event/profile" element={<EventProfilePage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
   );
 }
 
