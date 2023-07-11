@@ -4,8 +4,8 @@ import { Button, FormControl, Flex, FormHelperText, FormLabel, Input, Center, Sp
 import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from "@choc-ui/chakra-autocomplete";
 import { useEffect, useState } from "react";
 
-function SearchDiscoStep() {
-  const {nextStep } = useWizard();
+function SearchDiscoStep({ setDiscoName }) {
+  const { nextStep } = useWizard();
   const [discos, setDiscos] = useState([]);
   const [filteredDiscos, setfilteredDiscos] = useState([]);
   const [showButton, setShowButton] = useState(false);
@@ -14,7 +14,6 @@ function SearchDiscoStep() {
     try {
       const res = await discoService.getAllDiscos();
       setDiscos(res.data);
-      setfilteredDiscos(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -28,16 +27,15 @@ function SearchDiscoStep() {
     setShowButton(true);
   };
 
-
   return (
     <>
       <Flex pt="48" justify="center" align="center" w="full">
         <FormControl w="60">
           <FormLabel>Search for your club</FormLabel>
-          <AutoComplete>
+          <AutoComplete onChange={(value) => setDiscoName(value)}>
             <AutoCompleteInput />
-            <AutoCompleteList style={{ zIndex: 1 }}>
-              {filteredDiscos.map((disco) => (
+            <AutoCompleteList style={{ zIndex: 1, color: "white" }}>
+              {discos.map((disco) => (
                 <AutoCompleteItem key={disco._id} value={disco.name}>
                   {disco.name} ({disco.province})
                 </AutoCompleteItem>
