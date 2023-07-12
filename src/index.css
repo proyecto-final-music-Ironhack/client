@@ -83,3 +83,11 @@ button:focus-visible {
 } */
 
 
+.mapboxgl-map {
+  z-index: 0;
+}
+
+.navbar {
+  z-index: 1;
+  position: relative;
+}

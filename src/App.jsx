@@ -12,6 +12,7 @@ import EventsListPage from "./pages/privates.routes/event/EventsListPage";
 import EventProfilePage from "./pages/privates.routes/event/EventProfilePage";
 import DiscoDetailPage from "./pages/privates.routes/disco/DiscoDetailPage";
 import EventCreatePage from "./pages/privates.routes/event/EventCreatePage";
+import ProfilePage from "./pages/privates.routes/ProfilePage";
 import Nav from "./components/Nav";
 
 function App() {
@@ -27,9 +28,17 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/events/create" element={<EventCreatePage />} />
         <Route path="/disco/:id" element={<DiscoDetailPage />} />
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signup/user" element={<SignupPageUser />} />
