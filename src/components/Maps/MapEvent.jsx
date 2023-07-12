@@ -56,7 +56,7 @@ export default function Map({ children }) {
       mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
       mapStyle="mapbox://styles/mapbox/dark-v11"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      style={{ width: "100%", height: "250px" }}
+      style={{ width: "100%", height: "250px", zIndex: -1 }}
       attributionControl={false}
       logoControl={false}
     >
@@ -64,11 +64,7 @@ export default function Map({ children }) {
         .filter((event) => event.disco)
         .map((event) => {
           return (
-            <Marker
-              key={event._id}
-              latitude={event.disco.latitude}
-              longitude={event.disco.longitude}
-            >
+            <Marker key={event._id} latitude={event.disco.latitude} longitude={event.disco.longitude}>
               {isEventNow(event.date) ? myMarkerCurrent : myMarkerOther}
             </Marker>
           );
