@@ -3,11 +3,12 @@ import { Doughnut } from "react-chartjs-2";
 import "chart.js/auto";
 
 export default function GenreMusicChart() {
+  const randomGenre = Math.floor(Math.random() * 100) + 1;
   const data = {
     labels: ["Pop", "Rock", "Reggeaton"],
     datasets: [
       {
-        data: [300, 50, 100],
+        data: [randomGenre(), randomGenre(), randomGenre()],
         backgroundColor: [
           "rgb(255, 99, 132)",
           "rgb(54, 162, 235)",

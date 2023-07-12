@@ -22,14 +22,20 @@ export default function Map({ children }) {
     });
 
   const [events, setEvents] = useState([]);
+  const [geolocateUser, setGeolocatedUser] = useState();
   const [viewport, setViewport] = useState({
     latitude: coords?.latitude || 40.4165,
     longitude: coords?.longitude || -3.70256,
-    zoom: 14,
+    zoom: 3.5,
   });
 
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationEnabled && coords) {
+      setGeolocatedUser({
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+        zoom: 10,
+      });
       setViewport({
         latitude: coords?.latitude,
         longitude: coords?.longitude,
@@ -61,10 +67,20 @@ export default function Map({ children }) {
       now.getHours() === OneHourEvent.getHours()
     );
   };
-
+  console.log(viewport);
   return (
+    // <Mapbox
+    //   mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
+    //   {...viewport}
+
+    //   mapStyle="mapbox://styles/mapbox/dark-v11"
+    //   style={{ width: "100%", height: "250px" }}
+    //   attributionControl={false}
+    //   logoControl={false}
+    // />
     <Mapbox
       {...viewport}
+      onMove={(evt) => setViewport(evt.viewState)}
       mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
       mapStyle="mapbox://styles/mapbox/dark-v11"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
@@ -72,8 +88,11 @@ export default function Map({ children }) {
       attributionControl={false}
       logoControl={false}
     >
-      {isGeolocationAvailable && isGeolocationEnabled && coords && (
-        <Marker latitude={viewport.latitude} longitude={viewport.longitude}>
+      {geolocateUser && (
+        <Marker
+          latitude={geolocateUser.latitude}
+          longitude={geolocateUser.longitude}
+        >
           {myMarkerUser}
         </Marker>
       )}
