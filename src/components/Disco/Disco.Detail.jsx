@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import discoService from "../../services/disco.service";
 import { useParams } from "react-router-dom";
+import "chart.js";
+import GenreMusicChart from "../GenreMusicChart";
 
 export default function DiscoDetail() {
   const [disco, setDisco] = useState(null);
@@ -36,7 +38,7 @@ export default function DiscoDetail() {
 
   useEffect(() => {
     getDisco();
-  }, []);
+  }, [id]);
 
   if (!disco) {
     return <div>Loading...</div>;
@@ -55,13 +57,8 @@ export default function DiscoDetail() {
           <span>{followers}</span> followers
         </p>
       </div>
-      <div>
-        <div>
-          {disco.genre.map((genre, index) => (
-            <div key={index}>{genre}</div>
-          ))}
-        </div>
-      </div>
+
+      <GenreMusicChart genres={disco.genres} />
     </div>
   );
 }
