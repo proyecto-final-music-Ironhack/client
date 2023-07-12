@@ -1,5 +1,5 @@
-import Map from "../../components/Map";
-import SearchEvent from "../../components/SearchEvent";
+import Map from "../../../components/Map";
+import SearchEvent from "../../../components/SearchEvent";
 
 export default function EventsListPage() {
   return (

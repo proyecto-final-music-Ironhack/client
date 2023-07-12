@@ -1,4 +1,4 @@
-import DiscoDetail from "../../components/Disco/Disco.Detail";
+import DiscoDetail from "../../../components/Disco/Disco.Detail";
 import { Link } from "react-router-dom";
 export default function DiscoDetailPage() {
   return (
