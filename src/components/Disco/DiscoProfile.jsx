@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import "chart.js";
 import GenreMusicChart from "../GenreMusicChart";
 
-export default function DiscoDetail() {
+export default function DiscoProfile() {
   const [disco, setDisco] = useState(null);
   const [followers, setFollowers] = useState(0);
   const [isFollowing, setIsFollowing] = useState(false);

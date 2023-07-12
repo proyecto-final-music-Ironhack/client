@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import eventService from "../services/event.service";
+import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
 
 export default function SearchEvent() {

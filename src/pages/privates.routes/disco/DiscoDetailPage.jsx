@@ -1,9 +1,9 @@
-import DiscoDetail from "../../../components/Disco/Disco.Detail";
+import DiscoProfile from "../../../components/Disco/DiscoProfile";
 import { Link } from "react-router-dom";
 export default function DiscoDetailPage() {
   return (
     <div>
-      <DiscoDetail />
+      <DiscoProfile />
       <Link to="/events/create"> Create event</Link>
     </div>
   );

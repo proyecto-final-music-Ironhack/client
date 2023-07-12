@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import authService from "../services/auth.service";
+import userService from "../services/user.service";
 
 export const TOKEN_NAME = "authToken";
 
@@ -28,6 +29,12 @@ export const AuthContextWrapper = ({ children }) => {
     removeToken();
   };
 
+  const getUser = () => {
+    userService.getUser().then(({ data }) => {
+      setUser(data);
+    });
+  };
+
   const authenticate = async () => {
     const token = localStorage.getItem(TOKEN_NAME);
     if (!token) {
@@ -36,9 +43,9 @@ export const AuthContextWrapper = ({ children }) => {
     setLoading(true);
     return authService
       .verify(token)
-      .then((user) => {
+      .then(() => {
         setLoading(false);
-        setUser(user);
+        getUser();
       })
       .catch((err) => {
         logout();
