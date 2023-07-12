@@ -3,7 +3,7 @@ import eventService from "../../services/event.service";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import Map from "../../components/MapEvent";
+import Map from "../Maps/Map";
 
 function EventProfile() {
   const [event, setEvent] = useState(null);

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import authService from "../services/auth.service";
+import authService from "../../services/auth.service";
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 
-const SignupFormUser = () => {
+const SignupFormDj = () => {
   const [signupData, setSignupData] = useState({
     username: "",
     name: "",
@@ -20,11 +20,9 @@ const SignupFormUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     authService
-      .signupUser(signupData)
+      .signupDj(signupData)
       .then(({ data }) => {
-        console.log(data);
         setSignupData({ username: "", name: "", email: "", password: "" });
 
         navigate("/login");
@@ -38,46 +36,26 @@ const SignupFormUser = () => {
     <form onSubmit={handleSubmit}>
       <FormControl>
         <FormLabel>Username</FormLabel>
-        <Input
-          type="text"
-          value={username}
-          onChange={handleInputChange}
-          name="username"
-        />
+        <Input type="text" value={username} onChange={handleInputChange} name="username" />
       </FormControl>
       <FormControl>
         <FormLabel>Name</FormLabel>
-        <Input
-          type="text"
-          value={name}
-          onChange={handleInputChange}
-          name="name"
-        />
+        <Input type="text" value={name} onChange={handleInputChange} name="name" />
       </FormControl>
 
       <FormControl>
         <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          value={password}
-          onChange={handleInputChange}
-          name="password"
-        />
+        <Input type="password" value={password} onChange={handleInputChange} name="password" />
       </FormControl>
 
       <FormControl>
         <FormLabel>Email</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={handleInputChange}
-          name="email"
-        />
+        <Input type="email" value={email} onChange={handleInputChange} name="email" />
       </FormControl>
 
       <div>
         <Button colorScheme="teal" variant="solid" type="submit">
-          Create user
+          Create Dj
         </Button>
         <Link to="/login">Login</Link>
       </div>
@@ -85,4 +63,4 @@ const SignupFormUser = () => {
   );
 };
 
-export default SignupFormUser;
+export default SignupFormDj;
