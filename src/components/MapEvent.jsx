@@ -1,12 +1,10 @@
-import Mapbox, { Marker, Popup } from "react-map-gl";
-import { Container } from "@chakra-ui/react";
+import Mapbox, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import eventService from "../services/event.service";
 import { useEffect, useState } from "react";
 import { useGeolocated } from "react-geolocated";
 import myMarkerCurrentEvent from "../../src/images/Property 1=Live.svg";
 import myMarkerOtherEvent from "../../src/images/Property 1=Default.svg";
-import myImgUser from "../../src/images/Profile Picture.svg";
 
 const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
 const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;

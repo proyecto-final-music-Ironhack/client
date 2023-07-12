@@ -1,5 +1,4 @@
 import Mapbox, { Marker, Popup } from "react-map-gl";
-import { Container } from "@chakra-ui/react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import eventService from "../services/event.service";
 import { useEffect, useState } from "react";
