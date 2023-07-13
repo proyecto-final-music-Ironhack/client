@@ -25,5 +25,12 @@ export const DiscoPage = () => {
     getDisco();
   }, [id]);
 
-  return <DiscoProfile id={id} disco={disco} followers={followers} isFollowing={isFollowing} />;
+  return (
+    <DiscoProfile
+      id={id}
+      disco={disco}
+      followers={followers}
+      isFollowing={isFollowing}
+    />
+  );
 };

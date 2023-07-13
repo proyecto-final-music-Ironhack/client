@@ -1,21 +1,40 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import discoService from "../../services/disco.service";
 import { useParams } from "react-router-dom";
-import "chart.js";
-import GenreMusicChart from "../GenreMusicChart";
 
-export default function DiscoProfile({ disco, followers, isFollowing, id }) {
-  const handleFollow = async () => {
-    if (id) {
+export default function DiscoProfile() {
+  const [disco, setDisco] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followers, setFollowers] = useState(0);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchDisco = async () => {
       try {
-        const incrementFollowers = !isFollowing;
-        const dataDisco = await discoService.updateDisco(id, incrementFollowers);
-        setFollowers((followers) => (incrementFollowers ? followers + 1 : followers - 1));
-        setIsFollowing(incrementFollowers);
-        console.log(dataDisco);
+        const response = await discoService.getOneDisco(id);
+        setDisco(response.data);
+        setFollowers(response.data.followers);
       } catch (err) {
         console.log(err);
       }
+    };
+
+    fetchDisco();
+  }, [id]);
+
+  const handleFollow = async () => {
+    try {
+      const incrementFollowers = !isFollowing;
+      let newFollowers;
+      if (incrementFollowers) {
+        newFollowers = await discoService.addFollower(id);
+      } else {
+        newFollowers = await discoService.removeFollower(id);
+      }
+      setFollowers(newFollowers);
+      setIsFollowing(incrementFollowers);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -38,8 +57,6 @@ export default function DiscoProfile({ disco, followers, isFollowing, id }) {
           <span>{followers}</span> followers
         </p>
       </div>
-
-      <GenreMusicChart genres={disco.genres} />
     </div>
   );
 }

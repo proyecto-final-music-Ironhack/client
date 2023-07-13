@@ -69,6 +69,20 @@ export default function CreateEventForm() {
     }
   };
 
+  const genres = [
+    "Jazz",
+    "Soul",
+    "Pop",
+    "Rock and Roll",
+    "Techno",
+    "Reggeaton",
+    "Hip Hop/Rap",
+    "Funk",
+    "Metal",
+    "Salsa",
+    "Country",
+  ];
+
   return (
     <>
       <Box boxSize="300px">
@@ -107,7 +121,7 @@ export default function CreateEventForm() {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Price of entry: </FormLabel>
+            <FormLabel>Ticket: </FormLabel>
             <Input
               type="number"
               value={eventData.priceOfEntry}
@@ -118,7 +132,7 @@ export default function CreateEventForm() {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Drinks with entry: </FormLabel>
+            <FormLabel>Drinks with ticket: </FormLabel>
             <Input
               type="number"
               value={eventData.drinksWithEntry}
@@ -148,13 +162,21 @@ export default function CreateEventForm() {
           </FormControl>
           <FormControl>
             <FormLabel>Genre:</FormLabel>
-            <Input
-              type="text"
+            <Select
+              placeholder="Select option"
               value={eventData.genre}
               onChange={(e) =>
                 setEventData({ ...eventData, genre: e.target.value })
               }
-            />
+            >
+              {genres.map((genre, index) => {
+                return (
+                  <option key={index} value={genre}>
+                    {genre}
+                  </option>
+                );
+              })}
+            </Select>
           </FormControl>
 
           <FormControl>

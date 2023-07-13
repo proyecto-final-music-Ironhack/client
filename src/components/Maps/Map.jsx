@@ -1,4 +1,4 @@
-import Mapbox, { Marker } from "react-map-gl";
+import Mapbox, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
 const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;
 const myMarkerUser = <img src={myImgUser} alt="Marker" />;
 
-export default function Map({ children }) {
+export default function Map() {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
       positionOptions: {
@@ -68,15 +68,6 @@ export default function Map({ children }) {
   };
   console.log(viewport);
   return (
-    // <Mapbox
-    //   mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
-    //   {...viewport}
-
-    //   mapStyle="mapbox://styles/mapbox/dark-v11"
-    //   style={{ width: "100%", height: "250px" }}
-    //   attributionControl={false}
-    //   logoControl={false}
-    // />
     <Mapbox
       {...viewport}
       onMove={(evt) => setViewport(evt.viewState)}
@@ -108,16 +99,16 @@ export default function Map({ children }) {
               {/* <Popup
                 latitude={event.disco?.latitude}
                 longitude={event.disco?.longitude}
-                >
+              >
                 <div>
-                <h3>{event.disco.name}</h3>
-                <p>{new Date(event.date).toLocaleDateString()}</p>
+                  <h3>{event.disco.name}</h3>
+                  <p>{new Date(event.date).toLocaleDateString()}</p>
+                  <p>{event.genre}</p>
                 </div>
               </Popup> */}
             </Marker>
           );
         })}{" "}
-      {children}
     </Mapbox>
   );
 }
