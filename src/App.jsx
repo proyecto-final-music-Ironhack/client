@@ -10,10 +10,11 @@ import SearchDiscoPage from "./pages/auth/SearchDiscoPage";
 import ErrorPage from "./pages/ErrorPage";
 import EventsListPage from "./pages/privates.routes/event/EventsListPage";
 import EventProfilePage from "./pages/privates.routes/event/EventProfilePage";
-import DiscoDetailPage from "./pages/privates.routes/disco/DiscoDetailPage";
+// import DiscoDetailPage from "./pages/privates.routes/disco/DiscoDetailPage";
 import EventCreatePage from "./pages/privates.routes/event/EventCreatePage";
 import ProfilePage from "./pages/auth/ProfilePage";
 import Nav from "./components/Nav";
+import { DiscoPage } from "./pages/DiscoPage/DiscoPage";
 
 function App() {
   return (
@@ -37,8 +38,16 @@ function App() {
           }
         />
 
+        <Route
+          path="/disco/:id"
+          element={
+            <PrivateRoute>
+              <DiscoPage />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/events/create" element={<EventCreatePage />} />
-        <Route path="/disco/:id" element={<DiscoDetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signup/user" element={<SignupPageUser />} />
