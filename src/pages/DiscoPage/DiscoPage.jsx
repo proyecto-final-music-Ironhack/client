@@ -12,8 +12,9 @@ export const DiscoPage = () => {
 
   const getDisco = async () => {
     try {
-      const { data } = await discoService.getOneDisco(id);
-      setDisco(data);
+      const res = await discoService.getOneDisco(id);
+      setDisco(res.data);
+      console.log(res.data);
       setFollowers(data.followers);
       setIsFollowing(data.isFollowing);
     } catch (err) {
@@ -23,6 +24,7 @@ export const DiscoPage = () => {
 
   useEffect(() => {
     getDisco();
+    console.log('DISCO', disco)
   }, [id]);
 
   return (
