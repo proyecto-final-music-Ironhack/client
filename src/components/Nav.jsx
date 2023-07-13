@@ -18,7 +18,6 @@ import { AuthContext } from "../context/auth.context";
 export default function Nav() {
   const { user, logout } = useContext(AuthContext);
   console.log("CURRENT USER", user);
-
   const handleLogout = () => {
     logout();
   };
