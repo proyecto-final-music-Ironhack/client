@@ -14,7 +14,7 @@ import EventProfilePage from "./pages/privates.routes/event/EventProfilePage";
 import EventCreatePage from "./pages/privates.routes/event/EventCreatePage";
 import ProfilePage from "./pages/auth/ProfilePage";
 import Nav from "./components/Nav";
-import { DiscoPage } from "./pages/DiscoPage/DiscoPage";
+import { DiscoPage } from "./pages/privates.routes/disco/DiscoPage";
 
 function App() {
   return (
@@ -47,7 +47,15 @@ function App() {
           }
         />
 
-        <Route path="/events/create" element={<EventCreatePage />} />
+        <Route
+          path="/events/create"
+          element={
+            <PrivateRoute>
+              <EventCreatePage />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signup/user" element={<SignupPageUser />} />
