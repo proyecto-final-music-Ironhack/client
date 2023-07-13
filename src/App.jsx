@@ -12,7 +12,7 @@ import EventsListPage from "./pages/privates.routes/event/EventsListPage";
 import EventProfilePage from "./pages/privates.routes/event/EventProfilePage";
 import DiscoDetailPage from "./pages/privates.routes/disco/DiscoDetailPage";
 import EventCreatePage from "./pages/privates.routes/event/EventCreatePage";
-import ProfilePage from "./pages/privates.routes/ProfilePage";
+import ProfilePage from "./pages/auth/ProfilePage";
 import Nav from "./components/Nav";
 
 function App() {

@@ -198,7 +198,7 @@ export default function CreateEventForm() {
             </Select>
           </FormControl>
 
-          <Button type="submit">Create event</Button>
+          <Button type="submit">Add event</Button>
         </form>
       </Box>
     </>
