@@ -58,9 +58,9 @@ const LoginForm = () => {
 
       <div>
         <Button colorScheme="teal" variant="solid" type="submit">
-          Login
+          Log in
         </Button>
-        <Link to="/signup">Signup</Link>
+        <Link to="/signup">Sign up</Link>
       </div>
       <p>{error}</p>
     </form>

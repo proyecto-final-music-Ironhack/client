@@ -12,7 +12,7 @@ const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
 const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;
 const myMarkerUser = <img src={myImgUser} alt="Marker" />;
 
-export default function Map() {
+export default function MapEvent({ event }) {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
       positionOptions: {
@@ -21,22 +21,19 @@ export default function Map() {
       userDecisionTimeout: 5000,
     });
 
-  const [currentEvent, setCurrentEvent] = useState(null);
   const [geolocateUser, setGeolocatedUser] = useState();
   const [viewport, setViewport] = useState({
     latitude: coords?.latitude || 40.4165,
     longitude: coords?.longitude || -3.70256,
     zoom: 3.5,
   });
-  const { id } = useParams();
-  console.log("QUIERO SABER LA INFO:", id);
 
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationEnabled && coords) {
       setGeolocatedUser({
         latitude: coords?.latitude,
         longitude: coords?.longitude,
-        zoom: 10,
+        zoom: 12,
       });
       setViewport({
         latitude: coords?.latitude,
@@ -45,18 +42,6 @@ export default function Map() {
       });
     }
   }, [isGeolocationAvailable, isGeolocationEnabled, coords]);
-
-  useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        const res = await eventService.getOnedeEvent(id);
-        setCurrentEvent(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchEvent();
-  }, [id]);
 
   const isEventNow = (eventDate) => {
     const now = new Date();
@@ -89,13 +74,13 @@ export default function Map() {
           {myMarkerUser}
         </Marker>
       )}
-      {currentEvent && (
+      {event && (
         <Marker
-          key={currentEvent._id}
-          latitude={currentEvent.event?.disco.latitude}
-          longitude={currentEvent.event?.disco.longitude}
+          key={event._id}
+          latitude={event.disco.latitude}
+          longitude={event.disco.longitude}
         >
-          {isEventNow(currentEvent.date) ? myMarkerCurrent : myMarkerOther}
+          {isEventNow(event.date) ? myMarkerCurrent : myMarkerOther}
         </Marker>
       )}
     </Mapbox>

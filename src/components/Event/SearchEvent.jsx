@@ -67,7 +67,7 @@ export default function SearchEvent() {
             <h3>
               {event.dj ? event.dj.username : "No DJ information available"}
             </h3>
-            <h3>{event.genre}</h3> {/* mostrar el genero del evento */}
+            <h3>{event.genre}</h3>
           </Link>
         </div>
       ))}

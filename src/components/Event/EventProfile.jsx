@@ -3,7 +3,7 @@ import eventService from "../../services/event.service";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import Map from "../Maps/Map";
+import MapEvent from "../Maps/MapEvent";
 
 function EventProfile() {
   const [event, setEvent] = useState(null);
@@ -36,9 +36,12 @@ function EventProfile() {
     <div>
       <h1>{event.name}</h1>
       <h2>
+        Disco:{" "}
         {event.disco ? event.disco.name : "No disco information available"}
       </h2>
-      <h2>{event.dj ? event.dj.username : "No DJ information available"}</h2>
+      <h2>
+        Dj: {event.dj ? event.dj.username : "No DJ information available"}
+      </h2>
       <p>{formattedDate}</p>
       <p>{event.priceOfEntry} €</p>
       <div>
@@ -61,7 +64,7 @@ function EventProfile() {
 
       <div>
         <h2>Location</h2>
-        <Map />
+        <MapEvent event={event} />
       </div>
     </div>
   );
