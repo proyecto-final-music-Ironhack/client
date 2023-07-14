@@ -5,8 +5,6 @@ import discoService from "../../../services/disco.service";
 
 export const DiscoPage = () => {
   const [disco, setDisco] = useState(null);
-
-
   const { discoId } = useParams();
 
   const getDisco = async () => {

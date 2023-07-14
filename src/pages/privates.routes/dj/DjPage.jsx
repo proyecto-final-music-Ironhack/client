@@ -5,13 +5,12 @@ import djService from "../../../services/dj.service";
 
 export const DjPage = () => {
   const [dj, setDj] = useState(null);
+  const { djId } = useParams();
 
-  const { id } = useParams();
-  console.log(id);
 
   const getDj = async () => {
     try {
-      const { data } = await djService.getOneDj(id);
+      const { data } = await djService.getOneDj(djId);
       console.log(data);
       setDj(data);
     } catch (err) {
@@ -21,7 +20,7 @@ export const DjPage = () => {
 
   useEffect(() => {
     getDj();
-  }, [id]);
+  }, [djId]);
 
-  return <DjProfile id={id} dj={dj} />;
+  return <DjProfile djId={djId} dj={dj} />;
 };

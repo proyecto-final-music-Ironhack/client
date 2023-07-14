@@ -17,15 +17,11 @@ class DiscoService {
     return this.api.put(`/disco/${id}`);
   }
   addFollower(id) {
-    return this.api
-      .put(`/disco/${id}/add-follower`)
-      .then((response) => response.data.followers);
+    return this.api.put(`/disco/${id}/add-follower`).then((response) => response.data.followers);
   }
 
   removeFollower(id) {
-    return this.api
-      .put(`/disco/${id}/remove-follower`)
-      .then((response) => response.data.followers);
+    return this.api.put(`/disco/${id}/remove-follower`).then((response) => response.data.followers);
   }
 }
 

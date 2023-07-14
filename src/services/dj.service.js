@@ -16,6 +16,14 @@ class DjService {
   updateDj(id) {
     return this.api.put(`/djs/${id}`);
   }
+
+  addFollower(id) {
+    return this.api.put(`/djs/${id}/add-follower`).then((response) => response.data.followers);
+  }
+
+  removeFollower(id) {
+    return this.api.put(`/djs/${id}/remove-follower`).then((response) => response.data.followers);
+  }
 }
 
 const djService = new DjService();
