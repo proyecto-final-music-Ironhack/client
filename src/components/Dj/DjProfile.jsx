@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import djService from "../../services/dj.service";
 import { Link } from "react-router-dom";
 
-export default function DjProfile({ dj, id }) {
+export default function DjProfile({ djId, dj }) {
   const [isFollowing, setIsFollowing] = useState(false);
+  console.log("DISCO", dj);
+
 
   const handleFollow = async () => {
-    if (id) {
+    if (djId) {
       try {
         const incrementFollowers = !isFollowing;
         if (incrementFollowers) {
-          await djService.addFollower(id);
+          await djService.addFollower(djId);
         } else {
-          await djService.removeFollower(id);
+          await djService.removeFollower(djId);
         }
         setIsFollowing(incrementFollowers);
       } catch (err) {
@@ -25,9 +27,9 @@ export default function DjProfile({ dj, id }) {
     dj && (
       <div>
         <img style={{ width: "50%" }} src={dj.image} alt="DjImg" />
-        <h1>{dj.name},</h1>
+        <h1>{dj.username},</h1>
         <h2>DJ</h2>
-        {id && id !== dj._id && (
+        {djId && djId !== djId._id && (
           <button type="submit" onClick={handleFollow}>
             {isFollowing ? "Unfollow" : "Follow"}
           </button>
@@ -39,7 +41,6 @@ export default function DjProfile({ dj, id }) {
           </p>
         </div>
         <br />
-        <Link to="/dj/64adce45be4c652eb8cf3999">jaja!</Link>
       </div>
     )
   );

@@ -47,7 +47,7 @@ function App() {
           }
         />
         <Route
-          path="/dj/:id"
+          path="/dj/:djId"
           element={
             <PrivateRoute>
               <DjPage />

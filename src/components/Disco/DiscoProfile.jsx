@@ -5,7 +5,6 @@ import NextEventCard from "../Event/NextEventCard";
 
 export default function DiscoProfile({ disco, discoId }) {
   const [isFollowing, setIsFollowing] = useState(false);
-  console.log("DISCO", disco);
 
   const handleFollow = async () => {
     if (discoId) {
@@ -39,7 +38,7 @@ export default function DiscoProfile({ disco, discoId }) {
         <img style={{ width: "50%" }} src={disco.image} alt="DiscoImg" />
         <h1>{disco.name},</h1>
         <h2>Disco</h2>
-        {discoId && discoId !== disco._id && (
+        {discoId && discoId !== discoId._id && (
           <button type="submit" onClick={handleFollow}>
             {isFollowing ? "Unfollow" : "Follow"}
           </button>
@@ -52,7 +51,6 @@ export default function DiscoProfile({ disco, discoId }) {
         </div>
         {!discoId && <Link to="/events/create">Create event!</Link>}
         <br />
-        <Link to="/disco/649dd6f77c0d5811d70d3647">jaja!</Link>
         <h2>Next Events</h2>
         {getDiscoEvents()}
       </div>
