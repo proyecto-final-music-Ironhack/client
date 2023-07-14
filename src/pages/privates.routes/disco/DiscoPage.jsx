@@ -6,12 +6,12 @@ import discoService from "../../../services/disco.service";
 export const DiscoPage = () => {
   const [disco, setDisco] = useState(null);
 
-  const { id } = useParams();
-  console.log(id);
+
+  const { discoId } = useParams();
 
   const getDisco = async () => {
     try {
-      const { data } = await discoService.getOneDisco(id);
+      const { data } = await discoService.getOneDisco(discoId);
       console.log(data);
       setDisco(data);
     } catch (err) {
@@ -21,7 +21,7 @@ export const DiscoPage = () => {
 
   useEffect(() => {
     getDisco();
-  }, [id]);
+  }, [discoId]);
 
-  return <DiscoProfile id={id} disco={disco} />;
+  return <DiscoProfile discoId={discoId} disco={disco} />;
 };
