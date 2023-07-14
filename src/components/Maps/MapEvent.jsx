@@ -23,9 +23,9 @@ export default function MapEvent({ event }) {
 
   const [geolocateUser, setGeolocatedUser] = useState();
   const [viewport, setViewport] = useState({
-    latitude: coords?.latitude || 40.4165,
-    longitude: coords?.longitude || -3.70256,
-    zoom: 3.5,
+    latitude: event.disco.latitude,
+    longitude: event.disco.longitude,
+    zoom: 16,
   });
 
   useEffect(() => {
@@ -34,11 +34,6 @@ export default function MapEvent({ event }) {
         latitude: coords?.latitude,
         longitude: coords?.longitude,
         zoom: 12,
-      });
-      setViewport({
-        latitude: coords?.latitude,
-        longitude: coords?.longitude,
-        zoom: 10,
       });
     }
   }, [isGeolocationAvailable, isGeolocationEnabled, coords]);
@@ -66,14 +61,6 @@ export default function MapEvent({ event }) {
       attributionControl={false}
       logoControl={false}
     >
-      {geolocateUser && (
-        <Marker
-          latitude={geolocateUser.latitude}
-          longitude={geolocateUser.longitude}
-        >
-          {myMarkerUser}
-        </Marker>
-      )}
       {event && (
         <Marker
           key={event._id}

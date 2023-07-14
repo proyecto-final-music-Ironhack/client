@@ -15,6 +15,7 @@ import EventCreatePage from "./pages/privates.routes/event/EventCreatePage";
 import ProfilePage from "./pages/auth/ProfilePage";
 import Nav from "./components/Nav";
 import { DiscoPage } from "./pages/privates.routes/disco/DiscoPage";
+import { DjPage } from "./pages/privates.routes/dj/DjPage";
 
 function App() {
   return (
@@ -43,6 +44,14 @@ function App() {
           element={
             <PrivateRoute>
               <DiscoPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dj/:id"
+          element={
+            <PrivateRoute>
+              <DjPage />
             </PrivateRoute>
           }
         />

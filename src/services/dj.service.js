@@ -9,11 +9,11 @@ class DjService {
     return this.api.get("/djs");
   }
 
-  getOneDj() {
+  getOneDj(id) {
     return this.api.get(`/djs/${id}`);
   }
 
-  updateDj() {
+  updateDj(id) {
     return this.api.put(`/djs/${id}`);
   }
 }

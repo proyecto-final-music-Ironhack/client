@@ -22,6 +22,7 @@ export default function Map() {
 
   const [events, setEvents] = useState([]);
   const [geolocateUser, setGeolocatedUser] = useState();
+  const [popupInfo, setPopupInfo] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: coords?.latitude || 40.4165,
     longitude: coords?.longitude || -3.70256,
@@ -66,7 +67,28 @@ export default function Map() {
       now.getHours() === OneHourEvent.getHours()
     );
   };
-  console.log(viewport);
+
+  const renderPopup = () => {
+    return (
+      popupInfo && (
+        <Popup
+          tipSize={5}
+          anchor="top"
+          longitude={popupInfo.disco?.longitude}
+          latitude={popupInfo.disco?.latitude}
+          closeOnClick={false}
+          onClose={() => setPopupInfo(null)}
+        >
+          <div>
+            <h3>{popupInfo.disco.name}</h3>
+            <p>{new Date(popupInfo.date).toLocaleDateString()}</p>
+            <p>{popupInfo.genre}</p>
+          </div>
+        </Popup>
+      )
+    );
+  };
+
   return (
     <Mapbox
       {...viewport}
@@ -94,21 +116,13 @@ export default function Map() {
               key={event._id}
               latitude={event.disco?.latitude}
               longitude={event.disco?.longitude}
+              onClick={() => setPopupInfo(event)}
             >
               {isEventNow(event.date) ? myMarkerCurrent : myMarkerOther}
-              {/* <Popup
-                latitude={event.disco?.latitude}
-                longitude={event.disco?.longitude}
-              >
-                <div>
-                  <h3>{event.disco.name}</h3>
-                  <p>{new Date(event.date).toLocaleDateString()}</p>
-                  <p>{event.genre}</p>
-                </div>
-              </Popup> */}
             </Marker>
           );
-        })}{" "}
+        })}
+      {renderPopup()}
     </Mapbox>
   );
 }

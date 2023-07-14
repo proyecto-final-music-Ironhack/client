@@ -11,7 +11,7 @@ export default function ProfilePage() {
     <>
       {user.savedSongs && <UserProfile />}
       {user.idFromAPI && <DiscoProfile disco={user} />}
-      {user.musicGenre && <DjProfile />}
+      {user.musicGenre && <DjProfile dj={user} />}
     </>
   );
 }
