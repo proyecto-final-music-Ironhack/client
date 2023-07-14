@@ -9,13 +9,12 @@ import SignupPageDisco from "./pages/auth/SignupPage.Disco";
 import SearchDiscoPage from "./pages/auth/SearchDiscoPage";
 import ErrorPage from "./pages/ErrorPage";
 import EventsListPage from "./pages/privates.routes/event/EventsListPage";
-import EventProfilePage from "./pages/privates.routes/event/EventProfilePage";
-// import DiscoDetailPage from "./pages/privates.routes/disco/DiscoDetailPage";
 import EventCreatePage from "./pages/privates.routes/event/EventCreatePage";
-import ProfilePage from "./pages/auth/ProfilePage";
+import ProfilePage from "./pages/privates.routes/ProfilePage";
 import Nav from "./components/Nav";
 import { DiscoPage } from "./pages/privates.routes/disco/DiscoPage";
 import { DjPage } from "./pages/privates.routes/dj/DjPage";
+import EventDetailPage from "./pages/privates.routes/event/EventDetailPage";
 
 function App() {
   return (
@@ -40,7 +39,7 @@ function App() {
         />
 
         <Route
-          path="/disco/:id"
+          path="/disco/:discoId"
           element={
             <PrivateRoute>
               <DiscoPage />
@@ -65,13 +64,21 @@ function App() {
           }
         />
 
+        <Route
+          path="/event/:id"
+          element={
+            <PrivateRoute>
+              <EventDetailPage />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signup/user" element={<SignupPageUser />} />
         <Route path="/signup/dj" element={<SignupPageDj />} />
         <Route path="/signup/disco" element={<SignupPageDisco />} />
         <Route path="/search/disco" element={<SearchDiscoPage />} />
-        <Route path="/event/:id" element={<EventProfilePage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
