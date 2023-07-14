@@ -51,7 +51,13 @@ export default function SearchEvent() {
         <option value="">All Genres</option>
         <option value="Rock">Rock</option>
         <option value="Pop">Pop</option>
-        <option value="Reggaeton">Reggaeton</option>
+        <option value="Reggeaton">Reggeaton</option>
+        <option value="Techno">Techno</option>
+        <option value="Funk">Funk</option>
+        <option value="Metal">Metal</option>
+        <option value="Salsa">Salsa</option>
+        <option value="Jazz">Jazz</option>
+        <option value="Country">Country</option>
       </select>
 
       {filterEvent.map((event) => (
