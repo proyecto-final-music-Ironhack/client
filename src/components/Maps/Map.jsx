@@ -1,8 +1,9 @@
-import Mapbox, { Marker, Popup } from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
 import { useGeolocated } from "react-geolocated";
+import Mapbox, { Marker, Popup } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 import myMarkerCurrentEvent from "../../../src/images/Property 1=Live.svg";
 import myMarkerOtherEvent from "../../../src/images/Property 1=Default.svg";
 import myImgUser from "../../../src/images/Profile Picture.svg";
@@ -59,12 +60,12 @@ export default function Map() {
   const isEventNow = (eventDate) => {
     const now = new Date();
     const event = new Date(eventDate);
-    const OneHourEvent = new Date(now.getTime() + 60);
+    const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
     return (
       now.getDate() === event.getDate() &&
       now.getMonth() === event.getMonth() &&
       now.getFullYear() === event.getFullYear() &&
-      now.getHours() === OneHourEvent.getHours()
+      now.getHours() === oneHourLater.getHours()
     );
   };
 
@@ -83,6 +84,7 @@ export default function Map() {
             <h3>{popupInfo.disco.name}</h3>
             <p>{new Date(popupInfo.date).toLocaleDateString()}</p>
             <p>{popupInfo.genre}</p>
+            <Link to={`/event/${popupInfo._id}`}>VIEW</Link>
           </div>
         </Popup>
       )
@@ -109,7 +111,7 @@ export default function Map() {
         </Marker>
       )}
       {events
-        .filter((event) => event.disco)
+        .filter((event) => event.disco && new Date(event.date) > new Date())
         .map((event) => {
           return (
             <Marker

@@ -30,7 +30,11 @@ function EventDetail() {
     );
   }
 
-  const formattedDate = format(new Date(event.date), "EEE, d MMM - hh:mma");
+  const formattedDate = new Date(event.date).toLocaleDateString();
+  const formattedTime = new Date(event.date).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
     <div>
@@ -43,7 +47,9 @@ function EventDetail() {
         Dj: {" "}
          <Link to={`/dj/${event.dj._id}`}>{event.dj ? event.dj.username : "No DJ information available"}</Link>
       </h2>
-      <p>{formattedDate}</p>
+      <p>
+        {formattedDate} - {formattedTime}
+      </p>
       <p>{event.priceOfEntry} €</p>
       <div>
         <h2>Now Playing</h2>

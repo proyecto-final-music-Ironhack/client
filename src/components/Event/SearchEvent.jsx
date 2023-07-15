@@ -24,8 +24,7 @@ export default function SearchEvent() {
   useEffect(() => {
     const today = new Date();
     const sevenDaysLater = new Date();
-    sevenDaysLater.setDate(today.getDate() + 8);
-
+    sevenDaysLater.setDate(today.getDate() + 7);
     setFilterEvent(
       event.filter((e) => {
         const eventDate = new Date(e.date);
@@ -59,24 +58,36 @@ export default function SearchEvent() {
         <option value="Jazz">Jazz</option>
         <option value="Country">Country</option>
       </select>
+      {filterEvent.map((event) => {
+        console.log(event.date);
+        const date = new Date(event.date);
+        date.setHours(date.getHours() - 2);
 
-      {filterEvent.map((event) => (
-        <div style={{ border: "5px solid white" }} key={event._id}>
-          <Link to={`/event/${event._id}`}>
-            <h2>{event.name}</h2>
-            <p>{new Date(event.date).toLocaleDateString()}</p>
-            <h3>
-              {event.disco
-                ? event.disco.name
-                : "No disco information available"}
-            </h3>
-            <h3>
-              {event.dj ? event.dj.username : "No DJ information available"}
-            </h3>
-            <h3>{event.genre}</h3>
-          </Link>
-        </div>
-      ))}
+        return (
+          <div style={{ border: "5px solid white" }} key={event._id}>
+            <Link to={`/event/${event._id}`}>
+              <h2>{event.name}</h2>
+              <p>
+                {new Date(event.date).toLocaleDateString("es")} -{" "}
+                {date.toLocaleTimeString("es", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </p>
+
+              <h3>
+                {event.disco
+                  ? event.disco.name
+                  : "No disco information available"}
+              </h3>
+              <h3>
+                {event.dj ? event.dj.username : "No DJ information available"}
+              </h3>
+              <h3>{event.genre}</h3>
+            </Link>
+          </div>
+        );
+      })}
     </div>
   );
 }
