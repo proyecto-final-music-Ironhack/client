@@ -5,17 +5,23 @@ import NextEventCard from "../Event/NextEventCard";
 
 export default function DiscoProfile({ disco, discoId }) {
   const [isFollowing, setIsFollowing] = useState(false);
+  const [showFollowers, setShowFollowers] = useState(disco?.followers || 0);
+  // console.log(disco.followers);
 
   const handleFollow = async () => {
     if (discoId) {
       try {
         const incrementFollowers = !isFollowing;
+        let handleFollowers = 0;
         if (incrementFollowers) {
           await discoService.addFollower(discoId);
+          handleFollowers = showFollowers + 1;
         } else {
           await discoService.removeFollower(discoId);
+          handleFollowers = showFollowers - 1;
         }
         setIsFollowing(incrementFollowers);
+        setShowFollowers(handleFollowers);
       } catch (err) {
         console.log(err);
       }
@@ -46,7 +52,7 @@ export default function DiscoProfile({ disco, discoId }) {
 
         <div>
           <p>
-            <span>{disco.followers}</span> followers
+            <span>{showFollowers}</span> followers
           </p>
         </div>
         {!discoId && <Link to="/events/create">Create event!</Link>}
