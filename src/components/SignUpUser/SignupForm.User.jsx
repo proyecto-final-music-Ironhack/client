@@ -24,12 +24,11 @@ const SignupFormUser = () => {
     authService
       .signupUser(signupData)
       .then(({ data }) => {
-        console.log(data);
         setSignupData({ username: "", name: "", email: "", password: "" });
 
         navigate("/login");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const { username, name, password, email } = signupData;

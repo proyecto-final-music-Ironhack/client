@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom";
 import discoService from "../../services/disco.service";
-import { Button, FormControl, Flex, FormHelperText, FormLabel, Input, Center, Spinner, Text } from "@chakra-ui/react";
-import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from "@choc-ui/chakra-autocomplete";
+import {
+  Button,
+  FormControl,
+  Flex,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Center,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
 import { useEffect, useState } from "react";
 
 export default function SearchDiscoPage() {
@@ -15,7 +30,7 @@ export default function SearchDiscoPage() {
       setDiscos(res.data);
       setfilteredDiscos(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -36,7 +51,11 @@ export default function SearchDiscoPage() {
             <AutoCompleteInput />
             <AutoCompleteList>
               {filteredDiscos.map((disco) => (
-                <AutoCompleteItem key={disco._id} value={disco.name} onClick={() => inputOnChange()}>
+                <AutoCompleteItem
+                  key={disco._id}
+                  value={disco.name}
+                  onClick={() => inputOnChange()}
+                >
                   {disco.name} ({disco.province})
                 </AutoCompleteItem>
               ))}

@@ -6,7 +6,7 @@ class PlaylistService {
   }
 
   getPlaylists() {
-    return this.api.get("/playlists");
+    return this.api.get("/spotify/playlists");
   }
   getPlaylistId() {
     return this.api.get(`/playlist/${playlistId}/${eventId}`);

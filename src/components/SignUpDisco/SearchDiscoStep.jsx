@@ -1,7 +1,22 @@
 import { useWizard } from "react-use-wizard";
 import discoService from "../../services/disco.service";
-import { Button, FormControl, Flex, FormHelperText, FormLabel, Input, Center, Spinner, Text } from "@chakra-ui/react";
-import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from "@choc-ui/chakra-autocomplete";
+import {
+  Button,
+  FormControl,
+  Flex,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Center,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
 import { useEffect, useState } from "react";
 
 function SearchDiscoStep({ setDiscoName }) {
@@ -15,7 +30,7 @@ function SearchDiscoStep({ setDiscoName }) {
       const res = await discoService.getAllDiscos();
       setDiscos(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

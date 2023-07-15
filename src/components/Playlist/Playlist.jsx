@@ -7,10 +7,10 @@ const Playlist = () => {
   const getPlaylist = async () => {
     try {
       const res = await playlistService.getPlaylists();
-      console.log(res);
+
       setPlaylist(res.data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

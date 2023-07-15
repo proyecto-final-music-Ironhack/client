@@ -16,6 +16,7 @@ import { DiscoPage } from "./pages/privates.routes/disco/DiscoPage";
 import { DjPage } from "./pages/privates.routes/dj/DjPage";
 import EventDetailPage from "./pages/privates.routes/event/EventDetailPage";
 import PlaylistPage from "./pages/privates.routes/playlist/PlaylistPage";
+import PlaylistOfListPage from "./pages/privates.routes/playlist/PlaylistOfListPage";
 
 function App() {
   return (
@@ -60,6 +61,15 @@ function App() {
           element={
             <PrivateRoute>
               <PlaylistPage />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/playlists"
+          element={
+            <PrivateRoute>
+              <PlaylistOfListPage />
             </PrivateRoute>
           }
         />
