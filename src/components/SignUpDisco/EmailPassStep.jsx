@@ -11,7 +11,6 @@ function EmailPassStep({ discoName }) {
     email: "",
     password: "",
   });
-  console.log(discoName);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -27,7 +26,7 @@ function EmailPassStep({ discoName }) {
         setSignupData({ email: "", password: "" });
         navigate("/login");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const { email, password } = signupData;
@@ -36,17 +35,32 @@ function EmailPassStep({ discoName }) {
     <>
       <form onSubmit={handleSubmit}>
         <FormControl>
-          <Input type="text" value={discoName} onChange={handleInputChange} name="discoName" />
+          <Input
+            type="text"
+            value={discoName}
+            onChange={handleInputChange}
+            name="discoName"
+          />
         </FormControl>
 
         <FormControl>
           <FormLabel>Email</FormLabel>
-          <Input type="email" value={email} onChange={handleInputChange} name="email" />
+          <Input
+            type="email"
+            value={email}
+            onChange={handleInputChange}
+            name="email"
+          />
         </FormControl>
 
         <FormControl>
           <FormLabel>Password</FormLabel>
-          <Input type="password" value={password} onChange={handleInputChange} name="password" />
+          <Input
+            type="password"
+            value={password}
+            onChange={handleInputChange}
+            name="password"
+          />
         </FormControl>
 
         <Button onClick={() => previousStep()}>Previous</Button>

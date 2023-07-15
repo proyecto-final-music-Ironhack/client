@@ -59,7 +59,6 @@ export default function SearchEvent() {
         <option value="Country">Country</option>
       </select>
       {filterEvent.map((event) => {
-        console.log(event.date);
         const date = new Date(event.date);
         date.setHours(date.getHours() - 2);
 

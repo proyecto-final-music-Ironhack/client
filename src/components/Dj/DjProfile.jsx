@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import djService from "../../services/dj.service";
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
+import EventCardDj from "./EventCardDj";
 
 export default function DjProfile({ djId, dj }) {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -14,9 +15,8 @@ export default function DjProfile({ djId, dj }) {
         (event) => event.dj._id === djId || dj?._id
       );
       setDjEvents(djEventsData);
-      console.log(djEventsData);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -35,7 +35,7 @@ export default function DjProfile({ djId, dj }) {
         }
         setIsFollowing(incrementFollowers);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   };
@@ -57,7 +57,13 @@ export default function DjProfile({ djId, dj }) {
             <span>{dj.followers}</span> followers
           </p>
         </div>
-        <div>{djEvents.map((event) => event.name)}</div>
+        <div>
+          {djEvents.map((event) => (
+            <div key={event._id}>
+              <EventCardDj {...event} />
+            </div>
+          ))}
+        </div>
         <br />
       </div>
     )

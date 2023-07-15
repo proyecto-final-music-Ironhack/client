@@ -6,7 +6,6 @@ import NextEventCard from "../Event/NextEventCard";
 export default function DiscoProfile({ disco, discoId }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const [showFollowers, setShowFollowers] = useState(disco?.followers || 0);
-  // console.log(disco.followers);
 
   const handleFollow = async () => {
     if (discoId) {
@@ -23,7 +22,7 @@ export default function DiscoProfile({ disco, discoId }) {
         setIsFollowing(incrementFollowers);
         setShowFollowers(handleFollowers);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   };

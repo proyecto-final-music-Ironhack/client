@@ -10,10 +10,9 @@ export const DiscoPage = () => {
   const getDisco = async () => {
     try {
       const { data } = await discoService.getOneDisco(discoId);
-      console.log(data);
       setDisco(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

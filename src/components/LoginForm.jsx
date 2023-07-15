@@ -29,7 +29,7 @@ const LoginForm = () => {
         authenticate();
         navigate("/events");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const { password, email } = loginData;

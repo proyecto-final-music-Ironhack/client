@@ -8,10 +8,9 @@ export const UserPage = () => {
   const getUser = async () => {
     try {
       const { data } = await userService.getUser();
-      console.log(data);
       setUser(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

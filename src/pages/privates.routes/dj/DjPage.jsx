@@ -7,14 +7,12 @@ export const DjPage = () => {
   const [dj, setDj] = useState(null);
   const { djId } = useParams();
 
-
   const getDj = async () => {
     try {
       const { data } = await djService.getOneDj(djId);
-      console.log(data);
       setDj(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
