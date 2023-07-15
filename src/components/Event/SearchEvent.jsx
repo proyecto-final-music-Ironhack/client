@@ -13,7 +13,7 @@ export default function SearchEvent() {
       const res = await eventService.getAllEvent();
       setEvent(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
