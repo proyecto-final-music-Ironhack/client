@@ -56,6 +56,7 @@ export default function DiscoProfile({ disco, discoId }) {
         </div>
         {!discoId && <Link to="/events/create">Create event!</Link>}
         <br />
+        <Link to="/playlists">Playlists</Link>
         <h2>Next Events</h2>
         {getDiscoEvents()}
       </div>
