@@ -9,7 +9,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      {user.savedSongs && <UserProfile />}
+      {user.savedSongs && <UserProfile user={user} />}
       {user.idFromAPI && <DiscoProfile disco={user} />}
       {user.musicGenre && <DjProfile dj={user} />}
     </>

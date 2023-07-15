@@ -30,7 +30,11 @@ function EventProfile() {
     );
   }
 
-  const formattedDate = format(new Date(event.date), "EEE, d MMM - hh:mma");
+  const formattedDate = new Date(event.date).toLocaleDateString();
+  const formattedTime = new Date(event.date).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
     <div>
@@ -42,7 +46,9 @@ function EventProfile() {
       <h2>
         Dj: {event.dj ? event.dj.username : "No DJ information available"}
       </h2>
-      <p>{formattedDate}</p>
+      <p>
+        {formattedDate} - {formattedTime}
+      </p>
       <p>{event.priceOfEntry} €</p>
       <div>
         <h2>Now Playing</h2>

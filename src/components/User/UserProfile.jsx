@@ -1,7 +1,9 @@
-export default function UserProfile () {
-    return (
-        <>
-        <h1>User Profile</h1>
-        </>
-    )
-}
+const UserProfile = ({ user }) => {
+  return (
+    <>
+      <h1>{user.name}</h1>
+    </>
+  );
+};
+
+export default UserProfile;

@@ -16,6 +16,7 @@ import ProfilePage from "./pages/auth/ProfilePage";
 import Nav from "./components/Nav";
 import { DiscoPage } from "./pages/privates.routes/disco/DiscoPage";
 import { DjPage } from "./pages/privates.routes/dj/DjPage";
+import PlaylistPage from "./pages/privates.routes/playlist/PlaylistPage";
 
 function App() {
   return (
@@ -52,6 +53,14 @@ function App() {
           element={
             <PrivateRoute>
               <DjPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/playlists"
+          element={
+            <PrivateRoute>
+              <PlaylistPage />
             </PrivateRoute>
           }
         />

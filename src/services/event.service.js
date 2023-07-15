@@ -12,8 +12,13 @@ class EventService {
   getOneEvent(id) {
     return this.api.get(`/events/${id}`);
   }
+
   createEvent(eventData) {
     return this.api.post("/events/create", eventData);
+  }
+
+  getEventsByDjId(djId) {
+    return this.api.get(`/events?djId=${djId}`);
   }
 }
 

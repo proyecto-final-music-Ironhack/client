@@ -7,6 +7,13 @@ class UserService {
   getUser() {
     return this.api.get("/users/user-profile");
   }
+
+  updateUser(id) {
+    return this.api.get(`/users/${id}`);
+  }
+  deleteUser(id) {
+    this.api.get(`/users/${id}/delete`);
+  }
 }
 
 const userService = new UserService();
