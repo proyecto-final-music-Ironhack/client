@@ -1,19 +1,15 @@
-import apiInstace from "./apiInstance";
+import apiInstance from "./apiInstance";
 
 class PlaylistService {
   constructor() {
-    this.api = apiInstace;
+    this.api = apiInstance;
   }
 
   getPlaylists() {
     return this.api.get("/playlists");
   }
   getPlaylistId() {
-    return this.api.get("/playlist-id");
-  }
-
-  getNewTrack() {
-    return this.api.get("new-track");
+    return this.api.get(`/playlist/${playlistId}/${eventId}`);
   }
 
   getTrackLike() {

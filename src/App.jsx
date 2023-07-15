@@ -56,7 +56,7 @@ function App() {
           }
         />
         <Route
-          path="/playlists"
+          path="/playlist/:eventId"
           element={
             <PrivateRoute>
               <PlaylistPage />
