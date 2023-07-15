@@ -1,6 +1,5 @@
 export default function NextEventCard({ name, dj, date }) {
-  console.log(dj);
-
+ 
   const displayEventDate = () => {
     return new Date({date}).toLocaleDateString()
   }

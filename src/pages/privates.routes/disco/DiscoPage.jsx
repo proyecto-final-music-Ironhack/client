@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import discoService from "../../../services/disco.service";
 
 export const DiscoPage = () => {
-  const [disco, setDisco] = useState(null);
+  const [disco, setDisco] = useState();
   const { discoId } = useParams();
 
   const getDisco = async () => {
