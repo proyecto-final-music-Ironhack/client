@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Button } from "@chakra-ui/react";
 import eventService from "../../services/event.service";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
 import MapEvent from "../Maps/MapEvent";
 import TrackCard from "../Playlist/TrackCard";
+import { AuthContext } from "../../context/auth.context";
 
 function EventDetail() {
   const [event, setEvent] = useState(null);
   const [eventTracks, setEventTracks] = useState(null);
+  const [CheckedIn, setCheckedIn] = useState();
+  const { user } = useContext(AuthContext);
+
   const { id } = useParams();
 
   const getEvent = async () => {
@@ -48,6 +51,12 @@ function EventDetail() {
     );
   }
 
+  // User Check In
+
+  const handleCheckIn = () => {
+    setCheckedIn(!CheckedIn)
+  }
+
   // Formate Dates
   const formattedDate = new Date(event.date).toLocaleDateString();
   const formattedTime = new Date(event.date).toLocaleTimeString([], {
@@ -69,6 +78,9 @@ function EventDetail() {
       </p>
       <p>{event.priceOfEntry} €</p>
       <div>
+        {user.savedSongs && <Button onClick={handleCheckIn}>{CheckedIn ? "Checked In" : "Check In"}</Button>}
+
+        <hr />
         <h2>Now Playing</h2>
         <p>
           Have a look at what the DJ is playing and <span>check in</span> to vote for the next songs
@@ -80,7 +92,7 @@ function EventDetail() {
       {eventTracks ? getTracks() : <Spinner />}
 
       <p>check in to see whitch songs are up next at the disco, vote and suggest your favorite ones</p>
-      <Link to={`/playlist/${event._id}`}>See all</Link>
+      {CheckedIn && <Link to={`/playlist/${event._id}`}>See all</Link>}
 
       <div>
         <h2>Location</h2>
