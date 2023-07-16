@@ -5,7 +5,7 @@ import { Spinner } from "@chakra-ui/react";
 
 import TrackCard from "../../../components/Playlist/TrackCard";
 
-function PlaylistPage() {
+function TracksPage() {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
 
@@ -34,4 +34,4 @@ function PlaylistPage() {
   return <>{event ? getTracks() : <Spinner />}</>;
 }
 
-export default PlaylistPage;
+export default TracksPage;

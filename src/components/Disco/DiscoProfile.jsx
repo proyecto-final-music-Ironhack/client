@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import discoService from "../../services/disco.service";
 import { Link } from "react-router-dom";
-import NextEventCard from "../Event/NextEventCard";
+import EventCardDisco from "./EventCardDisco";
 
 export default function DiscoProfile({ disco, discoId }) {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -31,7 +31,7 @@ export default function DiscoProfile({ disco, discoId }) {
     return disco.events.map((event) => {
       return (
         <div key={event._id}>
-          <NextEventCard {...event} />
+          <EventCardDisco {...event} />
         </div>
       );
     });

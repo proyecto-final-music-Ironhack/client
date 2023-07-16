@@ -5,6 +5,7 @@ import playlistService from "../../services/playlist.service";
 import { useState } from "react";
 
 function TrackCard({ trackName, likes, image, artists, _id }) {
+  console.log('track id', _id)
   const [like, setLike] = useState(false);
   const [showLikes, setShowLikes] = useState(likes.length);
 
