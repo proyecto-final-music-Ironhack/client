@@ -8,11 +8,11 @@ class UserService {
     return this.api.get("/users/user-profile");
   }
 
-  updateUser(id) {
-    return this.api.get(`/users/${id}`);
+  updateUser(id, formData) {
+    return this.api.put(`/users/${id}`, formData);
   }
   deleteUser(id) {
-    this.api.get(`/users/${id}/delete`);
+    this.api.post(`/users/${id}/delete`);
   }
 }
 
