@@ -5,15 +5,21 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import MapEvent from "../Maps/MapEvent";
+import TrackCard from "../Playlist/TrackCard";
 
 function EventDetail() {
   const [event, setEvent] = useState(null);
+  const [eventTracks, setEventTracks] = useState(null);
   const { id } = useParams();
 
   const getEvent = async () => {
     try {
-      const res = await eventService.getOneEvent(id);
-      setEvent(res.data);
+      const { data } = await eventService.getOneEvent(id);
+      const tracks = data.playlist.sort((a, b) => {
+        return b.likes.length - a.likes.length;
+      });
+      setEvent(data);
+      setEventTracks(tracks);
     } catch (err) {
       console.log(err);
     }
@@ -23,6 +29,17 @@ function EventDetail() {
     getEvent();
   }, [id]);
 
+  // Get tracks for preview "Up Next"
+  const getTracks = () => {
+    return eventTracks.slice(0, 2).map((track) => {
+      return <TrackCard key={track._id} {...track} />;
+    });
+  };
+
+  // Get random track
+  const randomIndex = Math.floor(Math.random() * event?.playlist.length);
+  const randomTrack = event?.playlist[randomIndex];
+
   if (!event) {
     return (
       <div>
@@ -31,6 +48,7 @@ function EventDetail() {
     );
   }
 
+  // Formate Dates
   const formattedDate = new Date(event.date).toLocaleDateString();
   const formattedTime = new Date(event.date).toLocaleTimeString([], {
     hour: "2-digit",
@@ -55,13 +73,14 @@ function EventDetail() {
         <p>
           Have a look at what the DJ is playing and <span>check in</span> to vote for the next songs
         </p>
-        <div style={{ color: "red" }}>AQUI VA LA CANCION QUE ESTA SONANDO</div>
+        {event.playlist ? <TrackCard {...randomTrack} /> : <Spinner />}
       </div>
 
       <h3>Up next</h3>
-      <p style={{ color: "red" }}>AQUI VA UN SCROLL DE LAS CANCIONES DE LA PLAYLIST</p>
-      <Link to={`/playlist/${event._id}`}>See all</Link>
+      {eventTracks ? getTracks() : <Spinner />}
+
       <p>check in to see whitch songs are up next at the disco, vote and suggest your favorite ones</p>
+      <Link to={`/playlist/${event._id}`}>See all</Link>
 
       <div>
         <h2>Location</h2>
