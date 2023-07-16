@@ -9,15 +9,15 @@ class PlaylistService {
     return this.api.get("/spotify/playlists");
   }
   getPlaylistId() {
-    return this.api.get(`/playlist/${playlistId}/${eventId}`);
+    return this.api.get(`/spotify/playlist/${playlistId}/${eventId}`);
   }
 
-  getTrackLike() {
-    return this.api.get("/track-like");
+  getTrackLike(trackId) {
+    return this.api.put("/spotify/track-like", trackId);
   }
 
-  getTrackDislike() {
-    return this.api.get("/track-dislike");
+  getTrackDislike(trackId) {
+    return this.api.put("/spotify/track-dislike", trackId);
   }
 }
 

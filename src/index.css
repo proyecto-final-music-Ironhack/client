@@ -1,7 +1,3 @@
-/* * {
-  background-color: black;
-  color: white;
-} */
 
 
 :root {
@@ -12,6 +8,8 @@
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424; */
+  background-color: black;
+  color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -47,6 +45,12 @@ button {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+.like-button {
+  background-color: black;
+  padding: 10px;
+
 }
 /* button:hover {
   border-color: #646cff;
@@ -90,4 +94,8 @@ button:focus-visible {
 .navbar {
   z-index: 1;
   position: relative;
+}
+
+.map-pop-up {
+  color: black
 }
