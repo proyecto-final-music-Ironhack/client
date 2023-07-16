@@ -67,8 +67,8 @@ export default function SearchEvent() {
             <Link to={`/event/${event._id}`}>
               <h2>{event.name}</h2>
               <p>
-                {new Date(event.date).toLocaleDateString("es")} -{" "}
-                {date.toLocaleTimeString("es", {
+                {new Date(event.date).toLocaleDateString("en")} -{" "}
+                {date.toLocaleTimeString("en", {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}

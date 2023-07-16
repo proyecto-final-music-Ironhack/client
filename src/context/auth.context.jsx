@@ -58,6 +58,7 @@ export const AuthContextWrapper = ({ children }) => {
       value={{
         loading,
         user,
+        setUser,
         storeToken,
         authenticate,
         logout,
