@@ -13,11 +13,11 @@ class PlaylistService {
   }
 
   getTrackLike(trackId) {
-    return this.api.put("/spotify/track-like", trackId);
+    return this.api.put(`/spotify/track-like/${trackId}`);
   }
 
   getTrackDislike(trackId) {
-    return this.api.put("/spotify/track-dislike", trackId);
+    return this.api.put(`/spotify/track-dislike/${trackId}`);
   }
 }
 
