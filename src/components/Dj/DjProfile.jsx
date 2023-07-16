@@ -8,8 +8,7 @@ export default function DjProfile({ djId, dj }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const [showFollowers, setShowFollowers] = useState(0);
   const [djEvents, setDjEvents] = useState([]);
-  console.log("DJ", dj);
-
+ 
   const allEvents = async () => {
     try {
       const { data } = await eventService.getAllEvent();
@@ -23,7 +22,7 @@ export default function DjProfile({ djId, dj }) {
   useEffect(() => {
     setShowFollowers(dj?.followers);
     allEvents();
-  }, []);
+  }, [dj]);
 
   const handleFollow = async () => {
     if (djId) {
