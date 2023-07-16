@@ -1,33 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import uploadService from "../../services/upload.servide";
 import userService from "../../services/user.service";
+import { AuthContext } from "../../context/auth.context";
+import { cloneWith } from "lodash";
+import { Button, Spinner } from "@chakra-ui/react";
 
 const UserEdit = () => {
   const { id } = useParams();
-  const [name, setName] = useState("");
+  const { setUser, user } = useContext(AuthContext);
+  const [name, setName] = useState(user?.name);
   const [image, setImage] = useState(null);
-
+  const [loadingImage, setLoadingImage] = useState(false);
+  const navigate = useNavigate();
   const handleNameChange = (event) => setName(event.target.value);
 
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
+  const uploadUserImage = async (event) => {
+    setLoadingImage(true);
+    const formData = new FormData();
+    formData.append("image", event.target.files[0]);
+
+    try {
+      const { data } = await uploadService.uploadImage(formData);
+      setImage(data.cloudinary_url);
+    } catch (error) {
+      console.error(
+        "Ocurrió un error durante la actualización del usuario.",
+        error
+      );
+    } finally {
+      setLoadingImage(false);
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const formData = new FormData();
-    formData.append("name", name);
-    if (image) {
-      formData.append("image", image);
-    }
-
     try {
-      await uploadService.uploadImage(formData);
-      console.log(`Updated user with name: ${name} and image: ${image.name}`);
-    } catch (error) {
-      console.log("An error occurred while updating the user.", error);
+      const updatedUser = await userService.updateUser(id, { name, image });
+      setLoadingImage(false);
+      setUser(updatedUser);
+      navigate(`/events`);
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -45,9 +59,11 @@ const UserEdit = () => {
         </label>
         <label>
           Image:
-          <input type="file" onChange={handleImageChange} />
+          <input type="file" name="image" onChange={uploadUserImage} />
         </label>
-        <input type="submit" value="Submit" />
+        <Button type="submit" value="Submit" disabled={loadingImage}>
+          {loadingImage ? <Spinner /> : "Edit"}
+        </Button>
       </form>
     </>
   );
