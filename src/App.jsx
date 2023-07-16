@@ -17,6 +17,7 @@ import { DjPage } from "./pages/privates.routes/dj/DjPage";
 import EventDetailPage from "./pages/privates.routes/event/EventDetailPage";
 import TracksPage from "./pages/privates.routes/playlist/TracksPage";
 import PlaylistOfListPage from "./pages/privates.routes/playlist/PlaylistOfListPage";
+import UserPageEdit from "./pages/privates.routes/user/UserPageEdit";
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
           element={
             <PrivateRoute>
               <ProfilePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/user-edit/:id"
+          element={
+            <PrivateRoute>
+              <UserPageEdit />
             </PrivateRoute>
           }
         />
@@ -66,7 +75,7 @@ function App() {
         />
 
         <Route
-          path="/playlists"
+          path="/playlists-list"
           element={
             <PrivateRoute>
               <PlaylistOfListPage />
