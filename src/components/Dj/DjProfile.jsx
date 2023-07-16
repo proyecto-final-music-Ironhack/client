@@ -6,6 +6,7 @@ import EventCardDj from "./EventCardDj";
 
 export default function DjProfile({ djId, dj }) {
   const [isFollowing, setIsFollowing] = useState(false);
+  
   const [djEvents, setDjEvents] = useState([]);
 
   const allEvents = async () => {
