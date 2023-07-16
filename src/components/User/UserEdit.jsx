@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import uploadService from "../../services/upload.servide";
+import uploadService from "../../services/upload.service";
 import userService from "../../services/user.service";
 import { AuthContext } from "../../context/auth.context";
 import { cloneWith } from "lodash";
@@ -38,8 +38,17 @@ const UserEdit = () => {
     try {
       const updatedUser = await userService.updateUser(id, { name, image });
       setLoadingImage(false);
-      setUser(updatedUser);
-      navigate(`/events`);
+
+      // Create a new promise that resolves after a small delay.
+      new Promise((resolve) =>
+        setTimeout(() => {
+          setUser(updatedUser);
+          resolve();
+        }, 1000)
+      ) // 1 second delay, adjust as necessary.
+        .then(() => {
+          navigate(`/events`);
+        });
     } catch (err) {
       console.error(err);
     }
