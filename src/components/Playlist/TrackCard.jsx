@@ -7,7 +7,7 @@ import { useState } from "react";
 function TrackCard({ trackName, likes, image, artists, _id }) {
   console.log('track id', _id)
   const [like, setLike] = useState(false);
-  const [showLikes, setShowLikes] = useState(likes.length);
+  const [showLikes, setShowLikes] = useState(likes?.length);
 
   const getArtists = () => {
     return artists.map((artist) => artist);

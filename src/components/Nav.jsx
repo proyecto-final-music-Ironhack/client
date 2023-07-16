@@ -20,8 +20,8 @@ export default function Nav() {
         <Spacer />
         {user && (
           <Menu style={{ zIndex: 10 }}>
-            <MenuButton as={Button}>
-              <Image boxSize="50px" borderRadius={500} name="profileImage" src={user.image} />
+            <MenuButton className="profile-image" as={Button}>
+              <Image  boxSize="50px" borderRadius={500} name="profileImage" src={user.image} />
             </MenuButton>
             <MenuList>
               <Link to="/profile">
