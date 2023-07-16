@@ -1,7 +1,7 @@
 const EventCardDj = ({ name, disco, date }) => {
-  const dateEvent = new Date(date).toLocaleTimeString("es", {
-    hour: "2-digit",
-    minute: "2-digit",
+  const dateEvent = new Date(date).toLocaleDateString("es", {
+    day: 'numeric',
+    month: 'short',
   });
   return (
     <>
