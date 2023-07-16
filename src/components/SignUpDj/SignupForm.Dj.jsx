@@ -24,7 +24,6 @@ const SignupFormDj = () => {
       .signupDj(signupData)
       .then(({ data }) => {
         setSignupData({ username: "", name: "", email: "", password: "" });
-
         navigate("/login");
       })
       .catch((err) => console.error(err));

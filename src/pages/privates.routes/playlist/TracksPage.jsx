@@ -7,7 +7,7 @@ import TrackCard from "../../../components/Playlist/TrackCard";
 
 function TracksPage() {
   const { eventId } = useParams();
-  const [event, setEvent] = useState(null);
+  const [eventTracks, setEventTracks] = useState(null);
 
   const getEventPlaylist = async () => {
     try {
@@ -15,7 +15,7 @@ function TracksPage() {
       const tracks = data.playlist.sort((a, b) => {
         return b.likes.length - a.likes.length;
       });
-      setEvent(tracks);
+      setEventTracks(tracks);
     } catch (err) {
       console.log(err);
     }
@@ -25,13 +25,26 @@ function TracksPage() {
     getEventPlaylist();
   }, [eventId]);
 
-  const getTracks = () => {
-    return event.map((track) => {
+  const get3Tracks = () => {
+    return eventTracks.slice(0, 3).map((track) => {
       return <TrackCard key={track._id} {...track} />;
     });
   };
 
-  return <>{event ? getTracks() : <Spinner />}</>;
+  const getRestOfTracks = () => {
+    return eventTracks.slice(3, 9).map((track) => {
+      return <TrackCard key={track._id} {...track} />;
+    });
+  };
+
+  return (
+    <>
+      {eventTracks ? get3Tracks() : <Spinner />}
+      <h2>Vote your favs:</h2>
+      <hr />
+      {eventTracks ? getRestOfTracks() : <Spinner />}
+    </>
+  );
 }
 
 export default TracksPage;

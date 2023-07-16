@@ -54,11 +54,15 @@ export default function DiscoProfile({ disco, discoId }) {
             <span>{showFollowers}</span> followers
           </p>
         </div>
+        <div>
+          <p>{disco.events.length} event(s)</p>
+        </div>
         {!discoId && <Link to="/events/create">Create event!</Link>}
         <br />
         <Link to="/playlists">Playlists</Link>
         <h2>Next Events</h2>
-        {getDiscoEvents()}
+        {disco.events ? getDiscoEvents() : <p>Not events yet</p>}
+        {}
       </div>
     )
   );

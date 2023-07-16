@@ -9,6 +9,7 @@ export default function DjProfile({ djId, dj }) {
   const [showFollowers, setShowFollowers] = useState(dj?.followers || 0);
   const [djEvents, setDjEvents] = useState([]);
 
+
   const allEvents = async () => {
     try {
       const { data } = await eventService.getAllEvent();
@@ -58,6 +59,11 @@ export default function DjProfile({ djId, dj }) {
         <div>
           <p>
             <span>{showFollowers}</span> followers
+          </p>
+        </div>
+        <div>
+          <p>
+            <span>{djEvents.length}</span> event(s)
           </p>
         </div>
         <div>
