@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-key */
+import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import playlistService from "../../services/playlist.service";
-
 
 const PlaylistsName = () => {
   const [playlistsName, setPlaylistName] = useState([]);
@@ -24,12 +25,27 @@ const PlaylistsName = () => {
   }, []);
 
   return (
-    <div>
-      <h1>HOLA</h1>
+    <Box>
+      <Heading as="h1" size="lg" mb={20}>
+        ADD A PLAYLIST:
+      </Heading>
       {playlistsName.items?.map((playlistItems) => {
-        return <h1 key={playlistItems.id}>{playlistItems.name}</h1>;
+        return (
+          <Flex align="center" my={10}>
+            <Image
+              boxSize="60px"
+              src={playlistItems.images[0].url}
+              alt=""
+              mr={3}
+            />
+            <Heading as="h1" key={playlistItems.id} size="md">
+              {playlistItems.name}
+            </Heading>
+            <Button> ADD </Button>
+          </Flex>
+        );
       })}
-    </div>
+    </Box>
   );
 };
 

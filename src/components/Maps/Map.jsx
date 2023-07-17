@@ -13,12 +13,13 @@ const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;
 const myMarkerUser = <img src={myImgUser} alt="Marker" />;
 
 export default function Map() {
-  const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
-    positionOptions: {
-      enableHighAccuracy: false,
-    },
-    userDecisionTimeout: 5000,
-  });
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+    });
 
   const [events, setEvents] = useState([]);
   const [geolocateUser, setGeolocatedUser] = useState();
@@ -103,7 +104,10 @@ export default function Map() {
       logoControl={false}
     >
       {geolocateUser && (
-        <Marker latitude={geolocateUser.latitude} longitude={geolocateUser.longitude}>
+        <Marker
+          latitude={geolocateUser.latitude}
+          longitude={geolocateUser.longitude}
+        >
           {myMarkerUser}
         </Marker>
       )}
@@ -111,7 +115,12 @@ export default function Map() {
         .filter((event) => event.disco && new Date(event.date) > new Date())
         .map((event) => {
           return (
-            <Marker key={event._id} latitude={event.disco?.latitude} longitude={event.disco?.longitude} onClick={() => setPopupInfo(event)}>
+            <Marker
+              key={event._id}
+              latitude={event.disco?.latitude}
+              longitude={event.disco?.longitude}
+              onClick={() => setPopupInfo(event)}
+            >
               {isEventNow(event.date) ? myMarkerCurrent : myMarkerOther}
             </Marker>
           );
