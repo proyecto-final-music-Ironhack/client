@@ -9,11 +9,12 @@ export default function DjProfile({ djId, dj }) {
   const [showFollowers, setShowFollowers] = useState(dj?.followers || 0);
   const [djEvents, setDjEvents] = useState([]);
 
-
   const allEvents = async () => {
     try {
       const { data } = await eventService.getAllEvent();
-      const djEventsData = data.filter((event) => event.dj._id === djId || dj?._id);
+      const djEventsData = data.filter(
+        (event) => event.dj._id === djId || dj?._id
+      );
       setDjEvents(djEventsData);
     } catch (err) {
       console.error(err);

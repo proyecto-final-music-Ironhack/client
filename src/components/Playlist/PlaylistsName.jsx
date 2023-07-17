@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import playlistService from "../../services/playlist.service";
 
-
 const PlaylistsName = () => {
   const [playlistsName, setPlaylistName] = useState([]);
 
@@ -25,9 +24,18 @@ const PlaylistsName = () => {
 
   return (
     <div>
-      <h1>HOLA</h1>
+      <h1>ADD A PLAYLIST:</h1>
       {playlistsName.items?.map((playlistItems) => {
-        return <h1 key={playlistItems.id}>{playlistItems.name}</h1>;
+        return (
+          <div>
+            <img
+              style={{ height: "60px" }}
+              src={playlistItems.images[0].url}
+              alt=""
+            />
+            <h1 key={playlistItems.id}>{playlistItems.name}</h1>
+          </div>
+        );
       })}
     </div>
   );

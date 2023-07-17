@@ -54,36 +54,53 @@ function EventDetail() {
   // User Check In
 
   const handleCheckIn = () => {
-    setCheckedIn(!CheckedIn)
-  }
+    setCheckedIn(!CheckedIn);
+  };
 
   // Formate Dates
-  const formattedDate = new Date(event.date).toLocaleDateString();
-  const formattedTime = new Date(event.date).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+  const formattedDate = new Date(event.date).toLocaleDateString("en", {
+    day: "2-digit",
+    month: "short",
   });
+  const formattedTime = new Date(event.date).toLocaleTimeString(
+    "en",
+    {
+      hour: "2-digit",
+      minute: "2-digit",
+    } - 2
+  );
 
   return (
     <div>
       <h1>{event.name}</h1>
       <h2>
-        Disco: <Link to={`/disco/${event.disco._id}`}>{event.disco ? event.disco.name : "No disco information available"}</Link>
+        Disco:{" "}
+        <Link to={`/disco/${event.disco._id}`}>
+          {event.disco ? event.disco.name : "No disco information available"}
+        </Link>
       </h2>
       <h2>
-        Dj: <Link to={`/dj/${event.dj._id}`}>{event.dj ? event.dj.username : "No DJ information available"}</Link>
+        Dj:{" "}
+        <Link to={`/dj/${event.dj._id}`}>
+          {event.dj ? event.dj.username : "No DJ information available"}
+        </Link>
       </h2>
       <p>
         {formattedDate} - {formattedTime}
       </p>
       <p>{event.priceOfEntry} €</p>
       <div>
-        {user.savedSongs && <Button onClick={handleCheckIn}>{CheckedIn ? "Checked In" : "Check In"}</Button>}
+        {user.savedSongs && (
+          <Button onClick={handleCheckIn}>
+            {CheckedIn ? "Checked In" : "Check In"}
+          </Button>
+        )}
 
         <hr />
         <h2>Now Playing</h2>
         <p>
-          Have a look at what the DJ is playing and <span>check in</span> to vote for the next songs
+          Have a look at what the DJ is playing and <span>check in</span> to
+          vote for the next songs
         </p>
         {event.playlist ? <TrackCard {...randomTrack} /> : <Spinner />}
       </div>
@@ -91,7 +108,10 @@ function EventDetail() {
       <h3>Up next</h3>
       {eventTracks ? getTracks() : <Spinner />}
 
-      <p>check in to see whitch songs are up next at the disco, vote and suggest your favorite ones</p>
+      <p>
+        check in to see whitch songs are up next at the disco, vote and suggest
+        your favorite ones
+      </p>
       {CheckedIn && <Link to={`/playlist/${event._id}`}>See all</Link>}
 
       <div>
