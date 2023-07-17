@@ -47,7 +47,7 @@ button {
   transition: border-color 0.25s;
 }
 
-.like-button {
+.like-button, .profile-image {
   background-color: black;
   padding: 10px;
 

@@ -5,22 +5,24 @@ import EventCardDisco from "./EventCardDisco";
 
 export default function DiscoProfile({ disco, discoId }) {
   const [isFollowing, setIsFollowing] = useState(false);
-  const [showFollowers, setShowFollowers] = useState(disco?.followers || 0);
+  const [showFollowers, setShowFollowers] = useState(0);
+
+  useEffect(() => {
+    setShowFollowers(disco?.followers)
+  }, [disco])
 
   const handleFollow = async () => {
     if (discoId) {
       try {
         const incrementFollowers = !isFollowing;
-        let handleFollowers = 0;
         if (incrementFollowers) {
           await discoService.addFollower(discoId);
-          handleFollowers = showFollowers + 1;
+          setShowFollowers((num) => num + 1);
         } else {
           await discoService.removeFollower(discoId);
-          handleFollowers = showFollowers - 1;
+          setShowFollowers((num) => num - 1);
         }
         setIsFollowing(incrementFollowers);
-        setShowFollowers(handleFollowers);
       } catch (err) {
         console.error(err);
       }
@@ -50,9 +52,11 @@ export default function DiscoProfile({ disco, discoId }) {
         )}
 
         <div>
-          <p>
-            <span>{showFollowers}</span> followers
-          </p>
+          {disco.followers && (
+            <p>
+              <span>{showFollowers}</span> followers
+            </p>
+          )}
         </div>
         <div>
           <p>{disco.events.length} event(s)</p>

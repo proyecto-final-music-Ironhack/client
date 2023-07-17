@@ -6,8 +6,10 @@ import EventCardDj from "./EventCardDj";
 
 export default function DjProfile({ djId, dj }) {
   const [isFollowing, setIsFollowing] = useState(false);
-  const [showFollowers, setShowFollowers] = useState(dj?.followers || 0);
+  const [showFollowers, setShowFollowers] = useState(0);
   const [djEvents, setDjEvents] = useState([]);
+
+ 
 
   const allEvents = async () => {
     try {
@@ -22,23 +24,22 @@ export default function DjProfile({ djId, dj }) {
   };
 
   useEffect(() => {
+    setShowFollowers(dj?.followers);
     allEvents();
-  }, []);
+  }, [dj]);
 
   const handleFollow = async () => {
     if (djId) {
       try {
         const incrementFollowers = !isFollowing;
-        let handleFollowers = 0;
         if (incrementFollowers) {
           await djService.addFollower(djId);
-          handleFollowers = showFollowers + 1;
+          setShowFollowers((num) => num + 1);
         } else {
           await djService.removeFollower(djId);
-          handleFollowers = showFollowers - 1;
+          setShowFollowers((num) => num - 1);
         }
         setIsFollowing(incrementFollowers);
-        setShowFollowers(handleFollowers);
       } catch (err) {
         console.error(err);
       }
@@ -58,9 +59,11 @@ export default function DjProfile({ djId, dj }) {
         )}
 
         <div>
-          <p>
-            <span>{showFollowers}</span> followers
-          </p>
+          {dj.followers && (
+            <p>
+              <span>{showFollowers}</span> followers
+            </p>
+          )}
         </div>
         <div>
           <p>
