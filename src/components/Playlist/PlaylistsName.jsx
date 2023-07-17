@@ -3,7 +3,8 @@ import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import playlistService from "../../services/playlist.service";
 
-const PlaylistsName = () => {
+const PlaylistsName = (eventId) => {
+
   const [playlistsName, setPlaylistName] = useState([]);
 
   const allPlaylists = async () => {
