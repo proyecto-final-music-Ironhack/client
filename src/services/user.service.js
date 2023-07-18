@@ -8,6 +8,10 @@ class UserService {
     return this.api.get("/users/user-profile");
   }
 
+  pushEvent(eventId) {
+    return this.api.put(`/users/check-in/${eventId}`);
+  }
+
   updateUser(id, formData) {
     return this.api.put(`/users/${id}`, formData);
   }

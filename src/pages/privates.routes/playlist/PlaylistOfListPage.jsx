@@ -5,7 +5,7 @@ const PlaylistOfListPage = () => {
 
 const {eventId} = useParams();
 
-console.log('EVENT ID', eventId)
+
 
   return (
     <>
