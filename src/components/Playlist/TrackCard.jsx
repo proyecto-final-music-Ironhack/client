@@ -1,59 +1,60 @@
-import { Button, Image, Spinner } from "@chakra-ui/react";
-import emptyHeart from "../../images/empy-heart.png";
-import heart from "../../images/heart.png";
-import playlistService from "../../services/playlist.service";
-import { useState } from "react";
+import { Button, Image, Spinner } from '@chakra-ui/react'
+import emptyHeart from '../../images/empy-heart.png'
+import heart from '../../images/heart.png'
+import playlistService from '../../services/playlist.service'
+import { useState, useEffect } from 'react'
 
-function TrackCard({ trackName, likes, image, artists, _id }) {
-  console.log("track id", _id);
-  const [like, setLike] = useState(false);
-  const [showLikes, setShowLikes] = useState(likes?.length);
+function TrackCard({ trackName, likes, image, artists, _id, userId }) {
+  const [like, setLike] = useState(likes?.includes(userId) ?? false)
+  const [showLikes, setShowLikes] = useState(likes?.length ?? 0)
+  const [artistList, setArtistList] = useState('')
 
-  const getArtists = () => {
-    return artists.map((artist) => artist);
-  };
+  useEffect(() => {
+    if (artists) {
+      setArtistList(artists.join(', '))
+    }
+  }, [artists])
 
   const handleLike = async () => {
     try {
-      await playlistService.getTrackLike(_id);
-      setLike(true);
-      setShowLikes((num) => num + 1);
+      await playlistService.getTrackLike(_id)
+      setLike(true)
+      setShowLikes(num => num + 1)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const handleDislike = async () => {
     try {
-      await playlistService.getTrackDislike(_id);
-      setLike(false);
-      setShowLikes((num) => num - 1);
+      await playlistService.getTrackDislike(_id)
+      setLike(false)
+      setShowLikes(num => (num > 0 ? num - 1 : 0))
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   return (
     <>
-      <img src={image} alt="Track image" />
+      <img src={image} alt='Track image' />
       <p>{trackName}</p>
-      {artists ? getArtists() : <Spinner />}
-      <br />
-      {likes ? showLikes : <Spinner />}
+      <p>{artistList || <Spinner />}</p>
+      <p>{showLikes >= 0 ? showLikes : <Spinner />}</p>
 
       {like ? (
-        <Button className="like-button" type="submit" onClick={handleDislike}>
-          <Image w="18px" src={heart} />
+        <Button className='like-button' type='button' onClick={handleDislike}>
+          <Image w='18px' src={heart} />
         </Button>
       ) : (
-        <Button className="dislike-button" type="submit" onClick={handleLike}>
-          <Image w="18px" src={emptyHeart} />
+        <Button className='dislike-button' type='button' onClick={handleLike}>
+          <Image w='18px' src={emptyHeart} />
         </Button>
       )}
 
       <hr />
     </>
-  );
+  )
 }
 
-export default TrackCard;
+export default TrackCard

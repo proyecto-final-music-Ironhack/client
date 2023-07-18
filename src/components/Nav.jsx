@@ -11,17 +11,17 @@ export default function Nav() {
   };
   return (
     <>
-      <Flex className="navbar" alignItems={"center"} justifyContent={"space-between"}>
-        <Box p="20">
-          <Link to="/events">
-            <Image w="74px" name="Beat the Beat Logo" src={logo} />
-          </Link>
-        </Box>
-        <Spacer />
-        {user && (
+      {user && (
+        <Flex className="navbar" alignItems={"center"} justifyContent={"space-between"}>
+          <Box p="20">
+            <Link to="/events">
+              <Image w="74px" name="Beat the Beat Logo" src={logo} />
+            </Link>
+          </Box>
+          <Spacer />
           <Menu style={{ zIndex: 10 }}>
             <MenuButton className="profile-image" as={Button}>
-              <Image  boxSize="50px" borderRadius={500} name="profileImage" src={user.image} />
+              <Image boxSize="50px" borderRadius={500} name="profileImage" src={user.image} />
             </MenuButton>
             <MenuList>
               <Link to="/profile">
@@ -32,8 +32,8 @@ export default function Nav() {
               </MenuItem>
             </MenuList>
           </Menu>
-        )}
-      </Flex>
+        </Flex>
+      )}
     </>
   );
 }
