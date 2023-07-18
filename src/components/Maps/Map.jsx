@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGeolocated } from "react-geolocated";
 import Mapbox, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import myMarkerCurrentEvent from "../../../src/images/Property 1=Live.svg";
 import myMarkerOtherEvent from "../../../src/images/Property 1=Default.svg";
 import myImgUser from "../../../src/images/Profile Picture.svg";
+import { AuthContext } from "../../context/auth.context";
 
 const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
 const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;
-const myMarkerUser = <img src={myImgUser} alt="Marker" />;
 
 export default function Map() {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -20,7 +20,6 @@ export default function Map() {
       },
       userDecisionTimeout: 5000,
     });
-
   const [events, setEvents] = useState([]);
   const [geolocateUser, setGeolocatedUser] = useState();
   const [popupInfo, setPopupInfo] = useState(null);
@@ -29,6 +28,14 @@ export default function Map() {
     longitude: coords?.longitude || -3.70256,
     zoom: 3.5,
   });
+  const { user } = useContext(AuthContext);
+  const myMarkerUser = (
+    <img
+      style={{ height: "25px", borderRadius: "50%" }}
+      src={user.image}
+      alt="Marker"
+    />
+  );
 
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationEnabled && coords) {
@@ -99,7 +106,7 @@ export default function Map() {
       mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
       mapStyle="mapbox://styles/mapbox/dark-v11"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      style={{ width: "100%", height: "250px" }}
+      style={{ width: "100%", height: "254px" }}
       attributionControl={false}
       logoControl={false}
     >
