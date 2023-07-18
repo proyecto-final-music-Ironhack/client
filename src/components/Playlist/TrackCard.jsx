@@ -40,7 +40,7 @@ function TrackCard({ trackName, likes, image, artists, _id, userId }) {
       <img src={image} alt='Track image' />
       <p>{trackName}</p>
       <p>{artistList || <Spinner />}</p>
-      <p>{showLikes >= 0 ? showLikes : <Spinner />}</p>
+      <p style={{ display: 'inline-block' }}>{showLikes >= 0 ? showLikes : <Spinner/>}</p>
 
       {like ? (
         <Button className='like-button' type='button' onClick={handleDislike}>
