@@ -10,10 +10,11 @@ export const AuthContextWrapper = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const [hasChanged, setHasChanged] = useState(false);
 
   useEffect(() => {
     authenticate();
-  }, []);
+  }, [hasChanged]);
 
   const storeToken = (token) => {
     localStorage.setItem(TOKEN_NAME, token);
@@ -58,11 +59,13 @@ export const AuthContextWrapper = ({ children }) => {
       value={{
         loading,
         user,
+        hasChanged,
         setUser,
         storeToken,
         authenticate,
         logout,
         removeToken,
+        setHasChanged,
         error,
       }}
     >
