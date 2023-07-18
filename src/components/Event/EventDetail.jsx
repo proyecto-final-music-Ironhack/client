@@ -11,8 +11,9 @@ import { AuthContext } from "../../context/auth.context";
 function EventDetail() {
   const [event, setEvent] = useState(null);
   const [eventTracks, setEventTracks] = useState(null);
-  const [CheckedIn, setCheckedIn] = useState();
+  const [CheckedIn, setCheckedIn] = useState(false);
   const { user, hasChanged, setHasChanged } = useContext(AuthContext);
+  let bool = undefined;
 
   const { id } = useParams();
 
@@ -22,8 +23,10 @@ function EventDetail() {
       const tracks = data.playlist.sort((a, b) => {
         return b.likes.length - a.likes.length;
       });
+      bool = user.attendedEvents.some((ev) => ev._id == event?._id);
       setEvent(data);
       setEventTracks(tracks);
+      setCheckedIn(bool);
     } catch (err) {
       console.log(err);
     }
@@ -56,12 +59,14 @@ function EventDetail() {
   const pushAttendedEvent = async () => {
     try {
       await userService.pushEvent(event?._id);
-      setCheckedIn(!CheckedIn);
+      bool = user.attendedEvents.some((ev) => ev._id == event?._id);
+      setCheckedIn(bool);
       setHasChanged(!hasChanged);
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(CheckedIn);
 
   // Formate Dates
   const formattedDate = new Date(event.date).toLocaleDateString("en", {

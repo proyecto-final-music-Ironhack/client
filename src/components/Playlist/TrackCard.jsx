@@ -5,7 +5,7 @@ import playlistService from "../../services/playlist.service";
 import { useState } from "react";
 
 function TrackCard({ trackName, likes, image, artists, _id }) {
-  console.log('track id', _id)
+  console.log("track id", _id);
   const [like, setLike] = useState(false);
   const [showLikes, setShowLikes] = useState(likes?.length);
 
@@ -15,17 +15,19 @@ function TrackCard({ trackName, likes, image, artists, _id }) {
 
   const handleLike = async () => {
     try {
-      const addLike = !like;
-      let handleLikes = 0;
-      if (addLike) {
-        await playlistService.getTrackLike(_id);
-        handleLikes = showLikes + 1;
-      } else {
-        await playlistService.getTrackDislike(_id);
-        handleLikes = showLikes - 1;
-      }
-      setLike(addLike);
-      setShowLikes(handleLikes);
+      await playlistService.getTrackLike(_id);
+      setLike(true);
+      setShowLikes((num) => num + 1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDislike = async () => {
+    try {
+      await playlistService.getTrackDislike(_id);
+      setLike(false);
+      setShowLikes((num) => num - 1);
     } catch (error) {
       console.error(error);
     }
@@ -38,9 +40,17 @@ function TrackCard({ trackName, likes, image, artists, _id }) {
       {artists ? getArtists() : <Spinner />}
       <br />
       {likes ? showLikes : <Spinner />}
-      <Button className="like-button" type="submit" onClick={handleLike}>
-        {like ? <Image w="18px" src={heart} /> : <Image w="18px" src={emptyHeart} />}
-      </Button>
+
+      {like ? (
+        <Button className="like-button" type="submit" onClick={handleDislike}>
+          <Image w="18px" src={heart} />
+        </Button>
+      ) : (
+        <Button className="dislike-button" type="submit" onClick={handleLike}>
+          <Image w="18px" src={emptyHeart} />
+        </Button>
+      )}
+
       <hr />
     </>
   );

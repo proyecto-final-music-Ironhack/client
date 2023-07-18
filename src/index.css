@@ -47,8 +47,8 @@ button {
   transition: border-color 0.25s;
 }
 
-.like-button, .profile-image {
-  background-color: black;
+.like-button, .profile-image, .dislike-button {
+  background-color: transparent;
   padding: 10px;
 
 }
