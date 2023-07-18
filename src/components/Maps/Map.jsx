@@ -31,7 +31,7 @@ export default function Map() {
   const { user } = useContext(AuthContext);
   const myMarkerUser = (
     <img
-      style={{ height: "25px", borderRadius: "50%" }}
+      style={{ height: "20px", width: "20px", borderRadius: "50%" }}
       src={user.image}
       alt="Marker"
     />
