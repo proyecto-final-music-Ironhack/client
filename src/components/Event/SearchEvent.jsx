@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
+import { Box, Input, VStack, Select, Text, Image } from "@chakra-ui/react";
 
 export default function SearchEvent() {
   const [event, setEvent] = useState([]);
@@ -40,9 +41,11 @@ export default function SearchEvent() {
 
   return (
     <div>
-      <input
+      <Input
         type="text"
-        placeholder="Search"
+        size="lg"
+        variant="filled"
+        placeholder={"Search an event"}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -63,7 +66,7 @@ export default function SearchEvent() {
         date.setHours(date.getHours() - 2);
 
         return (
-          <div style={{ border: "5px solid white" }} key={event._id}>
+          <div key={event._id}>
             <Link to={`/event/${event._id}`}>
               <h2>{event.name}</h2>
               <p>
@@ -75,6 +78,12 @@ export default function SearchEvent() {
               </p>
 
               <h3>
+                <Image
+                  src="/app-music-client/src/images/icons/headphones.png"
+                  boxSize="24px"
+                  alt="DJ Icon"
+                />
+
                 {event.disco
                   ? event.disco.name
                   : "No disco information available"}
@@ -82,6 +91,12 @@ export default function SearchEvent() {
               <h3>
                 {event.dj ? event.dj.username : "No DJ information available"}
               </h3>
+              <img
+                src={event.dj.image}
+                style={{ height: "40px", width: "40px", borderRadius: "50%" }}
+                className="img-style-dj"
+                alt=""
+              />
               <h3>{event.genre}</h3>
             </Link>
           </div>

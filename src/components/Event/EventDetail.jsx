@@ -32,15 +32,13 @@ function EventDetail() {
     getEvent();
   }, [id, user]);
 
-
   // const nowPlayingTrack = Array.from({...eventTracks})[0]
   // console.log('NOW PLAYING', nowPlayingTrack)
 
-  const nowPlayingTrack = eventTracks?.[0]
+  const nowPlayingTrack = eventTracks?.[0];
   console.log(nowPlayingTrack);
 
-  console.log(eventTracks)
-
+  console.log(eventTracks);
 
   const getTracks = () => {
     return eventTracks.slice(1, 3).map((track) => {
@@ -68,7 +66,9 @@ function EventDetail() {
     : "";
 
   const formattedTime = event
-    ? new Date(event.date).toLocaleTimeString("en", {
+    ? new Date(
+        new Date(event.date).getTime() - 2 * 60 * 60 * 1000
+      ).toLocaleTimeString("en", {
         hour: "2-digit",
         minute: "2-digit",
       })
@@ -86,29 +86,51 @@ function EventDetail() {
     <div>
       <h1>{event.name}</h1>
       <h2>
-        Disco: <Link to={`/disco/${event.disco._id}`}>{event.disco ? event.disco.name : "No disco information available"}</Link>
+        Disco:{" "}
+        <Link to={`/disco/${event.disco._id}`}>
+          {event.disco ? event.disco.name : "No disco information available"}
+        </Link>
       </h2>
       <h2>
-        Dj: <Link to={`/dj/${event.dj._id}`}>{event.dj ? event.dj.username : "No DJ information available"}</Link>
+        Dj:{" "}
+        <Link to={`/dj/${event.dj._id}`}>
+          {event.dj ? event.dj.username : "No DJ information available"}
+        </Link>
       </h2>
       <p>
         {formattedDate} - {formattedTime}
       </p>
       <p>{event.priceOfEntry} €</p>
       <div>
-        {user.savedSongs && <Button onClick={pushAttendedEvent}>{CheckedIn ? "Checked In" : "Check In"}</Button>}
+        {user.savedSongs && (
+          <Button onClick={pushAttendedEvent}>
+            {CheckedIn ? "Checked In" : "Check In"}
+          </Button>
+        )}
         <hr />
         <h2>Now Playing</h2>
         <p>
-          Have a look at what the DJ is playing and <span>check in</span> to vote for the next songs
+          Have a look at what the DJ is playing and <span>check in</span> to
+          vote for the next songs
         </p>
-        {event.playlist ? <TrackCard key={nowPlayingTrack?._id} {...nowPlayingTrack} userId={user._id} /> : <Spinner />}
+        {event.playlist ? (
+          <TrackCard
+            key={nowPlayingTrack?._id}
+            {...nowPlayingTrack}
+            userId={user._id}
+          />
+        ) : (
+          <Spinner />
+        )}
       </div>
 
       <h3>Up next</h3>
       {eventTracks ? getTracks() : <Spinner />}
 
-      <p>check in to see whitch songs are up next at the disco, vote and suggest your favorite ones</p>
+      <p>
+        check in to see whitch songs are up next at the disco, vote and suggest
+        your favorite ones
+      </p>
       {CheckedIn && <Link to={`/playlist/${event._id}`}>See all</Link>}
 
       <div>

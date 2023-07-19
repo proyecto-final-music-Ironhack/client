@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, Flex } from "@chakra-ui/react";
 
 const LoginForm = () => {
   const [loginData, setLoginData] = useState({
@@ -19,51 +19,57 @@ const LoginForm = () => {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    authService
-      .login(loginData)
-      .then(({ data }) => {
-        storeToken(data.authToken);
-        authenticate();
-        navigate("/events");
-      })
-      .catch((err) => console.error(err));
+    try {
+      const { data } = await authService.login(loginData);
+      storeToken(data.authToken);
+      await authenticate();
+      navigate("/events");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const { password, email } = loginData;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl>
-        <FormLabel>Email</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={handleInputChange}
-          name="email"
-        />
-      </FormControl>
+    <Flex
+      width="100vw"
+      height="50vh"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <form onSubmit={handleSubmit}>
+        <FormControl>
+          <FormLabel>Email</FormLabel>
+          <Input
+            type="email"
+            value={email}
+            onChange={handleInputChange}
+            name="email"
+          />
+        </FormControl>
 
-      <FormControl>
-        <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          value={password}
-          onChange={handleInputChange}
-          name="password"
-        />
-      </FormControl>
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input
+            type="password"
+            value={password}
+            onChange={handleInputChange}
+            name="password"
+          />
+        </FormControl>
 
-      <div>
-        <Button colorScheme="teal" variant="solid" type="submit">
-          Log in
-        </Button>
-        <Link to="/signup">Sign up</Link>
-      </div>
-      <p>{error}</p>
-    </form>
+        <div>
+          <Button colorScheme="teal" variant="solid" type="submit">
+            Log in
+          </Button>
+        </div>
+        <p>{error}</p>
+      </form>
+    </Flex>
   );
 };
 
