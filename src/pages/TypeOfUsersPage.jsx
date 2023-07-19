@@ -1,7 +1,7 @@
 import { Container, Heading, VStack, Box, Card, CardBody, Text, AbsoluteCenter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-export default function TypeOfUserPage() {
+export default function TypeOfUsersPage() {
   return (
     <>
       <Container className="bg-black" p="30px">

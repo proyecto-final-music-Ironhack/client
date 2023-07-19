@@ -11,7 +11,7 @@ function EventDetail() {
   const [event, setEvent] = useState(null);
   const [eventTracks, setEventTracks] = useState(null);
   const [CheckedIn, setCheckedIn] = useState(false);
-  const [likeButton, showLikeButton] = useState(true)
+  const [likeButton, showLikeButton] = useState(true);
   const { user, hasChanged, setHasChanged } = useContext(AuthContext);
 
   const { id } = useParams();
@@ -67,7 +67,7 @@ function EventDetail() {
     : "";
 
   const formattedTime = event
-    ? new Date(event.date).toLocaleTimeString("en", {
+    ? new Date(new Date(event.date).getTime() - 2 * 60 * 60 * 1000).toLocaleTimeString("en", {
         hour: "2-digit",
         minute: "2-digit",
       })

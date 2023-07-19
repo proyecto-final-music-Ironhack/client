@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
 
 const SignupFormDj = () => {
   const [signupData, setSignupData] = useState({
@@ -32,53 +32,60 @@ const SignupFormDj = () => {
   const { username, name, password, email } = signupData;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl>
-        <FormLabel>Username</FormLabel>
-        <Input
-          type="text"
-          value={username}
-          onChange={handleInputChange}
-          name="username"
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Name</FormLabel>
-        <Input
-          type="text"
-          value={name}
-          onChange={handleInputChange}
-          name="name"
-        />
-      </FormControl>
+    <Flex
+      width="100vw"
+      height="100vw"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <form onSubmit={handleSubmit}>
+        <FormControl>
+          <FormLabel>Username</FormLabel>
+          <Input
+            type="text"
+            value={username}
+            onChange={handleInputChange}
+            name="username"
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Name</FormLabel>
+          <Input
+            type="text"
+            value={name}
+            onChange={handleInputChange}
+            name="name"
+          />
+        </FormControl>
 
-      <FormControl>
-        <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          value={password}
-          onChange={handleInputChange}
-          name="password"
-        />
-      </FormControl>
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input
+            type="password"
+            value={password}
+            onChange={handleInputChange}
+            name="password"
+          />
+        </FormControl>
 
-      <FormControl>
-        <FormLabel>Email</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={handleInputChange}
-          name="email"
-        />
-      </FormControl>
+        <FormControl>
+          <FormLabel>Email</FormLabel>
+          <Input
+            type="email"
+            value={email}
+            onChange={handleInputChange}
+            name="email"
+          />
+        </FormControl>
 
-      <div>
-        <Button colorScheme="teal" variant="solid" type="submit">
-          Create Dj
-        </Button>
-        <Link to="/login">Login</Link>
-      </div>
-    </form>
+        <div>
+          <Button colorScheme="teal" variant="solid" type="submit">
+            Create Dj
+          </Button>
+          <Link to="/login">Login</Link>
+        </div>
+      </form>
+    </Flex>
   );
 };
 
