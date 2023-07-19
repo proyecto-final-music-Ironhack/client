@@ -6,7 +6,6 @@ import Mapbox, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import myMarkerCurrentEvent from "../../../src/images/Property 1=Live.svg";
 import myMarkerOtherEvent from "../../../src/images/Property 1=Default.svg";
-import myImgUser from "../../../src/images/Profile Picture.svg";
 import { AuthContext } from "../../context/auth.context";
 
 const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
@@ -50,7 +49,7 @@ export default function Map() {
         zoom: 10,
       });
     }
-  }, [isGeolocationAvailable, isGeolocationEnabled, coords]);
+  }, [isGeolocationAvailable, isGeolocationEnabled, coords, user]);
 
   useEffect(() => {
     const fetchEvents = async () => {

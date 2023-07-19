@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import eventService from "../../../services/event.service";
 import { Spinner } from "@chakra-ui/react";
-
+import { AuthContext } from "../../../context/auth.context";
 import TrackCard from "../../../components/Playlist/TrackCard";
 
 function TracksPage() {
   const { eventId } = useParams();
   const [eventTracks, setEventTracks] = useState(null);
+  const { user, hasChanged, setHasChanged } = useContext(AuthContext);
 
   const getEventPlaylist = async () => {
     try {
@@ -23,17 +24,17 @@ function TracksPage() {
 
   useEffect(() => {
     getEventPlaylist();
-  }, [eventId]);
+  }, [eventId, user, eventTracks]);
 
   const get3Tracks = () => {
-    return eventTracks.slice(0, 3).map((track) => {
-      return <TrackCard key={track._id} {...track} />;
+    return eventTracks.slice(1, 4).map((track) => {
+      return <TrackCard key={track._id} {...track} userId={user._id} />;
     });
   };
 
   const getRestOfTracks = () => {
-    return eventTracks.slice(3, 9).map((track) => {
-      return <TrackCard key={track._id} {...track} />;
+    return eventTracks.slice(5, 10).map((track) => {
+      return <TrackCard key={track._id} {...track} userId={user._id} />;
     });
   };
 

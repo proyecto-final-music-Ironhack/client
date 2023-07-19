@@ -13,7 +13,11 @@ export const AuthContextWrapper = ({ children }) => {
   const [hasChanged, setHasChanged] = useState(false);
 
   useEffect(() => {
-    authenticate();
+    const authenticateUser = async () => {
+      await authenticate();
+    };
+
+    authenticateUser();
   }, [hasChanged]);
 
   const storeToken = (token) => {
@@ -31,7 +35,7 @@ export const AuthContextWrapper = ({ children }) => {
   };
 
   const getUser = () => {
-    userService.getUser().then(({ data }) => {
+    return userService.getUser().then(({ data }) => {
       setUser(data);
     });
   };
@@ -40,13 +44,14 @@ export const AuthContextWrapper = ({ children }) => {
     const token = localStorage.getItem(TOKEN_NAME);
     if (!token) {
       logout();
+      return;
     }
     setLoading(true);
     return authService
       .verify(token)
       .then(() => {
         setLoading(false);
-        getUser();
+        return getUser();
       })
       .catch((err) => {
         logout();
