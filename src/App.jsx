@@ -22,6 +22,8 @@ import UserPageEdit from "./pages/privates.routes/user/UserPageEdit";
 import OnBoardingPage from "./pages/OnBoardingPage";
 import TypeOfUsersPage from "./pages/TypeOfUsersPage";
 
+
+
 function App() {
   return (
     <ChakraProvider>
