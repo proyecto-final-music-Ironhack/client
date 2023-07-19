@@ -11,6 +11,7 @@ function EventDetail() {
   const [event, setEvent] = useState(null);
   const [eventTracks, setEventTracks] = useState(null);
   const [CheckedIn, setCheckedIn] = useState(false);
+  const [likeButton, showLikeButton] = useState(true)
   const { user, hasChanged, setHasChanged } = useContext(AuthContext);
 
   const { id } = useParams();
@@ -32,19 +33,17 @@ function EventDetail() {
     getEvent();
   }, [id, user]);
 
-
   // const nowPlayingTrack = Array.from({...eventTracks})[0]
   // console.log('NOW PLAYING', nowPlayingTrack)
 
-  const nowPlayingTrack = eventTracks?.[0]
+  const nowPlayingTrack = eventTracks?.[0];
   console.log(nowPlayingTrack);
 
-  console.log(eventTracks)
-
+  console.log(eventTracks);
 
   const getTracks = () => {
     return eventTracks.slice(1, 3).map((track) => {
-      return <TrackCard key={track._id} {...track} userId={user._id} />;
+      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={false} />;
     });
   };
 
@@ -102,7 +101,7 @@ function EventDetail() {
         <p>
           Have a look at what the DJ is playing and <span>check in</span> to vote for the next songs
         </p>
-        {event.playlist ? <TrackCard key={nowPlayingTrack?._id} {...nowPlayingTrack} userId={user._id} /> : <Spinner />}
+        {event.playlist ? <TrackCard key={nowPlayingTrack?._id} {...nowPlayingTrack} userId={user._id} showLikeButton={false} /> : <Spinner />}
       </div>
 
       <h3>Up next</h3>

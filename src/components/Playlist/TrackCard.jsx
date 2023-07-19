@@ -4,7 +4,7 @@ import heart from "../../images/heart.png";
 import playlistService from "../../services/playlist.service";
 import { useState, useEffect } from "react";
 
-function TrackCard({ trackName, likes, image, artists, _id, userId }) {
+function TrackCard({ trackName, likes, image, artists, _id, userId, showLikeButton }) {
   const [like, setLike] = useState(likes?.includes(userId) ?? false);
   const [showLikes, setShowLikes] = useState(likes?.length ?? 0);
   const [artistList, setArtistList] = useState("");
@@ -35,23 +35,24 @@ function TrackCard({ trackName, likes, image, artists, _id, userId }) {
     }
   };
 
+  console.log(showLikeButton);
   return (
     <>
       <img src={image} alt="Track image" />
       <p>{trackName}</p>
       <p>{artistList || <Spinner />}</p>
-      <>
-        <p style={{ display: "inline-block" }}>{showLikes >= 0 ? showLikes : <Spinner />}</p>
-      </>
-      {like ? (
-        <Button className="like-button" type="button" onClick={handleDislike}>
-          <Image w="18px" src={heart} />
-        </Button>
-      ) : (
-        <Button className="dislike-button" type="button" onClick={handleLike}>
-          <Image w="18px" src={emptyHeart} />
-        </Button>
-      )}
+      <p style={{ display: "inline-block" }}>{showLikes >= 0 ? showLikes : <Spinner />}</p>
+
+      {showLikeButton &&
+        (like ? (
+          <Button className="like-button" type="button" onClick={handleDislike}>
+            <Image w="18px" src={heart} />
+          </Button>
+        ) : (
+          <Button className="dislike-button" type="button" onClick={handleLike}>
+            <Image w="18px" src={emptyHeart} />
+          </Button>
+        ))}
 
       <hr />
     </>

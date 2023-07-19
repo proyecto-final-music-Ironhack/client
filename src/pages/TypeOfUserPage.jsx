@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export default function TypeOfUserPage() {
   return (
     <>
-      <Container p="30px">
-        <AbsoluteCenter>
+      <Container className="bg-black" p="30px">
+        <VStack>
           <Heading as="h2">Select your type of user: </Heading>
 
           <VStack spacing={15}>
@@ -36,7 +36,7 @@ export default function TypeOfUserPage() {
             </Card>
             </Link>
           </VStack>
-        </AbsoluteCenter>
+        </VStack>
       </Container>
     </>
   );

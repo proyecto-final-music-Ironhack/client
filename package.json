@@ -13,6 +13,7 @@
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.7.1",
     "@choc-ui/chakra-autocomplete": "^5.1.5",
+    "@fontsource/kanit": "^5.0.5",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "chartjs-plugin-datalabels": "^2.2.0",

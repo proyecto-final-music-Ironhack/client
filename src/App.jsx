@@ -21,6 +21,8 @@ import UserPageEdit from "./pages/privates.routes/user/UserPageEdit";
 import OnBoardingPage from "./pages/onBoardingPage";
 import TypeOfUserPage from "./pages/typeOfUserPage";
 
+
+
 function App() {
   return (
     <>
