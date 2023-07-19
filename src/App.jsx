@@ -18,7 +18,7 @@ import EventDetailPage from "./pages/privates.routes/event/EventDetailPage";
 import TracksPage from "./pages/privates.routes/playlist/TracksPage";
 import PlaylistOfListPage from "./pages/privates.routes/playlist/PlaylistOfListPage";
 import UserPageEdit from "./pages/privates.routes/user/UserPageEdit";
-import OnBoardingPage from "./pages/onBoardingPage";
+import OnBoardingPage from "./pages/OnBoardingPage";
 import TypeOfUserPage from "./pages/typeOfUserPage";
 
 function App() {
@@ -102,7 +102,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        
+
         <Route path="/user-type" element={<TypeOfUserPage />} />
         <Route path="/" element={<OnBoardingPage />} />
         <Route path="/login" element={<LoginPage />} />
