@@ -86,10 +86,10 @@ button {
   z-index: 0;
 }
 
-.navbar {
+/* .navbar {
   z-index: 1;
   position: relative;
-}
+} */
 
 .map-pop-up {
   color: black
