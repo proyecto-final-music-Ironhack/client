@@ -37,7 +37,14 @@ function EventDetail() {
 
   const getTracks = () => {
     return eventTracks.slice(1, 3).map((track) => {
-      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={false} />;
+      return (
+        <TrackCard
+          key={track._id}
+          {...track}
+          userId={user._id}
+          showLikeButton={false}
+        />
+      );
     });
   };
 
@@ -58,7 +65,9 @@ function EventDetail() {
     : "";
 
   const formattedTime = event
-    ? new Date(new Date(event.date).getTime() - 2 * 60 * 60 * 1000).toLocaleTimeString("en", {
+    ? new Date(
+        new Date(event.date).getTime() - 2 * 60 * 60 * 1000
+      ).toLocaleTimeString("en", {
         hour: "2-digit",
         minute: "2-digit",
       })
@@ -71,6 +80,11 @@ function EventDetail() {
       </div>
     );
   }
+  console.log(
+    event.date,
+    new Date(event.date).getHours(),
+    new Date().getHours()
+  );
 
   return (
     <>

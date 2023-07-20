@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { Box, Button, Flex, Heading, Image, Alert, AlertIcon } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import playlistService from "../../services/playlist.service";
 import PlaylistSelector from "./PlaylistSelector";
