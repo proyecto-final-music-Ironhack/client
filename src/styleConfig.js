@@ -10,6 +10,9 @@ export const Container = defineStyleConfig({
   baseStyle: {
     bg: "black",
     h: "100%",
+    pr:"25px",
+    pl:"25px"
+
   },
 });
 
