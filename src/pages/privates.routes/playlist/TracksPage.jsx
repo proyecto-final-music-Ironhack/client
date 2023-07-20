@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import eventService from "../../../services/event.service";
-import { Spinner } from "@chakra-ui/react";
+import { Container, Heading, Spinner, Text } from "@chakra-ui/react";
 import { AuthContext } from "../../../context/auth.context";
 import TrackCard from "../../../components/Playlist/TrackCard";
 
@@ -28,7 +28,7 @@ function TracksPage() {
 
   const get3Tracks = () => {
     return eventTracks.slice(1, 4).map((track) => {
-      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={true}/>;
+      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={true} />;
     });
   };
 
@@ -39,12 +39,13 @@ function TracksPage() {
   };
 
   return (
-    <>
+    <Container>
+      <Heading>Up next</Heading>
       {eventTracks ? get3Tracks() : <Spinner />}
-      <h2>Vote your favs:</h2>
+      <Heading size="md" mb="20px" mt="20px" >Vote your favs:</Heading>
       <hr />
       {eventTracks ? getRestOfTracks() : <Spinner />}
-    </>
+    </Container>
   );
 }
 
