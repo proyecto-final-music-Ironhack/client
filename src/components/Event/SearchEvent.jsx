@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
-import { Container } from "@chakra-ui/react";
-
+import {
+  Card,
+  Container,
+  Input,
+  Select,
+  Image,
+  Flex,
+  Text,
+} from "@chakra-ui/react";
+import headphones from "../../images/icons/headphones.svg";
+import locationImg from "../../images/icons/location.svg";
 export default function SearchEvent() {
   const [event, setEvent] = useState([]);
   const [search, setSearch] = useState("");
@@ -40,53 +49,129 @@ export default function SearchEvent() {
   }, [search, event, genre]);
 
   return (
-
     <Container maxHeight="100vh" className="bg-black" p="30px">
-      <input
-        type="text"
-        placeholder="Search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <select value={genre} onChange={(e) => setGenre(e.target.value)}>
-        <option value="">All Genres</option>
-        <option value="Rock">Rock</option>
-        <option value="Pop">Pop</option>
-        <option value="Reggeaton">Reggeaton</option>
-        <option value="Techno">Techno</option>
-        <option value="Funk">Funk</option>
-        <option value="Metal">Metal</option>
-        <option value="Salsa">Salsa</option>
-        <option value="Jazz">Jazz</option>
-        <option value="Country">Country</option>
-      </select>
+      <Flex>
+        <Input
+          height={"31.5px"}
+          type="text"
+          w={"160px"}
+          size={"sm"}
+          placeholder={"Search an event"}
+          bg={"#A7A7A7"}
+          borderLeftRadius={"50px"}
+          _placeholder={{ color: "#FFF" }}
+          value={search}
+          borderColor={"black"}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Text>
+          <Select
+            height={"30px"}
+            bg={"#A7A7A7"}
+            borderColor={"black"}
+            borderRightRadius={"50px"}
+            size={"sm"}
+            w={"112px"}
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+          >
+            <option style={{ background: "#A7A7A7" }} value="">
+              All Genres
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Rock">
+              Rock
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Pop">
+              Pop
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Reggeaton">
+              Reggeaton
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Techno">
+              Techno
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Funk">
+              Funk
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Metal">
+              Metal
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Salsa">
+              Salsa
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Jazz">
+              Jazz
+            </option>
+            <option style={{ background: "#A7A7A7" }} value="Country">
+              Country
+            </option>
+          </Select>
+        </Text>
+      </Flex>
+      <br />
+      <Text>Around me</Text>
       {filterEvent.map((event) => {
         const date = new Date(event.date);
         date.setHours(date.getHours() - 2);
 
         return (
-          <div style={{ border: "5px solid white" }} key={event._id}>
+          <Card
+            borderColor={"black"}
+            direction={{ base: "column", sm: "row" }}
+            overflow="hidden"
+            variant="outline"
+            borderRadius="10px"
+            bgGradient="linear(to-b,#0A0A0A,#A7A7A7,#0A0A0A)"
+            color={"white"}
+            p={"8px"}
+            key={event._id}
+          >
             <Link to={`/event/${event._id}`}>
-              <h2>{event.name}</h2>
-              <p>
-                {new Date(event.date).toLocaleDateString("en")} -{" "}
-                {date.toLocaleTimeString("en", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </p>
+              <Flex
+                flexDirection={"row"}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Image
+                  src={event.dj.image}
+                  borderRadius={"full"}
+                  style={{ width: "64px", height: "64px" }}
+                />
+                <Flex flexDirection={"column"}>
+                  <h2>{event.name}</h2>
+                  <p className="size-date">
+                    {new Date(event.date).toLocaleDateString("en", {
+                      month: "short",
+                      day: "2-digit",
+                    })}{" "}
+                    -{" "}
+                    {date.toLocaleTimeString("en", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
 
-              <h3>
-                {event.disco
-                  ? event.disco.name
-                  : "No disco information available"}
-              </h3>
-              <h3>
-                {event.dj ? event.dj.username : "No DJ information available"}
-              </h3>
-              <h3>{event.genre}</h3>
+                  <Flex flexDirection={"row"}>
+                    <img src={locationImg} alt="" />
+                    <p>
+                      {event.disco
+                        ? event.disco.name
+                        : "No disco information available"}
+                    </p>
+                  </Flex>
+                  <Flex flexDirection={"row"}>
+                    <img src={headphones} alt="" />
+                    <h3>
+                      {event.dj
+                        ? event.dj.username
+                        : "No DJ information available"}
+                    </h3>
+                  </Flex>
+                  <h3>{event.genre}</h3>
+                </Flex>
+              </Flex>
             </Link>
-          </div>
+          </Card>
         );
       })}
     </Container>
