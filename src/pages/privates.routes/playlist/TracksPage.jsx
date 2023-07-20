@@ -28,13 +28,13 @@ function TracksPage() {
 
   const get3Tracks = () => {
     return eventTracks.slice(1, 4).map((track) => {
-      return <TrackCard key={track._id} {...track} userId={user._id} />;
+      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={true}/>;
     });
   };
 
   const getRestOfTracks = () => {
     return eventTracks.slice(5, 10).map((track) => {
-      return <TrackCard key={track._id} {...track} userId={user._id} />;
+      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={true} />;
     });
   };
 

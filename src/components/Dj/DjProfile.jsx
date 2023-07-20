@@ -3,6 +3,7 @@ import djService from "../../services/dj.service";
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import EventCardDj from "./EventCardDj";
+import { Container } from "@chakra-ui/react";
 
 export default function DjProfile({ djId, dj }) {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -46,7 +47,7 @@ export default function DjProfile({ djId, dj }) {
 
   return (
     dj && (
-      <div>
+      <Container className="bg-black" >
         <img style={{ width: "50%" }} src={dj.image} alt="DjImg" />
         <h1>{dj.username},</h1>
         <h2>DJ</h2>
@@ -74,7 +75,7 @@ export default function DjProfile({ djId, dj }) {
           ))}
         </div>
         <br />
-      </div>
+      </Container>
     )
   );
 }
