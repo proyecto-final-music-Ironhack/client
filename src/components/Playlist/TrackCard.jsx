@@ -1,4 +1,4 @@
-import { Button, Image, Spinner } from "@chakra-ui/react";
+import { Button, Image, Spinner, Flex, Box, Card, Spacer, Text, Heading } from "@chakra-ui/react";
 import emptyHeart from "../../images/empy-heart.png";
 import heart from "../../images/heart.png";
 import playlistService from "../../services/playlist.service";
@@ -35,27 +35,36 @@ function TrackCard({ trackName, likes, image, artists, _id, userId, showLikeButt
     }
   };
 
-  console.log(showLikeButton);
   return (
-    <>
-      <img src={image} alt="Track image" />
-      <p>{trackName}</p>
-      <p>{artistList || <Spinner />}</p>
-      <p style={{ display: "inline-block" }}>{showLikes >= 0 ? showLikes : <Spinner />}</p>
+    <Card bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px">
+      <Flex justifyContent="center" alignItems="center">
+        <Box>
+          <Flex justifyContent="center" alignItems="center">
+            <img src={image} alt="Track image" />
+            <Box pl="10px">
+              <Heading size="xs">{trackName}</Heading>
+              <Text>{artistList || <Spinner />}</Text>
+            </Box>
+          </Flex>
+        </Box>
+        <Spacer />
 
-      {showLikeButton &&
-        (like ? (
-          <Button className="like-button" type="button" onClick={handleDislike}>
-            <Image w="18px" src={heart} />
-          </Button>
-        ) : (
-          <Button className="dislike-button" type="button" onClick={handleLike}>
-            <Image w="18px" src={emptyHeart} />
-          </Button>
-        ))}
-
-      <hr />
-    </>
+        <Box>
+          {/* <p style={{ display: "inline-block" }}>{showLikes >= 0 ? showLikes : <Spinner />}</p> */}
+          <Text>{showLikes >= 0 ? showLikes : <Spinner />}</Text>
+          {showLikeButton &&
+            (like ? (
+              <Button variant="unstyled" className="like-button" type="button" onClick={handleDislike}>
+                <Image w="18px" src={heart} />
+              </Button>
+            ) : (
+              <Button variant="unstyled" className="dislike-button" type="button" onClick={handleLike}>
+                <Image w="18px" src={emptyHeart} />
+              </Button>
+            ))}
+        </Box>
+      </Flex>
+    </Card>
   );
 }
 
