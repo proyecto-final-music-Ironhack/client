@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Button, Spinner } from "@chakra-ui/react";
+import { Button, Spinner, Container } from "@chakra-ui/react";
 import eventService from "../../services/event.service";
 import userService from "../../services/user.service";
 import { useParams, Link } from "react-router-dom";
@@ -82,7 +82,7 @@ function EventDetail() {
   }
 
   return (
-    <div>
+    <Container maxHeight="100vh" className="bg-black" p="30px">
       <h1>{event.name}</h1>
       <h2>
         Disco: <Link to={`/disco/${event.disco._id}`}>{event.disco ? event.disco.name : "No disco information available"}</Link>
@@ -114,7 +114,7 @@ function EventDetail() {
         <h2>Location</h2>
         <MapEvent event={event} />
       </div>
-    </div>
+    </Container>
   );
 }
 
