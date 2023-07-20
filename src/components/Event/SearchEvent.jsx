@@ -105,26 +105,36 @@ export default function SearchEvent() {
       {filterEvent.map((event) => {
         const date = new Date(event.date);
         date.setHours(date.getHours() - 2);
-
         return (
           <Card
-            borderColor={"black"}
             direction={{ base: "column", sm: "row" }}
             overflow="hidden"
             variant="outline"
             borderRadius="10px"
-            bgGradient="linear(to-b,#0A0A0A,#A7A7A7,#0A0A0A)"
+            bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)"
+            p="10px"
+            mt="10px"
+            mb="10px"
             color={"white"}
-            p={"8px"}
             key={event._id}
           >
             <Link to={`/event/${event._id}`}>
-              <Flex flexDirection={"row"} alignItems="center" justifyContent="center">
-                <Image src={event.dj.image} borderRadius={"full"} style={{ width: "64px", height: "64px" }} />
+
+              <Flex
+                flexDirection={"row"}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Image
+                  mr={"8px"}
+                  src={event.dj.image}
+                  borderRadius={"full"}
+                  style={{ width: "64px", height: "64px" }}
+                />
                 <Flex flexDirection={"column"}>
                   <h2>{event.name}</h2>
                   <p className="size-date">
-                    {new Date(event.date).toLocaleDateString("en", {
+                    {date.toLocaleDateString("en", {
                       month: "short",
                       day: "2-digit",
                     })}{" "}
@@ -141,9 +151,15 @@ export default function SearchEvent() {
                   </Flex>
                   <Flex flexDirection={"row"}>
                     <img src={headphones} alt="" />
-                    <h3>{event.dj ? event.dj.username : "No DJ information available"}</h3>
+
+                    <h3>
+                      {event.dj
+                        ? event.dj.username
+                        : "No DJ information available"}{" "}
+                      , {event.genre}
+                    </h3>
+
                   </Flex>
-                  <h3>{event.genre}</h3>
                 </Flex>
               </Flex>
             </Link>

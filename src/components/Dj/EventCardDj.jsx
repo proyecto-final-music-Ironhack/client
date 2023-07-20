@@ -4,13 +4,16 @@ import location from "../../images/icons/location.svg";
 import addplaylist from "../../images/icons/add-to-playlist.svg";
 
 const EventCardDj = ({ name, disco, date, _id, playlist }) => {
-  const dateEvent = new Date(date).toLocaleDateString("en", {
+  console.log(name);
+  const dateEvent = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "short",
+    timeZone: "UTC",
   });
-  const timeEvent = new Date(date).toLocaleTimeString("en", {
+  const timeEvent = new Date(date).toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "UTC",
   });
   return (
     <Card bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px">
@@ -40,6 +43,7 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
         </Box>
       </Flex>
     </Card>
+
   );
 };
 
