@@ -1,11 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { Button, Spinner, Container, Heading, Text, Center, Box } from "@chakra-ui/react";
+import { Button, Spinner, Container, Heading, Text, Center, Image,} from "@chakra-ui/react";
 import eventService from "../../services/event.service";
 import userService from "../../services/user.service";
 import { useParams, Link } from "react-router-dom";
 import MapEvent from "../Maps/MapEvent";
 import TrackCard from "../Playlist/TrackCard";
+import header from "../../images/event-image.png"
 import { AuthContext } from "../../context/auth.context";
+
 
 function EventDetail() {
   const [event, setEvent] = useState(null);
@@ -37,14 +39,7 @@ function EventDetail() {
 
   const getTracks = () => {
     return eventTracks.slice(1, 3).map((track) => {
-      return (
-        <TrackCard
-          key={track._id}
-          {...track}
-          userId={user._id}
-          showLikeButton={false}
-        />
-      );
+      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={false} />;
     });
   };
 
@@ -65,9 +60,7 @@ function EventDetail() {
     : "";
 
   const formattedTime = event
-    ? new Date(
-        new Date(event.date).getTime() - 2 * 60 * 60 * 1000
-      ).toLocaleTimeString("en", {
+    ? new Date(new Date(event.date).getTime() - 2 * 60 * 60 * 1000).toLocaleTimeString("en", {
         hour: "2-digit",
         minute: "2-digit",
       })
@@ -80,15 +73,13 @@ function EventDetail() {
       </div>
     );
   }
-  console.log(
-    event.date,
-    new Date(event.date).getHours(),
-    new Date().getHours()
-  );
+  console.log(event.date, new Date(event.date).getHours(), new Date().getHours());
 
   return (
-    <>
-      <Container maxHeight="100vh" className="bg-black" p="30px">
+   
+       
+      <Container >
+      <Image src={header} h="200px" w="500px"/>
         <Heading>{event.name}</Heading>
         <Heading as="span" size="md">
           {" "}
@@ -132,16 +123,19 @@ function EventDetail() {
         <Text fontSize="sm" textAlign="center">
           check in to see whitch songs are up next at the disco, vote and suggest your favorite ones
         </Text>
-        {CheckedIn && (
-          <Link className="main-link" to={`/playlist/${event._id}`}>
-            See all
-          </Link>
-        )}
+        <Center mt="20px" mb="20px">
+          {CheckedIn && (
+            <Link className="main-link" to={`/playlist/${event._id}`}>
+              See all
+            </Link>
+          )}
+        </Center>
         <hr />
-        <Heading>Location</Heading>
-      </Container>
+        <Heading  mt="10px" mb="10px" >Location</Heading>
       <MapEvent event={event} />
-    </>
+      </Container>
+   
+    
   );
 }
 
