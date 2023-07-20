@@ -2,7 +2,15 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
-import { Button, FormControl, FormLabel, Input, Flex } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Flex,
+  Container,
+  Text,
+} from "@chakra-ui/react";
 
 const LoginForm = () => {
   const [loginData, setLoginData] = useState({
@@ -35,41 +43,56 @@ const LoginForm = () => {
   const { password, email } = loginData;
 
   return (
-    <Flex
-      width="100vw"
-      height="50vh"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <form onSubmit={handleSubmit}>
-        <FormControl>
-          <FormLabel>Email</FormLabel>
-          <Input
-            type="email"
-            value={email}
-            onChange={handleInputChange}
-            name="email"
-          />
-        </FormControl>
+    <Container>
+      <Text>
+        <Flex
+          width="100vw"
+          height="50vh"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <form onSubmit={handleSubmit}>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                bgColor={"black"}
+                borderColor={"#CAFA00"}
+                color={"white"}
+                type="email"
+                value={email}
+                onChange={handleInputChange}
+                name="email"
+              />
+            </FormControl>
 
-        <FormControl>
-          <FormLabel>Password</FormLabel>
-          <Input
-            type="password"
-            value={password}
-            onChange={handleInputChange}
-            name="password"
-          />
-        </FormControl>
+            <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input
+                bgColor={"black"}
+                borderColor={"#CAFA00"}
+                color={"white"}
+                type="password"
+                value={password}
+                onChange={handleInputChange}
+                name="password"
+              />
+            </FormControl>
 
-        <div>
-          <Button colorScheme="teal" variant="solid" type="submit">
-            Log in
-          </Button>
-        </div>
-        <p>{error}</p>
-      </form>
-    </Flex>
+            <Flex justifyContent="space-between" alignItems="center" mt={4}>
+              <Button
+                bg={"#CAFA00"}
+                colorScheme="teal"
+                variant="solid"
+                type="submit"
+              >
+                Log in
+              </Button>
+              <Link to="/user-type">Sign up</Link>
+            </Flex>
+          </form>
+        </Flex>
+      </Text>
+    </Container>
   );
 };
 
