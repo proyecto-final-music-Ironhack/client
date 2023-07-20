@@ -1,5 +1,4 @@
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import LoginPage from "./pages/auth/LoginPage";
@@ -19,14 +18,13 @@ import EventDetailPage from "./pages/privates.routes/event/EventDetailPage";
 import TracksPage from "./pages/privates.routes/playlist/TracksPage";
 import PlaylistOfListPage from "./pages/privates.routes/playlist/PlaylistOfListPage";
 import UserPageEdit from "./pages/privates.routes/user/UserPageEdit";
-import OnBoardingPage from "./pages/OnBoardingPage";
 import TypeOfUsersPage from "./pages/TypeOfUsersPage";
+import OnBoardingPage from "./pages/onBoardingPage";
 
 
 
 function App() {
   return (
-    <ChakraProvider>
       <>
         <Nav />
         <Routes>
@@ -118,7 +116,6 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </>
-    </ChakraProvider>
   );
 }
 

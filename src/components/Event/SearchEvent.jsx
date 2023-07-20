@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
+import { Container } from "@chakra-ui/react";
 
 export default function SearchEvent() {
   const [event, setEvent] = useState([]);
@@ -39,7 +40,8 @@ export default function SearchEvent() {
   }, [search, event, genre]);
 
   return (
-    <div>
+
+    <Container maxHeight="100vh" className="bg-black" p="30px">
       <input
         type="text"
         placeholder="Search"
@@ -87,6 +89,6 @@ export default function SearchEvent() {
           </div>
         );
       })}
-    </div>
+    </Container>
   );
 }

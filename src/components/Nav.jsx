@@ -12,7 +12,7 @@ export default function Nav() {
   return (
     <>
       {user && (
-        <Flex className="navbar" alignItems={"center"} justifyContent={"space-between"}>
+        <Flex className="navbar, bg-black" alignItems={"center"} justifyContent={"space-between"}>
           <Box p="20">
             <Link to="/events">
               <Image w="74px" name="Beat the Beat Logo" src={logo} />
