@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 
 const EventCardDj = ({ name, disco, date, _id, playlist }) => {
-  const dateEvent = new Date(date).toLocaleDateString("en", {
+  console.log(name);
+  const dateEvent = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "short",
+    timeZone: "UTC",
   });
-  const timeEvent = new Date(date).toLocaleTimeString("en", {
+  const timeEvent = new Date(date).toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "UTC",
   });
   return (
     <>
@@ -16,7 +19,9 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
         {dateEvent} - {timeEvent}
       </p>
       <p>{disco.name}</p>
-      {!playlist || playlist.length == 0 ? <Link to={`/playlists-list/${_id}`}>Choose playlist</Link> : null }
+      {!playlist || playlist.length == 0 ? (
+        <Link to={`/playlists-list/${_id}`}>Choose playlist</Link>
+      ) : null}
     </>
   );
 };

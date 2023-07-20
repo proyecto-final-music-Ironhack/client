@@ -1,5 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { Button, Spinner, Container, Heading, Text, Center, Box } from "@chakra-ui/react";
+import {
+  Button,
+  Spinner,
+  Container,
+  Heading,
+  Text,
+  Center,
+  Box,
+} from "@chakra-ui/react";
 import eventService from "../../services/event.service";
 import userService from "../../services/user.service";
 import { useParams, Link } from "react-router-dom";
@@ -80,11 +88,6 @@ function EventDetail() {
       </div>
     );
   }
-  console.log(
-    event.date,
-    new Date(event.date).getHours(),
-    new Date().getHours()
-  );
 
   return (
     <>
@@ -95,7 +98,9 @@ function EventDetail() {
           Club:{" "}
         </Heading>
         <Text as="span">
-          <Link to={`/disco/${event.disco._id}`}>{event.disco ? event.disco.name : "No disco information available"}</Link>
+          <Link to={`/disco/${event.disco._id}`}>
+            {event.disco ? event.disco.name : "No disco information available"}
+          </Link>
         </Text>{" "}
         <br />
         <Heading as="span" size="md">
@@ -104,7 +109,9 @@ function EventDetail() {
         </Heading>
         <Text as="span">
           {" "}
-          <Link to={`/dj/${event.dj._id}`}>{event.dj ? event.dj.username : "No DJ information available"}</Link>
+          <Link to={`/dj/${event.dj._id}`}>
+            {event.dj ? event.dj.username : "No DJ information available"}
+          </Link>
         </Text>
         <Text mt={5}>
           {formattedDate} - {formattedTime}
@@ -113,29 +120,53 @@ function EventDetail() {
         <Text>{event.drinksWithEntry}</Text>
         <Center>
           {user.savedSongs && (
-            <Button mb="20px" mt="20px" className="main-button" onClick={pushAttendedEvent}>
+            <Button
+              mb="20px"
+              mt="20px"
+              className="main-button"
+              onClick={pushAttendedEvent}
+            >
               {CheckedIn ? "Checked In" : "Check In"}
             </Button>
           )}
         </Center>
         <hr />
-        <Heading mt="10px">Now Playing</Heading>
-        <Text>
-          Have a look at what the DJ is playing and <span className="lime-span">check in</span> to vote for the next songs
-        </Text>
-        {event.playlist ? <TrackCard key={nowPlayingTrack?._id} {...nowPlayingTrack} userId={user._id} showLikeButton={false} /> : <Spinner />}
-        <hr />
-        <Heading size="md" mt="10px">
-          Up next
-        </Heading>
-        {eventTracks ? getTracks() : <Spinner />}
-        <Text fontSize="sm" textAlign="center">
-          check in to see whitch songs are up next at the disco, vote and suggest your favorite ones
-        </Text>
-        {CheckedIn && (
-          <Link className="main-link" to={`/playlist/${event._id}`}>
-            See all
-          </Link>
+        {new Date(event.date).getDay() === new Date().toLocaleDateString() &&
+        new Date(event.date).getHours() === new Date().getHours() ? (
+          <>
+            <Heading mt="10px">Now Playing</Heading>
+            <Text>
+              Have a look at what the DJ is playing and{" "}
+              <span className="lime-span">check in</span> to vote for the next
+              songs
+            </Text>
+            {event.playlist ? (
+              <TrackCard
+                key={nowPlayingTrack?._id}
+                {...nowPlayingTrack}
+                userId={user?._id}
+                showLikeButton={false}
+              />
+            ) : (
+              <Spinner />
+            )}
+            <hr />
+            <Heading size="md" mt="10px">
+              Up next
+            </Heading>
+            {eventTracks ? getTracks() : <Spinner />}
+            <Text fontSize="sm" textAlign="center">
+              check in to see which songs are up next at the disco, vote and
+              suggest your favorite ones
+            </Text>
+            {CheckedIn && (
+              <Link className="main-link" to={`/playlist/${event._id}`}>
+                See all
+              </Link>
+            )}
+          </>
+        ) : (
+          "Waiting"
         )}
         <hr />
         <Heading>Location</Heading>

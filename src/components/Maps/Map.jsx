@@ -66,13 +66,7 @@ export default function Map() {
   const isEventNow = (eventDate) => {
     const now = new Date();
     const event = new Date(eventDate);
-    const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
-    return (
-      now.getDate() === event.getDate() &&
-      now.getMonth() === event.getMonth() &&
-      now.getFullYear() === event.getFullYear() &&
-      now.getHours() === oneHourLater.getHours()
-    );
+    return event >= now && event <= new Date(now.getTime() + 60 * 60 * 1000);
   };
 
   const renderPopup = () => {
@@ -89,7 +83,13 @@ export default function Map() {
         >
           <div>
             <h3>{popupInfo.disco.name}</h3>
-            <p>{new Date(popupInfo.date).toLocaleDateString()}</p>
+            <p>
+              {new Date(popupInfo.date).toLocaleDateString("en-EN", {
+                month: "2-digit",
+                day: "2-digit",
+                timeZone: "UTC",
+              })}
+            </p>
             <p>{popupInfo.genre}</p>
             <Link to={`/event/${popupInfo._id}`}>VIEW</Link>
           </div>

@@ -1,12 +1,15 @@
 export default function EventCardDisco({ name, dj, date }) {
-  const dateEvent = new Date(date).toLocaleDateString("en", {
-    day: "numeric",
-    month: "short",
-  });
-
-  const timeEvent = new Date(date).toLocaleTimeString("es", {
+  console.log(date);
+  const timeEvent = new Date(date).toLocaleTimeString("en-EN", {
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "UTC",
+  });
+
+  const dateTime = new Date(date).toLocaleDateString("en-EN", {
+    day: "2-digit",
+    month: "long",
+    timeZone: "UTC",
   });
 
   return (
@@ -14,7 +17,7 @@ export default function EventCardDisco({ name, dj, date }) {
       <h1>{name}</h1>
       <p>{dj?.name}</p>
       <p>
-        {dateEvent} - {timeEvent}
+        {dateTime} - {timeEvent}
       </p>
     </>
   );
