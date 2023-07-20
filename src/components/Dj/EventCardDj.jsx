@@ -1,4 +1,7 @@
+import { Card, Heading, Flex, Text, Box, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import location from "../../images/icons/location.svg";
+import addplaylist from "../../images/icons/add-to-playlist.svg";
 
 const EventCardDj = ({ name, disco, date, _id, playlist }) => {
   console.log(name);
@@ -13,16 +16,34 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
     timeZone: "UTC",
   });
   return (
-    <>
-      <h1>{name}</h1>
-      <p>
-        {dateEvent} - {timeEvent}
-      </p>
-      <p>{disco.name}</p>
-      {!playlist || playlist.length == 0 ? (
-        <Link to={`/playlists-list/${_id}`}>Choose playlist</Link>
-      ) : null}
-    </>
+    <Card bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px">
+      <Flex alignItems="center">
+        <Card p="10px" bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)">
+          <Flex flexDirection="column" justifyContent="center" alignItems="center">
+            <Heading size="md">{dateEvent}</Heading>
+            <Text> {timeEvent}</Text>
+          </Flex>
+        </Card>
+
+        <Box ml="20px">
+          <Text>{name}</Text>
+          <Flex>
+            <Image src={location} alt="location-icon" />
+            <Text fontSize="xs">{disco.name}</Text>
+          </Flex>
+          {!playlist || playlist.length == 0 ? (
+            <Flex>
+              <Image src={addplaylist} alt="location-icon" />
+              <Text fontSize="xs" textDecoration='underline'>
+                {" "}
+                <Link to={`/playlists-list/${_id}`}> Choose playlist</Link>{" "}
+              </Text>
+            </Flex>
+          ) : null}
+        </Box>
+      </Flex>
+    </Card>
+
   );
 };
 

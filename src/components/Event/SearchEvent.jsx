@@ -1,15 +1,7 @@
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  Container,
-  Input,
-  Select,
-  Image,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Card, Container, Input, Select, Image, Flex, Text } from "@chakra-ui/react";
 import headphones from "../../images/icons/headphones.svg";
 import locationImg from "../../images/icons/location.svg";
 export default function SearchEvent() {
@@ -127,6 +119,7 @@ export default function SearchEvent() {
             key={event._id}
           >
             <Link to={`/event/${event._id}`}>
+
               <Flex
                 flexDirection={"row"}
                 alignItems="center"
@@ -154,20 +147,18 @@ export default function SearchEvent() {
 
                   <Flex flexDirection={"row"}>
                     <img src={locationImg} alt="" />
-                    <p>
-                      {event.disco
-                        ? event.disco.name
-                        : "No disco information available"}
-                    </p>
+                    <p>{event.disco ? event.disco.name : "No disco information available"}</p>
                   </Flex>
                   <Flex flexDirection={"row"}>
                     <img src={headphones} alt="" />
+
                     <h3>
                       {event.dj
                         ? event.dj.username
                         : "No DJ information available"}{" "}
                       , {event.genre}
                     </h3>
+
                   </Flex>
                 </Flex>
               </Flex>
