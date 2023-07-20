@@ -1,17 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-<<<<<<< HEAD
-import {
-  Button,
-  Spinner,
-  Container,
-  Heading,
-  Text,
-  Center,
-  Box,
-} from "@chakra-ui/react";
-=======
 import { Button, Spinner, Container, Heading, Text, Center, Image,} from "@chakra-ui/react";
->>>>>>> master
 import eventService from "../../services/event.service";
 import userService from "../../services/user.service";
 import { useParams, Link } from "react-router-dom";
@@ -21,12 +9,7 @@ import header from "../../images/event-image.png"
 import { AuthContext } from "../../context/auth.context";
 
 
-function EventDetail() {
-  const [event, setEvent] = useState(null);
-  const [eventTracks, setEventTracks] = useState(null);
-  const [CheckedIn, setCheckedIn] = useState(false);
-  const [likeButton, showLikeButton] = useState(true);
-  const { user, hasChanged, setHasChanged } = useContext(AuthContext);
+fi
 
   const { id } = useParams();
 
@@ -85,10 +68,6 @@ function EventDetail() {
       </div>
     );
   }
-<<<<<<< HEAD
-=======
-  console.log(event.date, new Date(event.date).getHours(), new Date().getHours());
->>>>>>> master
 
   return (
    
@@ -134,7 +113,6 @@ function EventDetail() {
           )}
         </Center>
         <hr />
-<<<<<<< HEAD
         {new Date(event.date).getDay() === new Date().toLocaleDateString() &&
         new Date(event.date).getHours() === new Date().getHours() ? (
           <>
@@ -172,28 +150,6 @@ function EventDetail() {
         ) : (
           "Waiting"
         )}
-=======
-        <Heading mt="10px">Now Playing</Heading>
-        <Text>
-          Have a look at what the DJ is playing and <span className="lime-span">check in</span> to vote for the next songs
-        </Text>
-        {event.playlist ? <TrackCard key={nowPlayingTrack?._id} {...nowPlayingTrack} userId={user._id} showLikeButton={false} /> : <Spinner />}
-        <hr />
-        <Heading size="md" mt="10px">
-          Up next
-        </Heading>
-        {eventTracks ? getTracks() : <Spinner />}
-        <Text fontSize="sm" textAlign="center">
-          check in to see whitch songs are up next at the disco, vote and suggest your favorite ones
-        </Text>
-        <Center mt="20px" mb="20px">
-          {CheckedIn && (
-            <Link className="main-link" to={`/playlist/${event._id}`}>
-              See all
-            </Link>
-          )}
-        </Center>
->>>>>>> master
         <hr />
         <Heading  mt="10px" mb="10px" >Location</Heading>
       <MapEvent event={event} />
