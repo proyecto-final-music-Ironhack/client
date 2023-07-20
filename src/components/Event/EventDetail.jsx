@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Button, Spinner, Container } from "@chakra-ui/react";
+import { Button, Spinner, Container, Heading, Text, Center, Box } from "@chakra-ui/react";
 import eventService from "../../services/event.service";
 import userService from "../../services/user.service";
 import { useParams, Link } from "react-router-dom";
@@ -33,22 +33,13 @@ function EventDetail() {
     getEvent();
   }, [id, user]);
 
-  // const nowPlayingTrack = Array.from({...eventTracks})[0]
-  // console.log('NOW PLAYING', nowPlayingTrack)
-
   const nowPlayingTrack = eventTracks?.[0];
-  console.log(nowPlayingTrack);
-
-  console.log(eventTracks);
 
   const getTracks = () => {
     return eventTracks.slice(1, 3).map((track) => {
       return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={false} />;
     });
   };
-
-  // const randomIndex = Math.floor(Math.random() * event?.playlist?.length || 0)
-  // const randomTrack = event?.playlist?.[randomIndex]
 
   const pushAttendedEvent = async () => {
     try {
@@ -82,39 +73,61 @@ function EventDetail() {
   }
 
   return (
-    <Container maxHeight="100vh" className="bg-black" p="30px">
-      <h1>{event.name}</h1>
-      <h2>
-        Disco: <Link to={`/disco/${event.disco._id}`}>{event.disco ? event.disco.name : "No disco information available"}</Link>
-      </h2>
-      <h2>
-        Dj: <Link to={`/dj/${event.dj._id}`}>{event.dj ? event.dj.username : "No DJ information available"}</Link>
-      </h2>
-      <p>
-        {formattedDate} - {formattedTime}
-      </p>
-      <p>{event.priceOfEntry} €</p>
-      <div>
-        {user.savedSongs && <Button onClick={pushAttendedEvent}>{CheckedIn ? "Checked In" : "Check In"}</Button>}
+    <>
+      <Container maxHeight="100vh" className="bg-black" p="30px">
+        <Heading>{event.name}</Heading>
+        <Heading as="span" size="md">
+          {" "}
+          Club:{" "}
+        </Heading>
+        <Text as="span">
+          <Link to={`/disco/${event.disco._id}`}>{event.disco ? event.disco.name : "No disco information available"}</Link>
+        </Text>{" "}
+        <br />
+        <Heading as="span" size="md">
+          {" "}
+          Hosted DJ:{" "}
+        </Heading>
+        <Text as="span">
+          {" "}
+          <Link to={`/dj/${event.dj._id}`}>{event.dj ? event.dj.username : "No DJ information available"}</Link>
+        </Text>
+        <Text mt={5}>
+          {formattedDate} - {formattedTime}
+        </Text>
+        <Text>{event.priceOfEntry} €</Text>
+        <Text>{event.drinksWithEntry}</Text>
+        <Center>
+          {user.savedSongs && (
+            <Button mb="20px" mt="20px" className="main-button" onClick={pushAttendedEvent}>
+              {CheckedIn ? "Checked In" : "Check In"}
+            </Button>
+          )}
+        </Center>
         <hr />
-        <h2>Now Playing</h2>
-        <p>
-          Have a look at what the DJ is playing and <span>check in</span> to vote for the next songs
-        </p>
+        <Heading mt="10px">Now Playing</Heading>
+        <Text>
+          Have a look at what the DJ is playing and <span className="lime-span">check in</span> to vote for the next songs
+        </Text>
         {event.playlist ? <TrackCard key={nowPlayingTrack?._id} {...nowPlayingTrack} userId={user._id} showLikeButton={false} /> : <Spinner />}
-      </div>
-
-      <h3>Up next</h3>
-      {eventTracks ? getTracks() : <Spinner />}
-
-      <p>check in to see whitch songs are up next at the disco, vote and suggest your favorite ones</p>
-      {CheckedIn && <Link to={`/playlist/${event._id}`}>See all</Link>}
-
-      <div>
-        <h2>Location</h2>
-        <MapEvent event={event} />
-      </div>
-    </Container>
+        <hr />
+        <Heading size="md" mt="10px">
+          Up next
+        </Heading>
+        {eventTracks ? getTracks() : <Spinner />}
+        <Text fontSize="sm" textAlign="center">
+          check in to see whitch songs are up next at the disco, vote and suggest your favorite ones
+        </Text>
+        {CheckedIn && (
+          <Link className="main-link" to={`/playlist/${event._id}`}>
+            See all
+          </Link>
+        )}
+        <hr />
+        <Heading>Location</Heading>
+      </Container>
+      <MapEvent event={event} />
+    </>
   );
 }
 
