@@ -1,4 +1,4 @@
-import { Container, Heading } from "@chakra-ui/react";
+import { Container, Heading, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 export default function OnBoardingPage() {

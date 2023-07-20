@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import authService from "../services/auth.service";
 import userService from "../services/user.service";
+import { Spinner } from "@chakra-ui/react";
 
 export const TOKEN_NAME = "authToken";
 
@@ -50,8 +51,9 @@ export const AuthContextWrapper = ({ children }) => {
     return authService
       .verify(token)
       .then(() => {
-        setLoading(false);
-        return getUser();
+        return getUser().then(() => {
+          setLoading(false);
+        });
       })
       .catch((err) => {
         logout();
@@ -74,7 +76,13 @@ export const AuthContextWrapper = ({ children }) => {
         error,
       }}
     >
-      {children}
+      {loading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };
