@@ -81,7 +81,7 @@ const LoginForm = () => {
             <Flex justifyContent="space-between" alignItems="center" mt={4}>
               <Button
                 bg={"#CAFA00"}
-                colorScheme="teal"
+                color={"black"}
                 variant="solid"
                 type="submit"
               >
