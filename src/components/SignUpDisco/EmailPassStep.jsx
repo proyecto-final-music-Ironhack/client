@@ -36,6 +36,9 @@ function EmailPassStep({ discoName }) {
       <form onSubmit={handleSubmit}>
         <FormControl>
           <Input
+            bgColor={"black"}
+            borderColor={"#CAFA00"}
+            color={"white"}
             type="text"
             value={discoName}
             onChange={handleInputChange}
@@ -46,6 +49,9 @@ function EmailPassStep({ discoName }) {
         <FormControl>
           <FormLabel>Email</FormLabel>
           <Input
+            bgColor={"black"}
+            borderColor={"#CAFA00"}
+            color={"white"}
             type="email"
             value={email}
             onChange={handleInputChange}
@@ -56,6 +62,9 @@ function EmailPassStep({ discoName }) {
         <FormControl>
           <FormLabel>Password</FormLabel>
           <Input
+            bgColor={"black"}
+            borderColor={"#CAFA00"}
+            color={"white"}
             type="password"
             value={password}
             onChange={handleInputChange}
@@ -63,8 +72,17 @@ function EmailPassStep({ discoName }) {
           />
         </FormControl>
 
-        <Button onClick={() => previousStep()}>Previous</Button>
-        <Button type="submit">Register</Button>
+        <Button
+          bg={"#CAFA00"}
+          color={"black"}
+          m={"10px"}
+          onClick={() => previousStep()}
+        >
+          Previous
+        </Button>
+        <Button bg={"#CAFA00"} color={"black"} type="submit">
+          Register
+        </Button>
       </form>
     </>
   );

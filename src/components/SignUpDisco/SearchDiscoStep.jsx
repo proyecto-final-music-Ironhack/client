@@ -4,11 +4,8 @@ import {
   Button,
   FormControl,
   Flex,
-  FormHelperText,
   FormLabel,
-  Input,
-  Center,
-  Spinner,
+  Container,
   Text,
 } from "@chakra-ui/react";
 import {
@@ -43,26 +40,34 @@ function SearchDiscoStep({ setDiscoName }) {
   };
 
   return (
-    <>
-      <Flex pt="48" justify="center" align="center" w="full">
-        <FormControl w="60">
-          <FormLabel>Search for your club</FormLabel>
-          <AutoComplete onChange={(value) => setDiscoName(value)}>
-            <AutoCompleteInput />
-            <AutoCompleteList style={{ zIndex: 1, color: "white" }}>
-              {discos.map((disco) => (
-                <AutoCompleteItem key={disco._id} value={disco.name}>
-                  {disco.name} ({disco.province})
-                </AutoCompleteItem>
-              ))}
-            </AutoCompleteList>
-          </AutoComplete>
-        </FormControl>
-      </Flex>
-      <Button style={{ zIndex: 0 }} onClick={() => nextStep()}>
-        Next
-      </Button>
-    </>
+    <Container>
+      <Text>
+        <Flex pt="48" justify="center" align="center" w="full">
+          <FormControl w="60">
+            <FormLabel>Search for your club</FormLabel>
+            <AutoComplete onChange={(value) => setDiscoName(value)}>
+              <AutoCompleteInput color="black" />
+              <AutoCompleteList style={{ zIndex: 1, color: "black" }}>
+                {discos.map((disco) => (
+                  <AutoCompleteItem key={disco._id} value={disco.name}>
+                    {disco.name} ({disco.province})
+                  </AutoCompleteItem>
+                ))}
+              </AutoCompleteList>
+            </AutoComplete>
+          </FormControl>
+        </Flex>
+        <Button
+          m={"20px"}
+          bg={"#CAFA00"}
+          color={"black"}
+          style={{ zIndex: 0 }}
+          onClick={() => nextStep()}
+        >
+          Next
+        </Button>
+      </Text>
+    </Container>
   );
 }
 
