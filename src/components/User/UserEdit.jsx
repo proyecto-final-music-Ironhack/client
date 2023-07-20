@@ -1,10 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import uploadService from "../../services/upload.service";
 import userService from "../../services/user.service";
 import { AuthContext } from "../../context/auth.context";
-import { cloneWith } from "lodash";
-import { Button, Spinner } from "@chakra-ui/react";
+import {
+  Button,
+  Spinner,
+  Container,
+  Text,
+  Flex,
+  Heading,
+  Input,
+} from "@chakra-ui/react";
 
 const UserEdit = () => {
   const { id } = useParams();
@@ -45,36 +52,61 @@ const UserEdit = () => {
           setUser(updatedUser);
           resolve();
         }, 1000)
-      ) // 1 second delay, adjust as necessary.
-        .then(() => {
-          navigate(`/events`);
-        });
+      ).then(() => {
+        navigate(`/events`);
+      });
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleNameChange}
-          />
-        </label>
-        <label>
-          Image:
-          <input type="file" name="image" onChange={uploadUserImage} />
-        </label>
-        <Button type="submit" value="Submit" disabled={loadingImage}>
-          {loadingImage ? <Spinner /> : "Edit"}
-        </Button>
-      </form>
-    </>
+    <Container>
+      <Text>
+        <Heading mb={"10px"}>Edit your profile:</Heading>
+        <Flex flexDirection={"column"} alignItems="center">
+          {" "}
+          {/* Establecer flexDirection en "column" */}
+          <form onSubmit={handleSubmit}>
+            <label>Name:</label>
+            <br />
+            <Input
+              bgColor={"black"}
+              borderColor={"#CAFA00"}
+              color={"white"}
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+            />
+            <br />
+            <label>
+              Image:
+              <Input
+                pt={"4px"}
+                bgColor={"black"}
+                borderColor={"#CAFA00"}
+                color={"white"}
+                type="file"
+                name="image"
+                onChange={uploadUserImage}
+              />
+            </label>
+            <br />
+            <Button
+              mt={"20px"}
+              bg={"#CAFA00"}
+              color={"black"}
+              type="submit"
+              value="Submit"
+              disabled={loadingImage}
+            >
+              {loadingImage ? <Spinner /> : "Edit"}
+            </Button>
+          </form>
+        </Flex>
+      </Text>
+    </Container>
   );
 };
 
