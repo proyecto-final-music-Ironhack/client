@@ -38,5 +38,3 @@ export const Text = defineStyleConfig({
     color: "white",
   },
 });
-
-
