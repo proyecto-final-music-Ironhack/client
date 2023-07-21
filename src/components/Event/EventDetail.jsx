@@ -79,7 +79,7 @@ function EventDetail() {
 
   return (
     <Container>
-      <Image src={header} h="200px" w="500px" />
+      <Image src={header} h="200px" w="500px" mb="20px" />
       <Heading>{event.name}</Heading>
       <Heading as="span" size="md">
         {" "}

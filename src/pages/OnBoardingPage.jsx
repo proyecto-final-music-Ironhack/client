@@ -6,10 +6,9 @@ export default function OnBoardingPage() {
     <Box
       centerContent
       p="50px"
-      maxHeight="100vh"
       className="onboarding-container"
     >
-      <Heading as="h1" fontWeight="600" size="3xl" mb="500px">
+      <Heading as="h1" fontWeight="600" size="3xl" mb="350px">
         Beat the beat! <br /> Vote for your fav songs
       </Heading>
       <Center>

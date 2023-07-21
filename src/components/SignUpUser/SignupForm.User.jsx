@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
+import claim from "../../images/you-bring-the-beat.png"
 import {
   Button,
   FormControl,
@@ -9,6 +10,7 @@ import {
   Flex,
   Text,
   Container,
+  Image,
 } from "@chakra-ui/react";
 
 const SignupFormUser = () => {
@@ -45,11 +47,13 @@ const SignupFormUser = () => {
     <Container>
       <Text>
         <Flex
-          width="100vw"
-          height="60vh"
           alignItems="center"
           justifyContent="center"
+          flexDirection='column'
+          mt="90px"
         >
+
+          <Image w="40%"  mb="20px" src={claim} alt="claim"/>
           <form onSubmit={handleSubmit}>
             <FormControl>
               <FormLabel>Username</FormLabel>
@@ -63,7 +67,7 @@ const SignupFormUser = () => {
                 name="username"
               />
             </FormControl>
-            <FormControl>
+            <FormControl mt="10px">
               <FormLabel>Name</FormLabel>
               <Input
                 bgColor={"black"}
@@ -76,7 +80,7 @@ const SignupFormUser = () => {
               />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt="10px">
               <FormLabel>Password</FormLabel>
               <Input
                 bgColor={"black"}
@@ -89,7 +93,7 @@ const SignupFormUser = () => {
               />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt="10px">
               <FormLabel>Email</FormLabel>
               <Input
                 bgColor={"black"}
@@ -102,9 +106,9 @@ const SignupFormUser = () => {
               />
             </FormControl>
 
-            <Flex justifyContent="space-between" alignItems="center" mt={4}>
-              <Button bg={"#CAFA00"} variant="solid" type="submit">
-                Create user
+            <Flex alignItems="center" mt={4}>
+              <Button className="main-button" mr="20px" type="submit">
+                Sign up
               </Button>
               <Link to="/login">Log in</Link>
             </Flex>

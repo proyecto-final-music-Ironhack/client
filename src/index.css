@@ -70,6 +70,8 @@ p, h3 {
 .onboarding-container {
   background-image: url("../src/images/onboarding-bg.jpg");
   background-size: cover;
+  height: 740px;
+  overflow: hidden;
 }
 
 
