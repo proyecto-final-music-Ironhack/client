@@ -10,7 +10,7 @@ export default function TypeOfUsersPage() {
           <Link className="non-style-link" to="/signup/user">
             <Card borderColor="#CAFA00" borderWidth="3px" backgroundColor="black" centerContent w="300px" borderRadius="20px">
               <CardBody>
-                <Text as="h3">Music Lover</Text>
+                <Heading size="md" mb="10px">Music Lover</Heading>
                 <Text as="p">See, suggest, and vote the songs being played and the club</Text>
               </CardBody>
             </Card>
@@ -19,7 +19,7 @@ export default function TypeOfUsersPage() {
           <Link className="non-style-link" to="/signup/disco">
             <Card borderColor="#CAFA00" borderWidth="3px" backgroundColor="black" centerContent w="300px" borderRadius="20px">
               <CardBody>
-                <Text as="h3">Club</Text>
+                <Heading size="md" mb="10px">Club</Heading>
                 <Text as="p">Create and organice events, choose a DJ and spread the word!</Text>
               </CardBody>
             </Card>
@@ -28,7 +28,7 @@ export default function TypeOfUsersPage() {
           <Link className="non-style-link" to="/signup/dj">
             <Card borderColor="#CAFA00" borderWidth="3px" backgroundColor="black" centerContent w="300px" borderRadius="20px">
               <CardBody>
-                <Text as="h3">Dj</Text>
+                <Heading size="md" mb="10px">Dj</Heading>
                 <Text as="p">Gain followers to attend all of your events! Mix it how you love it!</Text>
               </CardBody>
             </Card>

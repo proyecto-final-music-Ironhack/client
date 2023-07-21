@@ -11,31 +11,29 @@ export default function Nav() {
   };
   return (
     <>
-      {user && (
-        <Container p="30px">
+      <Container p="30px">
         <Flex className="navbar" alignItems={"center"} justifyContent={"space-between"}>
-          <Box >
+          <Box>
             <Link to="/events">
               <Image w="74px" name="Beat the Beat Logo" src={logo} />
             </Link>
           </Box>
           <Spacer />
-          <Menu style={{ zIndex: 10 }}>
-            <MenuButton className="profile-image">
-              <Image boxSize="50px" borderRadius={500} name="profileImage" src={user.image} />
-            </MenuButton>
-            <MenuList>
-              <Link to="/profile">
-                <MenuItem >Profile</MenuItem>
-              </Link>
-              <MenuItem onClick={handleLogout}>
-                Log out
-              </MenuItem>
-            </MenuList>
-          </Menu>
+          {user && (
+            <Menu style={{ zIndex: 10 }}>
+              <MenuButton className="profile-image">
+                <Image boxSize="50px" borderRadius={500} name="profileImage" src={user.image} />
+              </MenuButton>
+              <MenuList>
+                <Link to="/profile">
+                  <MenuItem>Profile</MenuItem>
+                </Link>
+                <MenuItem onClick={handleLogout}>Log out</MenuItem>
+              </MenuList>
+            </Menu>
+          )}
         </Flex>
-        </Container>
-      )}
+      </Container>
     </>
   );
 }

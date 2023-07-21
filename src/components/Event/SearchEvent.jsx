@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
-import { Card, Heading, Input, Select, Image, Flex, Text } from "@chakra-ui/react";
+import { Card, Heading, Input, Select, Image, Flex, Text, Box } from "@chakra-ui/react";
 import headphones from "../../images/icons/headphones.svg";
 import locationImg from "../../images/icons/location.svg";
 export default function SearchEvent() {
@@ -107,15 +107,15 @@ export default function SearchEvent() {
         date.setHours(date.getHours() - 2);
         return (
           <Card
-          bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px"
+          bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px" border="1px solid #4E4E4E"
             key={event._id}
           >
             <Link to={`/event/${event._id}`}>
-              <Flex flexDirection={"row"} alignItems="center" justifyContent="center">
-                <Image mr={"8px"} src={event.dj.image} borderRadius={"full"} style={{ width: "64px", height: "64px" }} />
-                <Flex flexDirection={"column"}>
-                  <h2>{event.name}</h2>
-                  <p className="size-date">
+              <Flex alignItems="center" >
+                <Image mr={"20px"} src={event.dj.image} borderRadius={"full"} style={{ width: "64px", height: "64px" }} />
+                <Box>
+                  <Heading size="sm">{event.name}</Heading>
+                  <Text>
                     {date.toLocaleDateString("en", {
                       month: "short",
                       day: "2-digit",
@@ -125,20 +125,20 @@ export default function SearchEvent() {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
-                  </p>
+                  </Text>
 
                   <Flex flexDirection={"row"}>
-                    <img src={locationImg} alt="" />
-                    <p>{event.disco ? event.disco.name : "No disco information available"}</p>
+                    <Image src={locationImg} alt="" />
+                    <Text>{event.disco ? event.disco.name : "No disco information available"}</Text>
                   </Flex>
                   <Flex flexDirection={"row"}>
-                    <img src={headphones} alt="" />
+                    <Image src={headphones} alt="" />
 
-                    <h3>
+                    <Text>
                       {event.dj ? event.dj.username : "No DJ information available"} , {event.genre}
-                    </h3>
+                    </Text>
                   </Flex>
-                </Flex>
+                </Box>
               </Flex>
             </Link>
           </Card>
