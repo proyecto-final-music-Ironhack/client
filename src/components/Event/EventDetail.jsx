@@ -5,6 +5,7 @@ import {
   Container,
   Heading,
   Text,
+  Flex,
   Center,
   Image,
 } from "@chakra-ui/react";
@@ -163,11 +164,13 @@ function EventDetail() {
             check in to see which songs are up next at the disco, vote and
             suggest your favorite ones
           </Text>
-          {CheckedIn && (
-            <Link className="main-link" to={`/playlist/${event._id}`}>
-              See all
-            </Link>
-          )}
+          <Flex mt="6px" justifyContent={"center"}>
+            {CheckedIn && (
+              <Link className="main-link" to={`/playlist/${event._id}`}>
+                See all
+              </Link>
+            )}
+          </Flex>
         </>
       ) : (
         <Text fontSize="xs" color="gray" mt="20px" mb="20px">
