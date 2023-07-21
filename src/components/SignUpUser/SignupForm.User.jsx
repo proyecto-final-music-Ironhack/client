@@ -1,17 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
-import claim from "../../images/you-bring-the-beat.png"
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Flex,
-  Text,
-  Container,
-  Image,
-} from "@chakra-ui/react";
+import claim from "../../images/you-bring-the-beat.png";
+import { Button, FormControl, FormLabel, Input, Flex, Text, Container, Image } from "@chakra-ui/react";
 
 const SignupFormUser = () => {
   const [signupData, setSignupData] = useState({
@@ -46,14 +37,8 @@ const SignupFormUser = () => {
   return (
     <Container>
       <Text>
-        <Flex
-          alignItems="center"
-          justifyContent="center"
-          flexDirection='column'
-          mt="90px"
-        >
-
-          <Image w="40%"  mb="20px" src={claim} alt="claim"/>
+        <Flex alignItems="center" justifyContent="center" flexDirection="column" mt="20px">
+          <Image w="40%" mb="20px" src={claim} alt="claim" />
           <form onSubmit={handleSubmit}>
             <FormControl>
               <FormLabel>Username</FormLabel>
@@ -69,15 +54,7 @@ const SignupFormUser = () => {
             </FormControl>
             <FormControl mt="10px">
               <FormLabel>Name</FormLabel>
-              <Input
-                bgColor={"black"}
-                borderColor={"#CAFA00"}
-                color={"white"}
-                type="text"
-                value={name}
-                onChange={handleInputChange}
-                name="name"
-              />
+              <Input bgColor={"black"} borderColor={"#CAFA00"} color={"white"} type="text" value={name} onChange={handleInputChange} name="name" />
             </FormControl>
 
             <FormControl mt="10px">
@@ -95,15 +72,7 @@ const SignupFormUser = () => {
 
             <FormControl mt="10px">
               <FormLabel>Email</FormLabel>
-              <Input
-                bgColor={"black"}
-                borderColor={"#CAFA00"}
-                color={"white"}
-                type="email"
-                value={email}
-                onChange={handleInputChange}
-                name="email"
-              />
+              <Input bgColor={"black"} borderColor={"#CAFA00"} color={"white"} type="email" value={email} onChange={handleInputChange} name="email" />
             </FormControl>
 
             <Flex alignItems="center" mt={4}>

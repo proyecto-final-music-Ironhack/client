@@ -1,15 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
-import {
-  Button,
-  Container,
-  Flex,
-  FormControl,
-  FormLabel,
-  Text,
-  Input,
-} from "@chakra-ui/react";
+import claim from "../../images/you-bring-the-beat.png";
+import { Button, Container, Flex, FormControl, FormLabel, Text, Input, Image } from "@chakra-ui/react";
 
 const SignupFormDj = () => {
   const [signupData, setSignupData] = useState({
@@ -42,12 +35,8 @@ const SignupFormDj = () => {
   return (
     <Container>
       <Text>
-        <Flex
-          width="100vw"
-          height="100vw"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Flex alignItems="center" justifyContent="center" flexDirection="column" mt="20px">
+          <Image w="40%" mb="20px" src={claim} alt="claim" />
           <form onSubmit={handleSubmit}>
             <FormControl>
               <FormLabel>Username</FormLabel>
@@ -61,20 +50,12 @@ const SignupFormDj = () => {
                 name="username"
               />
             </FormControl>
-            <FormControl>
+            <FormControl mt="10px">
               <FormLabel>Name</FormLabel>
-              <Input
-                bgColor={"black"}
-                borderColor={"#CAFA00"}
-                color={"white"}
-                type="text"
-                value={name}
-                onChange={handleInputChange}
-                name="name"
-              />
+              <Input bgColor={"black"} borderColor={"#CAFA00"} color={"white"} type="text" value={name} onChange={handleInputChange} name="name" />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt="10px">
               <FormLabel>Password</FormLabel>
               <Input
                 bgColor={"black"}
@@ -87,29 +68,16 @@ const SignupFormDj = () => {
               />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt="10px">
               <FormLabel>Email</FormLabel>
-              <Input
-                bgColor={"black"}
-                borderColor={"#CAFA00"}
-                color={"white"}
-                type="email"
-                value={email}
-                onChange={handleInputChange}
-                name="email"
-              />
+              <Input bgColor={"black"} borderColor={"#CAFA00"} color={"white"} type="email" value={email} onChange={handleInputChange} name="email" />
             </FormControl>
 
             <Flex justifyContent="space-between" alignItems="center" mt={4}>
-              <Button
-                bg={"#CAFA00"}
-                color={"black"}
-                variant="solid"
-                type="submit"
-              >
-                Create Dj
+              <Button className="main-button" mr="10px" type="submit">
+                Sign up as Dj
               </Button>
-              <Link to="/login">Login</Link>
+              <Link to="/login">Log in</Link>
             </Flex>
           </form>
         </Flex>

@@ -1,19 +1,7 @@
 import { useWizard } from "react-use-wizard";
 import discoService from "../../services/disco.service";
-import {
-  Button,
-  FormControl,
-  Flex,
-  FormLabel,
-  Container,
-  Text,
-} from "@chakra-ui/react";
-import {
-  AutoComplete,
-  AutoCompleteInput,
-  AutoCompleteItem,
-  AutoCompleteList,
-} from "@choc-ui/chakra-autocomplete";
+import { Button, FormControl, Flex, Center, Container, Text } from "@chakra-ui/react";
+import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from "@choc-ui/chakra-autocomplete";
 import { useEffect, useState } from "react";
 
 function SearchDiscoStep({ setDiscoName }) {
@@ -42,11 +30,10 @@ function SearchDiscoStep({ setDiscoName }) {
   return (
     <Container>
       <Text>
-        <Flex pt="48" justify="center" align="center" w="full">
-          <FormControl w="60">
-            <FormLabel>Search for your club</FormLabel>
+        <Flex>
+          <FormControl>
             <AutoComplete onChange={(value) => setDiscoName(value)}>
-              <AutoCompleteInput color="black" />
+              <AutoCompleteInput className="auto-complete-input" />
               <AutoCompleteList style={{ zIndex: 1, color: "black" }}>
                 {discos.map((disco) => (
                   <AutoCompleteItem key={disco._id} value={disco.name}>
@@ -57,15 +44,11 @@ function SearchDiscoStep({ setDiscoName }) {
             </AutoComplete>
           </FormControl>
         </Flex>
-        <Button
-          m={"20px"}
-          bg={"#CAFA00"}
-          color={"black"}
-          style={{ zIndex: 0 }}
-          onClick={() => nextStep()}
-        >
-          Next
-        </Button>
+        <Center>
+          <Button m={"20px"} bg={"#CAFA00"} color={"black"} className="main-button" style={{ zIndex: 0 }} onClick={() => nextStep()}>
+            Next
+          </Button>
+        </Center>
       </Text>
     </Container>
   );
