@@ -98,29 +98,15 @@ export default function CreateEventForm() {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Date:</FormLabel>
+              <FormLabel>Date and time:</FormLabel>
               <Input
                 bgColor={"black"}
                 borderColor={"#CAFA00"}
                 color={"white"}
-                type="date"
+                type="datetime-local"
                 value={eventData.date}
                 onChange={(e) =>
                   setEventData({ ...eventData, date: e.target.value })
-                }
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel>Time: </FormLabel>
-              <Input
-                bgColor={"black"}
-                borderColor={"#CAFA00"}
-                color={"white"}
-                type="text"
-                value={eventData.startTime}
-                onChange={(e) =>
-                  setEventData({ ...eventData, startTime: e.target.value })
                 }
               />
             </FormControl>

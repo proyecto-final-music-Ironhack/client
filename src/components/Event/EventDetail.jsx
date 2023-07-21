@@ -1,15 +1,19 @@
 import { useEffect, useState, useContext } from "react";
-import { Button, Spinner, Container, Heading, Text, Center, Image,} from "@chakra-ui/react";
+import { Button, Spinner, Container, Heading, Text, Center, Image } from "@chakra-ui/react";
 import eventService from "../../services/event.service";
 import userService from "../../services/user.service";
 import { useParams, Link } from "react-router-dom";
 import MapEvent from "../Maps/MapEvent";
 import TrackCard from "../Playlist/TrackCard";
-import header from "../../images/event-image.png"
+import header from "../../images/event-image.png";
 import { AuthContext } from "../../context/auth.context";
 
-
-fi
+function EventDetail() {
+  const [event, setEvent] = useState(null);
+  const [eventTracks, setEventTracks] = useState(null);
+  const [CheckedIn, setCheckedIn] = useState(false);
+  const [likeButton, showLikeButton] = useState(true);
+  const { user, hasChanged, setHasChanged } = useContext(AuthContext);
 
   const { id } = useParams();
 
@@ -69,93 +73,73 @@ fi
     );
   }
 
+  const now = new Date();
+  const eventDate = new Date(event.date);
+  const twoHoursLater = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
   return (
-   
-       
-      <Container >
-      <Image src={header} h="200px" w="500px"/>
-        <Heading>{event.name}</Heading>
-        <Heading as="span" size="md">
-          {" "}
-          Club:{" "}
-        </Heading>
-        <Text as="span">
-          <Link to={`/disco/${event.disco._id}`}>
-            {event.disco ? event.disco.name : "No disco information available"}
-          </Link>
-        </Text>{" "}
-        <br />
-        <Heading as="span" size="md">
-          {" "}
-          Hosted DJ:{" "}
-        </Heading>
-        <Text as="span">
-          {" "}
-          <Link to={`/dj/${event.dj._id}`}>
-            {event.dj ? event.dj.username : "No DJ information available"}
-          </Link>
-        </Text>
-        <Text mt={5}>
-          {formattedDate} - {formattedTime}
-        </Text>
-        <Text>{event.priceOfEntry} €</Text>
-        <Text>{event.drinksWithEntry}</Text>
-        <Center>
-          {user.savedSongs && (
-            <Button
-              mb="20px"
-              mt="20px"
-              className="main-button"
-              onClick={pushAttendedEvent}
-            >
-              {CheckedIn ? "Checked In" : "Check In"}
-            </Button>
-          )}
-        </Center>
-        <hr />
-        {new Date(event.date).getDay() === new Date().toLocaleDateString() &&
-        new Date(event.date).getHours() === new Date().getHours() ? (
-          <>
-            <Heading mt="10px">Now Playing</Heading>
-            <Text>
-              Have a look at what the DJ is playing and{" "}
-              <span className="lime-span">check in</span> to vote for the next
-              songs
-            </Text>
-            {event.playlist ? (
-              <TrackCard
-                key={nowPlayingTrack?._id}
-                {...nowPlayingTrack}
-                userId={user?._id}
-                showLikeButton={false}
-              />
-            ) : (
-              <Spinner />
-            )}
-            <hr />
-            <Heading size="md" mt="10px">
-              Up next
-            </Heading>
-            {eventTracks ? getTracks() : <Spinner />}
-            <Text fontSize="sm" textAlign="center">
-              check in to see which songs are up next at the disco, vote and
-              suggest your favorite ones
-            </Text>
-            {CheckedIn && (
-              <Link className="main-link" to={`/playlist/${event._id}`}>
-                See all
-              </Link>
-            )}
-          </>
-        ) : (
-          "Waiting"
+    <Container>
+      <Image src={header} h="200px" w="500px" />
+      <Heading>{event.name}</Heading>
+      <Heading as="span" size="md">
+        {" "}
+        Club:{" "}
+      </Heading>
+      <Text as="span">
+        <Link to={`/disco/${event.disco._id}`}>{event.disco ? event.disco.name : "No disco information available"}</Link>
+      </Text>{" "}
+      <br />
+      <Heading as="span" size="md">
+        {" "}
+        Hosted DJ:{" "}
+      </Heading>
+      <Text as="span">
+        {" "}
+        <Link to={`/dj/${event.dj._id}`}>{event.dj ? event.dj.username : "No DJ information available"}</Link>
+      </Text>
+      <Text mt={5}>
+        {formattedDate} - {formattedTime}
+      </Text>
+      <Text>{event.priceOfEntry} €</Text>
+      <Text>{event.drinksWithEntry}</Text>
+      <Center>
+        {user.savedSongs && (
+          <Button mb="20px" mt="20px" className="main-button" onClick={pushAttendedEvent}>
+            {CheckedIn ? "Checked In" : "Check In"}
+          </Button>
         )}
-        <hr />
-        <Heading  mt="10px" mb="10px" >Location</Heading>
+      </Center>
+      <hr />
+      {eventDate >= now && eventDate <= twoHoursLater ?  (
+        <>
+          <Heading mt="10px">Now Playing</Heading>
+          <Text>
+            Have a look at what the DJ is playing and <span className="lime-span">check in</span> to vote for the next songs
+          </Text>
+          {event.playlist ? <TrackCard key={nowPlayingTrack?._id} {...nowPlayingTrack} userId={user?._id} showLikeButton={false} /> : <Spinner />}
+          <hr />
+          <Heading size="md" mt="10px">
+            Up next
+          </Heading>
+          {eventTracks ? getTracks() : <Spinner />}
+          <Text fontSize="sm" textAlign="center">
+            check in to see which songs are up next at the disco, vote and suggest your favorite ones
+          </Text>
+          {CheckedIn && (
+            <Link className="main-link" to={`/playlist/${event._id}`}>
+              See all
+            </Link>
+          )}
+        </>
+      ) : (
+        <Text fontSize="xs" color='gray' mt="20px" mb="20px">Discover and vote the tracks when the party starts!</Text>
+      )}
+      <hr />
+      <Heading mt="10px" mb="10px">
+        Location
+      </Heading>
       <MapEvent event={event} />
-      </Container>
-   
-    
+    </Container>
   );
 }
 

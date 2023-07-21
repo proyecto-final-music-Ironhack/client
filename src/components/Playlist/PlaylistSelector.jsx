@@ -20,13 +20,14 @@ export default function PlaylistSelector({ images, id, name, eventId }) {
         </Heading>
         <Button
           onClick={() => {
-            return toast({
-              title: "Account created.",
-              description: "We've created your account for you.",
-              status: "success",
-              duration: 9000,
-              isClosable: true,
-            });
+            pushTracksToEvent(),
+              toast({
+                title: "Playist added successfully",
+                description: "Tracks will turn visible at the time of the event",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
           }}
         >
           {" "}
