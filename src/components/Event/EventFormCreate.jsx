@@ -10,6 +10,7 @@ import {
   Box,
   Container,
   Text,
+  Heading,
 } from "@chakra-ui/react";
 import djService from "../../services/dj.service";
 import { useContext } from "react";
@@ -80,8 +81,10 @@ export default function CreateEventForm() {
 
   return (
     <Container>
+      <Heading mt="20px" mb="10px"> Create a new event for your club:</Heading>
+      <hr />
       <Text>
-        <Box boxSize="300px">
+        <Box boxSize="300px"  mt="20px">
           <form onSubmit={handleSubmit}>
             <FormControl>
               <FormLabel>Name of the event:</FormLabel>
@@ -163,6 +166,7 @@ export default function CreateEventForm() {
                 })}
               </Select>
             </FormControl>
+            
             <FormControl>
               <FormLabel>Genre:</FormLabel>
               <Select
@@ -185,7 +189,7 @@ export default function CreateEventForm() {
               </Select>
             </FormControl>
 
-            <Button bg={"#CAFA00"} color={"black"} type="submit">
+            <Button mt="20px" className="main-button" type="submit">
               Add event
             </Button>
           </form>

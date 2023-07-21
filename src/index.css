@@ -31,7 +31,9 @@ p, h3 {
   color: black;
   font-size: 15px;
   border-radius: 64px;
-  padding: 16px 32px;
+  padding: 16px 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 
 
 }
