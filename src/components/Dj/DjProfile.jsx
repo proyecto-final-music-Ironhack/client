@@ -66,7 +66,7 @@ export default function DjProfile({ djId, dj }) {
           </Flex>
         </Flex>
         <hr />
-        <Heading size="md" mt="10px">Next Events:</Heading>
+        <Heading size="md" mt="10px">Hosted Events:</Heading>
         <div>
           {djEvents.map((event) => (
             <div key={event._id}>

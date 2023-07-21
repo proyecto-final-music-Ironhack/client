@@ -34,7 +34,7 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
           {!playlist || playlist.length == 0 ? (
             <Flex>
               <Image src={addplaylist} alt="location-icon" />
-              <Text fontSize="xs" textDecoration='underline'>
+              <Text fontSize="xs" textDecoration="underline">
                 {" "}
                 <Link to={`/playlists-list/${_id}`}> Choose playlist</Link>{" "}
               </Text>
@@ -43,7 +43,6 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
         </Box>
       </Flex>
     </Card>
-
   );
 };
 
