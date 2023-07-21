@@ -2,7 +2,6 @@ import { Card, Heading, Flex, Text, Box, Image } from "@chakra-ui/react";
 import headphones from "../../images/icons/headphones.svg";
 
 export default function EventCardDisco({ name, dj, date }) {
-  console.log(date);
   const timeEvent = new Date(date).toLocaleTimeString("en-EN", {
     hour: "2-digit",
     minute: "2-digit",
@@ -16,10 +15,19 @@ export default function EventCardDisco({ name, dj, date }) {
   });
 
   return (
-    <Card bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px">
+    <Card
+      bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)"
+      p="10px"
+      mt="10px"
+      mb="10px"
+    >
       <Flex alignItems="center">
         <Card p="10px" bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)">
-          <Flex flexDirection="column" justifyContent="center" alignItems="center">
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Heading size="md">{dateTime}</Heading>
             <Text> {timeEvent}</Text>
           </Flex>

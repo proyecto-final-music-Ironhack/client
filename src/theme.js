@@ -1,12 +1,11 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Button, Container, Heading, Text } from "./styleConfig";
 
-
 const theme = extendTheme({
   styles: {
     global: () => ({
       body: {
-        bg: 'black',
+        bg: "black",
       },
     }),
   },
@@ -17,8 +16,8 @@ const theme = extendTheme({
   components: {
     Button,
     Container,
-    Heading, 
-    Text
+    Heading,
+    Text,
   },
 });
 

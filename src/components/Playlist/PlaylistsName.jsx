@@ -11,7 +11,6 @@ const PlaylistsName = ({ eventId }) => {
     try {
       const { data } = await playlistService.getPlaylists();
       setPlaylistName(data);
-      console.log(data);
     } catch (err) {
       console.error(err);
     }

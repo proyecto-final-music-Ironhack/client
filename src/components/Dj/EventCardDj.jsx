@@ -4,7 +4,6 @@ import location from "../../images/icons/location.svg";
 import addplaylist from "../../images/icons/add-to-playlist.svg";
 
 const EventCardDj = ({ name, disco, date, _id, playlist }) => {
-  console.log(name);
   const dateEvent = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "short",
@@ -16,10 +15,19 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
     timeZone: "UTC",
   });
   return (
-    <Card bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px">
+    <Card
+      bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)"
+      p="10px"
+      mt="10px"
+      mb="10px"
+    >
       <Flex alignItems="center">
         <Card p="10px" bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)">
-          <Flex flexDirection="column" justifyContent="center" alignItems="center">
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Heading size="md">{dateEvent}</Heading>
             <Text> {timeEvent}</Text>
           </Flex>
