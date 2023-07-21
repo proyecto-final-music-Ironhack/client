@@ -124,21 +124,21 @@ function EventDetail() {
       </Text>
       <Text>{event.priceOfEntry} €</Text>
       <Text>{event.drinksWithEntry}</Text>
-      <Center>
-        {user.savedSongs && (
-          <Button
-            mb="20px"
-            mt="20px"
-            className="main-button"
-            onClick={pushAttendedEvent}
-          >
-            {CheckedIn ? "Checked In" : "Check In"}
-          </Button>
-        )}
-      </Center>
-      <hr />
       {eventDate >= now && eventDate <= twoHoursLater ? (
         <>
+          <Center>
+            {user.savedSongs && (
+              <Button
+                mb="20px"
+                mt="20px"
+                className="main-button"
+                onClick={pushAttendedEvent}
+              >
+                {CheckedIn ? "Checked In" : "Check In"}
+              </Button>
+            )}
+          </Center>
+          <hr />
           <Heading mt="10px">Now Playing</Heading>
           <Text>
             Have a look at what the DJ is playing and{" "}
