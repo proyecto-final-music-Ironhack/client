@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Container, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import playlistService from "../../services/playlist.service";
 import PlaylistSelector from "./PlaylistSelector";
@@ -27,10 +27,8 @@ const PlaylistsName = ({ eventId }) => {
 
   return (
     <>
-      <Box>
-        <Heading as="h1" size="lg" mb={20}>
-          ADD A PLAYLIST:
-        </Heading>
+      <Container>
+        <Heading mb="10px">Choose one of your playlists:</Heading>
 
         {playlistsName.items?.map((playlist) => {
           return (
@@ -39,7 +37,7 @@ const PlaylistsName = ({ eventId }) => {
             </div>
           );
         })}
-      </Box>
+      </Container>
     </>
   );
 };

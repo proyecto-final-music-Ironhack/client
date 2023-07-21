@@ -19,7 +19,7 @@ import TracksPage from "./pages/privates.routes/playlist/TracksPage";
 import PlaylistOfListPage from "./pages/privates.routes/playlist/PlaylistOfListPage";
 import UserPageEdit from "./pages/privates.routes/user/UserPageEdit";
 import TypeOfUsersPage from "./pages/TypeOfUsersPage";
-import OnBoardingPage from "./pages/onBoardingPage";
+import OnBoardingPage from "./pages/OnBoardingPage";
 
 
 

@@ -90,6 +90,10 @@ function EventDetail() {
     );
   }
 
+  const now = new Date();
+  const eventDate = new Date(event.date);
+  const twoHoursLater = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
   return (
     <Container>
       <Image src={header} h="200px" w="500px" />
@@ -132,8 +136,7 @@ function EventDetail() {
         )}
       </Center>
       <hr />
-      {new Date(event.date).getDay() === new Date().toLocaleDateString() &&
-      new Date(event.date).getHours() === new Date().getHours() ? (
+      {eventDate >= now && eventDate <= twoHoursLater ? (
         <>
           <Heading mt="10px">Now Playing</Heading>
           <Text>
@@ -167,10 +170,12 @@ function EventDetail() {
           )}
         </>
       ) : (
-        "Waiting"
+        <Text fontSize="xs" color="gray" mt="20px" mb="20px">
+          Check in and vote your favorite songs at the time of the party!
+        </Text>
       )}
       <hr />
-      <Heading mt="10px" mb="10px">
+      <Heading size="mb" mt="10px" mb="10px">
         Location
       </Heading>
       <MapEvent event={event} />

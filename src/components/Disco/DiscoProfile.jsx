@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import discoService from "../../services/disco.service";
 import { Link } from "react-router-dom";
 import EventCardDisco from "./EventCardDisco";
-import { Container, Text } from "@chakra-ui/react";
+import mostplayed from "../../images/most-played.png";
+import { Container, Text, Image, Heading, Flex, Button, Center } from "@chakra-ui/react";
 
 export default function DiscoProfile({ disco, discoId }) {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -43,32 +44,43 @@ export default function DiscoProfile({ disco, discoId }) {
   return (
     disco && (
       <Container>
-        <Text>
-          <img style={{ width: "50%" }} src={disco.image} alt="DiscoImg" />
-          <h1>{disco.name},</h1>
-          <h2>Disco</h2>
-          {discoId && discoId !== discoId._id && (
-            <button type="submit" onClick={handleFollow}>
-              {isFollowing ? "Unfollow" : "Follow"}
-            </button>
+        <Image src={disco.image} alt="DiscoImg" />
+        <Heading mt="20px">{disco.name}</Heading>
+        <Text size="md">Disco</Text>
+
+        {discoId && discoId !== discoId._id && (
+          <Button mt="20px" mb="20px" className="main-button" type="submit" onClick={handleFollow}>
+            {isFollowing ? "Unfollow" : "Follow"}
+          </Button>
+        )}
+
+        <Flex justifyContent="center" alignItems="center" mb="20px">
+          {disco.followers && (
+            <Flex flexDirection="column" justifyContent="center" alignItems="center" pr="20px" borderRight="1px solid white">
+              <Text>{showFollowers}</Text>
+              <Text color="gray">followers</Text>
+            </Flex>
           )}
 
-          <div>
-            {disco.followers && (
-              <p>
-                <span>{showFollowers}</span> followers
-              </p>
-            )}
-          </div>
-          <div>
-            <p>{disco.events.length} event(s)</p>
-          </div>
-          {!discoId && <Link to="/events/create">Create event!</Link>}
-          <br />
-          <h2>Next Events</h2>
-          {disco.events ? getDiscoEvents() : <p>Not events yet</p>}
-          {}
-        </Text>
+          <Flex flexDirection="column" justifyContent="center" pl="20px" alignItems="center">
+            <Text>{disco.events.length}</Text>
+            <Text color="gray">event (s)</Text>
+          </Flex>
+        </Flex>
+        <Image mt="20px" mb="20px" src={mostplayed} alt="Most Played" />
+        <hr />
+        <Heading size="md" mt="10px">
+          Hosted Events:
+        </Heading>
+
+        {disco.events ? getDiscoEvents() : <p>Not events yet</p>}
+        <Center mt="20px" mb="20px">
+          {!discoId && (
+            <Link className="main-link"  to="/events/create">
+              Create new event
+            </Link>
+          )}
+        </Center>
       </Container>
     )
   );

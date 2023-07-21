@@ -3,7 +3,7 @@ import djService from "../../services/dj.service";
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import EventCardDj from "./EventCardDj";
-import { Container } from "@chakra-ui/react";
+import { Container, Image, Heading, Text, Button, Flex, Box } from "@chakra-ui/react";
 
 export default function DjProfile({ djId, dj }) {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -13,9 +13,7 @@ export default function DjProfile({ djId, dj }) {
   const allEvents = async () => {
     try {
       const { data } = await eventService.getAllEvent();
-      const djEventsData = data.filter(
-        (event) => event.dj._id == (djId || dj?._id)
-      );
+      const djEventsData = data.filter((event) => event.dj?._id == (djId || dj?._id));
       setDjEvents(djEventsData);
     } catch (err) {
       console.error(err);
@@ -47,26 +45,28 @@ export default function DjProfile({ djId, dj }) {
 
   return (
     dj && (
-      <Container className="bg-black" >
-        <img style={{ width: "50%" }} src={dj.image} alt="DjImg" />
-        <h1>{dj.username},</h1>
-        <h2>DJ</h2>
+      <Container>
+        <Image src={dj.image} alt="DjImg" />
+        <Heading mt="20px">{dj.username}</Heading>
+        <Text size="md">DJ</Text>
         {djId && djId !== djId._id && (
-          <button type="submit" onClick={handleFollow}>
+          <Button mt="20px" mb="20px" className="main-button" type="submit" onClick={handleFollow}>
             {isFollowing ? "Unfollow" : "Follow"}
-          </button>
+          </Button>
         )}
 
-        <div>
-          <p>
-            <span>{showFollowers} followers</span>
-          </p>
-        </div>
-        <div>
-          <p>
-            <span>{djEvents.length}</span> event(s)
-          </p>
-        </div>
+        <Flex justifyContent='center' alignItems='center' mb="20px">
+          <Flex flexDirection="column" justifyContent='center' alignItems='center' pr="20px" borderRight='1px solid white'>
+            <Text>{showFollowers}</Text>
+            <Text color='gray'>followers</Text>
+          </Flex>
+          <Flex flexDirection="column" justifyContent='center' pl="20px" alignItems='center'>
+            <Text>{djEvents.length}</Text>
+            <Text color='gray' >event (s)</Text>
+          </Flex>
+        </Flex>
+        <hr />
+        <Heading size="md" mt="10px">Hosted Events:</Heading>
         <div>
           {djEvents.map((event) => (
             <div key={event._id}>

@@ -1,15 +1,7 @@
 import { Link } from "react-router-dom";
 import eventService from "../../services/event.service";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  Container,
-  Input,
-  Select,
-  Image,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Card, Heading, Input, Select, Image, Flex, Text } from "@chakra-ui/react";
 import headphones from "../../images/icons/headphones.svg";
 import locationImg from "../../images/icons/location.svg";
 export default function SearchEvent() {
@@ -49,8 +41,8 @@ export default function SearchEvent() {
   }, [search, event, genre]);
 
   return (
-    <Container maxHeight="100vh" className="bg-black" p="30px">
-      <Flex>
+    <>
+      <Flex mt="20px" justifyContent='center' alignItems='center'>
         <Input
           height={"31.5px"}
           type="text"
@@ -109,35 +101,18 @@ export default function SearchEvent() {
         </Text>
       </Flex>
       <br />
-      <Text>Around me</Text>
+      <Heading size="md">Around me</Heading>
       {filterEvent.map((event) => {
         const date = new Date(event.date);
         date.setHours(date.getHours() - 2);
         return (
           <Card
-            direction={{ base: "column", sm: "row" }}
-            overflow="hidden"
-            variant="outline"
-            borderRadius="10px"
-            bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)"
-            p="10px"
-            mt="10px"
-            mb="10px"
-            color={"white"}
+          bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)" p="10px" mt="10px" mb="10px"
             key={event._id}
           >
             <Link to={`/event/${event._id}`}>
-              <Flex
-                flexDirection={"row"}
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Image
-                  mr={"8px"}
-                  src={event.dj.image}
-                  borderRadius={"full"}
-                  style={{ width: "64px", height: "64px" }}
-                />
+              <Flex flexDirection={"row"} alignItems="center" justifyContent="center">
+                <Image mr={"8px"} src={event.dj.image} borderRadius={"full"} style={{ width: "64px", height: "64px" }} />
                 <Flex flexDirection={"column"}>
                   <h2>{event.name}</h2>
                   <p className="size-date">
@@ -154,19 +129,13 @@ export default function SearchEvent() {
 
                   <Flex flexDirection={"row"}>
                     <img src={locationImg} alt="" />
-                    <p>
-                      {event.disco
-                        ? event.disco.name
-                        : "No disco information available"}
-                    </p>
+                    <p>{event.disco ? event.disco.name : "No disco information available"}</p>
                   </Flex>
                   <Flex flexDirection={"row"}>
                     <img src={headphones} alt="" />
+
                     <h3>
-                      {event.dj
-                        ? event.dj.username
-                        : "No DJ information available"}{" "}
-                      , {event.genre}
+                      {event.dj ? event.dj.username : "No DJ information available"} , {event.genre}
                     </h3>
                   </Flex>
                 </Flex>
@@ -175,6 +144,6 @@ export default function SearchEvent() {
           </Card>
         );
       })}
-    </Container>
+    </>
   );
 }

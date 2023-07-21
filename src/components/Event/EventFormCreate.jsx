@@ -10,6 +10,7 @@ import {
   Box,
   Container,
   Text,
+  Heading,
 } from "@chakra-ui/react";
 import djService from "../../services/dj.service";
 import { useContext } from "react";
@@ -77,11 +78,13 @@ export default function CreateEventForm() {
     "Salsa",
     "Country",
   ];
-
+console.log('HEY', eventData.date);
   return (
     <Container>
+      <Heading mt="20px" mb="10px"> Create a new event for your club:</Heading>
+      <hr />
       <Text>
-        <Box boxSize="300px">
+        <Box boxSize="300px"  mt="20px">
           <form onSubmit={handleSubmit}>
             <FormControl>
               <FormLabel>Name of the event:</FormLabel>
@@ -98,29 +101,15 @@ export default function CreateEventForm() {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Date:</FormLabel>
+              <FormLabel>Date and time:</FormLabel>
               <Input
                 bgColor={"black"}
                 borderColor={"#CAFA00"}
                 color={"white"}
-                type="date"
+                type="datetime-local"
                 value={eventData.date}
                 onChange={(e) =>
                   setEventData({ ...eventData, date: e.target.value })
-                }
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel>Time: </FormLabel>
-              <Input
-                bgColor={"black"}
-                borderColor={"#CAFA00"}
-                color={"white"}
-                type="text"
-                value={eventData.startTime}
-                onChange={(e) =>
-                  setEventData({ ...eventData, startTime: e.target.value })
                 }
               />
             </FormControl>
@@ -177,6 +166,7 @@ export default function CreateEventForm() {
                 })}
               </Select>
             </FormControl>
+            
             <FormControl>
               <FormLabel>Genre:</FormLabel>
               <Select
@@ -199,7 +189,7 @@ export default function CreateEventForm() {
               </Select>
             </FormControl>
 
-            <Button bg={"#CAFA00"} color={"black"} type="submit">
+            <Button mt="20px" className="main-button" type="submit">
               Add event
             </Button>
           </form>
