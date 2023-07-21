@@ -7,6 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import myMarkerCurrentEvent from "../../../src/images/Property 1=Live.svg";
 import myMarkerOtherEvent from "../../../src/images/Property 1=Default.svg";
 import { AuthContext } from "../../context/auth.context";
+import { Heading } from "@chakra-ui/react";
 
 const myMarkerCurrent = <img src={myMarkerCurrentEvent} alt="Marker" />;
 const myMarkerOther = <img src={myMarkerOtherEvent} alt="Marker" />;
@@ -82,9 +83,12 @@ export default function Map() {
           onClose={() => setPopupInfo(null)}
         >
           <div>
-            <h3>{popupInfo.disco.name}</h3>
+            <Heading color={"black"} size={"3px"}>
+              {popupInfo.name}
+            </Heading>
+            <p>{popupInfo.disco.name}</p>
             <p>
-              {new Date(popupInfo.date).toLocaleDateString("en-EN", {
+              {new Date(popupInfo.date).toLocaleDateString("es-ES", {
                 month: "2-digit",
                 day: "2-digit",
                 timeZone: "UTC",
