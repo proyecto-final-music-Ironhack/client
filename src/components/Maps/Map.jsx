@@ -66,14 +66,14 @@ export default function Map() {
   const isEventNow = (eventDate) => {
     const now = new Date();
     const event = new Date(eventDate);
-    return event >= now && event <= new Date(now.getTime() + 60 * 60 * 1000);
+    return event >= now && event <= new Date(now.getTime() + 120 * 60 * 1000);
   };
 
   const renderPopup = () => {
     return (
       popupInfo && (
         <Popup
-          className="map-pop-up"
+          color="white"
           tipSize={5}
           anchor="top"
           longitude={popupInfo.disco?.longitude}

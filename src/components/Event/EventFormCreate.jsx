@@ -78,13 +78,16 @@ export default function CreateEventForm() {
     "Salsa",
     "Country",
   ];
-console.log('HEY', eventData.date);
+  console.log("HEY", eventData.date);
   return (
     <Container>
-      <Heading mt="20px" mb="10px"> Create a new event for your club:</Heading>
+      <Heading mt="20px" mb="10px">
+        {" "}
+        Create a new event for your club:
+      </Heading>
       <hr />
       <Text>
-        <Box boxSize="300px"  mt="20px">
+        <Box boxSize="300px" mt="20px">
           <form onSubmit={handleSubmit}>
             <FormControl>
               <FormLabel>Name of the event:</FormLabel>
@@ -150,7 +153,7 @@ console.log('HEY', eventData.date);
               <Select
                 bgColor={"black"}
                 borderColor={"#CAFA00"}
-                color={"black"}
+                color={"white"}
                 placeholder="Select option"
                 value={eventData.dj}
                 onChange={(e) =>
@@ -159,14 +162,18 @@ console.log('HEY', eventData.date);
               >
                 {allDjs.map((dj) => {
                   return (
-                    <option key={dj._id} value={dj._id}>
+                    <option
+                      key={dj._id}
+                      value={dj._id}
+                      style={{ color: "black", backgroundColor: "#A7A7A7" }}
+                    >
                       {dj.username}
                     </option>
                   );
                 })}
               </Select>
             </FormControl>
-            
+
             <FormControl>
               <FormLabel>Genre:</FormLabel>
               <Select
@@ -181,7 +188,11 @@ console.log('HEY', eventData.date);
               >
                 {genres.map((genre, index) => {
                   return (
-                    <option key={index} value={genre}>
+                    <option
+                      key={index}
+                      value={genre}
+                      style={{ color: "black", backgroundColor: "#A7A7A7" }}
+                    >
                       {genre}
                     </option>
                   );
