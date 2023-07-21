@@ -18,7 +18,7 @@ function TracksPage() {
       });
       setEventTracks(tracks);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -28,13 +28,27 @@ function TracksPage() {
 
   const get3Tracks = () => {
     return eventTracks.slice(1, 4).map((track) => {
-      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={true} />;
+      return (
+        <TrackCard
+          key={track._id}
+          {...track}
+          userId={user._id}
+          showLikeButton={true}
+        />
+      );
     });
   };
 
   const getRestOfTracks = () => {
     return eventTracks.slice(5, 10).map((track) => {
-      return <TrackCard key={track._id} {...track} userId={user._id} showLikeButton={true} />;
+      return (
+        <TrackCard
+          key={track._id}
+          {...track}
+          userId={user._id}
+          showLikeButton={true}
+        />
+      );
     });
   };
 
@@ -42,7 +56,9 @@ function TracksPage() {
     <Container>
       <Heading>Up next</Heading>
       {eventTracks ? get3Tracks() : <Spinner />}
-      <Heading size="md" mb="20px" mt="20px" >Vote your favs:</Heading>
+      <Heading size="md" mb="20px" mt="20px">
+        Vote your favs:
+      </Heading>
       <hr />
       {eventTracks ? getRestOfTracks() : <Spinner />}
     </Container>

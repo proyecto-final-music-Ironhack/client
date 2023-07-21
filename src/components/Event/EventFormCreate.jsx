@@ -78,7 +78,7 @@ export default function CreateEventForm() {
     "Salsa",
     "Country",
   ];
-  console.log("HEY", eventData.date);
+
   return (
     <Container>
       <Heading mt="20px" mb="10px">
