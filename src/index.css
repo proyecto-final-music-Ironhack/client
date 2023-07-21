@@ -69,7 +69,7 @@ p, h3 {
 
 .onboarding-container {
   background-image: url("../src/images/onboarding-bg.jpg");
-  background-size: contain;
+  background-size: cover;
   height: 100vh;
   padding: 30px;
 }
