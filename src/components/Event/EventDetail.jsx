@@ -16,6 +16,7 @@ import MapEvent from "../Maps/MapEvent";
 import TrackCard from "../Playlist/TrackCard";
 import header from "../../images/event-image.png";
 import { AuthContext } from "../../context/auth.context";
+import imgTicket from "../../images/icons/money.svg";
 
 function EventDetail() {
   const [event, setEvent] = useState(null);
@@ -122,8 +123,13 @@ function EventDetail() {
       <Text mt={5}>
         {formattedDate} - {formattedTime}
       </Text>
-      <Text>{event.priceOfEntry} €</Text>
-      <Text>{event.drinksWithEntry}</Text>
+      <Text>
+        <Flex flexDirection={"row"}>
+          <img src={imgTicket} alt="img-ticket" />
+          {event.priceOfEntry} €
+        </Flex>
+      </Text>
+      <Text mb={"20px"}>🍸{event.drinksWithEntry}</Text>
       {eventDate >= now && eventDate <= twoHoursLater ? (
         <>
           <Center>
@@ -181,6 +187,9 @@ function EventDetail() {
       <Heading size="mb" mt="10px" mb="10px">
         Location
       </Heading>
+      <Text mb={"5px"}>
+        <address>{event.disco.address}</address>
+      </Text>
       <MapEvent event={event} />
     </Container>
   );
