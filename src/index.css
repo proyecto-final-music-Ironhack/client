@@ -47,6 +47,10 @@ p, h3 {
   background-color: gray;
   padding: 16px 32px;
   border-radius: 64px;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 50px;
+ 
 }
 
 .gray-button:hover {
@@ -61,21 +65,33 @@ p, h3 {
 }
 
 
-.map-pop-up {
-  color: black
-}
-
 /* On Boarding Page */
 
 .onboarding-container {
   background-image: url("../src/images/onboarding-bg.jpg");
-  background-size: cover;
-  height: 740px;
-  overflow: hidden;
+  background-size: contain;
+  height: 100vh;
+  padding: 30px;
 }
 
+.centered-containers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+} 
 
-/* Playlist List */
+.auto-complete-input {
+  border: 1px solid #CAFA00;
+  background-color: black;
+  height: 40px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px;
 
 
+}
 

@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function OnBoardingPage() {
   return (
-    <Box
-      centerContent
-      p="50px"
+    <div
       className="onboarding-container"
     >
-      <Heading as="h1" fontWeight="600" size="3xl" mb="350px">
+      <Heading fontWeight="600" size="2xl">
         Beat the beat! <br /> Vote for your fav songs
       </Heading>
       <Center>
@@ -16,6 +14,6 @@ export default function OnBoardingPage() {
           Get started!
         </Link>
       </Center>
-    </Box>
+    </div>
   );
 }
