@@ -2,6 +2,8 @@ import { Card, Heading, Flex, Text, Box, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import location from "../../images/icons/location.svg";
 import addplaylist from "../../images/icons/add-to-playlist.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth.context";
 
 const EventCardDj = ({ name, disco, date, _id, playlist }) => {
   const dateEvent = new Date(date).toLocaleDateString("en-US", {
@@ -14,6 +16,7 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
     minute: "2-digit",
     timeZone: "UTC",
   });
+  const { user } = useContext(AuthContext);
   return (
     <Card
       bgGradient="linear(to-r, #A7A7A7 0%, #0A0A0A 100%)"
@@ -39,11 +42,10 @@ const EventCardDj = ({ name, disco, date, _id, playlist }) => {
             <Image src={location} alt="location-icon" />
             <Text fontSize="xs">{disco.name}</Text>
           </Flex>
-          {!playlist || playlist.length == 0 ? (
+          {user.musicGenre && playlist.length == 0 ? (
             <Flex>
               <Image src={addplaylist} alt="location-icon" />
               <Text fontSize="xs" textDecoration="underline">
-                {" "}
                 <Link to={`/playlists-list/${_id}`}> Choose playlist</Link>{" "}
               </Text>
             </Flex>
