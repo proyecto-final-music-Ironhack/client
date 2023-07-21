@@ -132,10 +132,10 @@ function EventDetail() {
           )}
         </>
       ) : (
-        <Text fontSize="xs" color='gray' mt="20px" mb="20px">Discover and vote the tracks when the party starts!</Text>
+        <Text fontSize="xs" color='gray' mt="20px" mb="20px">Check in and vote your favorite songs at the time of the party!</Text>
       )}
       <hr />
-      <Heading mt="10px" mb="10px">
+      <Heading size="mb" mt="10px" mb="10px">
         Location
       </Heading>
       <MapEvent event={event} />
