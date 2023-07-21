@@ -45,37 +45,43 @@ export default function DjProfile({ djId, dj }) {
 
   return (
     dj && (
-      <Container>
-        <Image src={dj.image} alt="DjImg" />
-        <Heading mt="20px">{dj.username}</Heading>
-        <Text size="md">DJ</Text>
-        {djId && djId !== djId._id && (
-          <Button mt="20px" mb="20px" className="main-button" type="submit" onClick={handleFollow}>
-            {isFollowing ? "Unfollow" : "Follow"}
-          </Button>
-        )}
+      <>
+        <Container p="0px">
+          <Image src={dj.image} alt="DjImg" />
+        </Container>
+        <Container>
+          <Heading mt="20px">{dj.username}</Heading>
+          <Text size="md">DJ</Text>
+          {djId && djId !== djId._id && (
+            <Button mt="20px" mb="20px" className="main-button" type="submit" onClick={handleFollow}>
+              {isFollowing ? "Unfollow" : "Follow"}
+            </Button>
+          )}
 
-        <Flex justifyContent='center' alignItems='center' mb="20px">
-          <Flex flexDirection="column" justifyContent='center' alignItems='center' pr="20px" borderRight='1px solid white'>
-            <Text>{showFollowers}</Text>
-            <Text color='gray'>followers</Text>
+          <Flex justifyContent="center" alignItems="center" mb="20px">
+            <Flex flexDirection="column" justifyContent="center" alignItems="center" pr="20px" borderRight="1px solid white">
+              <Text>{showFollowers}</Text>
+              <Text color="gray">followers</Text>
+            </Flex>
+            <Flex flexDirection="column" justifyContent="center" pl="20px" alignItems="center">
+              <Text>{djEvents.length}</Text>
+              <Text color="gray">event (s)</Text>
+            </Flex>
           </Flex>
-          <Flex flexDirection="column" justifyContent='center' pl="20px" alignItems='center'>
-            <Text>{djEvents.length}</Text>
-            <Text color='gray' >event (s)</Text>
-          </Flex>
-        </Flex>
-        <hr />
-        <Heading size="md" mt="10px">Hosted Events:</Heading>
-        <div>
-          {djEvents.map((event) => (
-            <div key={event._id}>
-              <EventCardDj {...event} />
-            </div>
-          ))}
-        </div>
-        <br />
-      </Container>
+          <hr />
+          <Heading size="md" mt="10px">
+            Hosted Events:
+          </Heading>
+          <div>
+            {djEvents.map((event) => (
+              <div key={event._id}>
+                <EventCardDj {...event} />
+              </div>
+            ))}
+          </div>
+          <br />
+        </Container>
+      </>
     )
   );
 }
