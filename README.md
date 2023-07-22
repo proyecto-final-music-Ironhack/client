@@ -1,15 +1,20 @@
 # Beat the Beat
 
 [Link to app](https://sprightly-vacherin-973f9f.netlify.app/)
+
 [Server repository](https://github.com/proyecto-final-music-Ironhack/server)
 
 ### Authors
 
 Javier Vivas (Web Dev.)
+
 Raquel de Frutos (Web Dev.)
+
 Nico Regue (UX/UI)
 
 ### How it looks
+
+![Screens](https://github.com/proyecto-final-music-Ironhack/client/blob/master/src/images/how-it-looks.jpg)
 
 ### Description
 
@@ -75,4 +80,5 @@ The user checks in and has access to the list of songs the dj is going to play a
 ### Links
 
 [Trello](https://trello.com/b/DaoodUTx/proyecto-final)
+
 [Figma](https://www.figma.com/file/RewPaOiHC1RRikiaTCXUh1/Beat-The-Beat?type=design&node-id=253%3A581&mode=design&t=oCBKG7397VfjnleO-1)
