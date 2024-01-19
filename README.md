@@ -1,6 +1,6 @@
 # Beat the Beat
 
-[Link to app](https://sprightly-vacherin-973f9f.netlify.app/)
+[Link to app](https://beat-the-beat-event-music.netlify.app/)
 
 [Server repository](https://github.com/proyecto-final-music-Ironhack/server)
 
